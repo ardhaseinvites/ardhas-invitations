@@ -1,0 +1,473 @@
+.hwg-section {
+  padding: 100px max(24px, calc((100vw - 1200px) / 2));
+  background: #eeeade;
+  color: #263c32;
+  scroll-margin-top: 100px;
+}
+.hwg-section-heading {
+  text-align: center;
+  max-width: 650px;
+  margin: 0 auto 48px;
+}
+.hwg-eyebrow {
+  display: block;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 2.4px;
+  color: #837044;
+}
+.hwg-section h2 {
+  font-family: var(--serif, Georgia, serif);
+  font-weight: 400;
+  font-size: clamp(38px, 4.5vw, 62px);
+  line-height: 1.08;
+  margin: 18px 0;
+}
+.hwg-section-heading > p,
+.hwg-card > p {
+  font-size: 13px;
+  line-height: 1.8;
+  color: #73786b;
+}
+.hwg-games-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+.hwg-games-grid > div {
+  min-width: 0;
+}
+.hwg-card {
+  height: 100%;
+  padding: 30px;
+  border: 1px solid #dcd6c7;
+  background: #f9f6ed;
+  border-radius: 12px;
+  box-shadow: 0 15px 45px #263c3205;
+}
+.hwg-card-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.hwg-card-heading > svg {
+  flex-shrink: 0;
+  color: #a28b52;
+}
+.hwg-card h3 {
+  font-family: var(--serif, Georgia, serif);
+  font-size: 32px;
+  font-weight: 400;
+  line-height: 1.1;
+  margin: 12px 0;
+}
+.hwg-card > p {
+  margin: 12px 0 24px;
+}
+.hwg-puzzle-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.hwg-board {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4px;
+  aspect-ratio: 1.5;
+  padding: 5px;
+  border: 1px solid #d4c6a7;
+  border-radius: 8px;
+  background: #e3dac5;
+}
+.hwg-piece {
+  aspect-ratio: 1.5;
+  border: 0;
+  border-radius: 3px;
+  background-size: 300% 300%;
+  position: relative;
+  cursor: grab;
+  transition:
+    box-shadow 0.2s,
+    opacity 0.2s,
+    transform 0.2s;
+  min-width: 0;
+}
+.hwg-piece:active {
+  cursor: grabbing;
+}
+.hwg-piece > span {
+  position: absolute;
+  bottom: 5px;
+  left: 5px;
+  background: #173d2ccd;
+  color: #fff;
+  padding: 2px 6px;
+  font-size: 10px;
+  border-radius: 3px;
+}
+.hwg-piece.is-selected,
+.hwg-piece.is-over {
+  box-shadow: inset 0 0 0 4px #e5bf69;
+  z-index: 1;
+  transform: scale(0.96);
+}
+.hwg-piece:disabled {
+  cursor: default;
+  opacity: 1;
+}
+.hwg-piece:disabled > span {
+  display: none;
+}
+.hwg-puzzle-guide {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 8px 20px;
+  align-items: center;
+}
+.hwg-puzzle-guide > img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 5px;
+  grid-row: span 4;
+  aspect-ratio: 1;
+}
+.hwg-puzzle-guide > span,
+.hwg-puzzle-guide > small {
+  font-size: 10px;
+  color: #7b7c6e;
+}
+.hwg-stats {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 12px;
+}
+.hwg-stats > span {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.hwg-progress {
+  height: 3px;
+  background: #e7dfcb;
+  border-radius: 3px;
+  overflow: hidden;
+}
+.hwg-progress > span {
+  display: block;
+  height: 100%;
+  background: #9c8450;
+  transition: width 0.35s;
+}
+.hwg-text-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  color: #445748;
+  font-size: 11px;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  padding: 9px 0;
+  min-height: 40px;
+}
+.hwg-puzzle-guide > .hwg-text-button {
+  grid-column: 2;
+  justify-self: start;
+}
+.hwg-success {
+  text-align: center;
+  padding: 26px 10px 6px;
+  color: #294e39;
+}
+.hwg-success > svg {
+  margin: auto;
+}
+.hwg-success h4 {
+  font: 400 30px var(--serif, Georgia, serif);
+  margin: 10px 0;
+}
+.hwg-success p {
+  font-size: 12px;
+  line-height: 1.7;
+  margin: 10px 0 20px;
+}
+.hwg-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  text-decoration: none;
+  border: 1px solid #294a39;
+  background: #294a39;
+  color: #fff8e8;
+  border-radius: 5px;
+  padding: 14px 18px;
+  font-size: 11px;
+  cursor: pointer;
+  min-height: 45px;
+}
+.hwg-button:disabled,
+.hwg-text-button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+.hwg-decor-stage {
+  position: relative;
+  aspect-ratio: 1.18;
+  overflow: hidden;
+  border-radius: 7px;
+  background: #d9cfb8;
+  cursor: crosshair;
+  isolation: isolate;
+}
+.hwg-decor-stage > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  pointer-events: none;
+}
+.hwg-decor-stage:after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  box-shadow: inset 0 0 0 1px #c3a76c66;
+  pointer-events: none;
+  z-index: 3;
+  border-radius: inherit;
+}
+.hwg-decor-stage.is-over:after {
+  box-shadow: inset 0 0 0 4px #e6c57f;
+}
+.hwg-decor-stage.is-finished:after {
+  box-shadow:
+    inset 0 0 35px #f0ce72bb,
+    inset 0 0 0 2px #d0ad5d;
+}
+.hwg-scene-label {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  text-align: center;
+  padding: 18px 10px 28px;
+  background: linear-gradient(#183329bd, transparent);
+  font: 24px var(--serif, Georgia, serif);
+  color: #fff7dc;
+  pointer-events: none;
+}
+.hwg-scene-label > small {
+  display: block;
+  font: 8px var(--font-sans, sans-serif);
+  letter-spacing: 2px;
+  margin-top: 6px;
+}
+.hwg-placed-item {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  border: 0;
+  background: none;
+  padding: 3px;
+  line-height: 1;
+  cursor: pointer;
+  min-width: 38px;
+  min-height: 38px;
+  filter: drop-shadow(0 2px 3px #1e332955);
+}
+.hwg-placed-item > span {
+  font-size: 37px;
+}
+.hwg-placed-item > i {
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  background: #f8f4e6;
+  border-radius: 50%;
+  padding: 2px;
+  color: #274234;
+  opacity: 0;
+}
+.hwg-placed-item:hover > i,
+.hwg-placed-item:focus-visible > i {
+  opacity: 1;
+}
+.hwg-decoration-tray {
+  display: flex;
+  gap: 4px;
+  justify-content: space-between;
+  margin-top: 18px;
+  flex-wrap: wrap;
+}
+.hwg-decoration-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  min-width: 44px;
+  flex: 1;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  padding: 9px 3px;
+  background: none;
+  cursor: grab;
+  color: #69705e;
+}
+.hwg-decoration-item > span {
+  font-size: 25px;
+  line-height: 1.3;
+}
+.hwg-decoration-item > small {
+  font-size: 8px;
+  line-height: 1.3;
+  max-width: 50px;
+}
+.hwg-decoration-item.is-selected {
+  border-color: #b99c61;
+  background: #eee6d3;
+}
+.hwg-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+.hwg-card > .hwg-hint {
+  font-size: 10px;
+  margin: 14px 0 0;
+}
+.hwg-card > .hwg-status {
+  font-size: 11px;
+  margin: 8px 0 0;
+  min-height: 20px;
+}
+.hwg-card > .hwg-finished {
+  font-family: var(--serif, Georgia, serif);
+  font-size: 27px;
+  color: #3e6045;
+  margin: 18px 0 0;
+}
+.hwg-rituals {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-top: 24px;
+}
+.hwg-ritual {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  border: 1px solid #d4cebd;
+  border-radius: 8px;
+  padding: 25px 28px;
+  text-align: left;
+  background: #e9e5d8;
+  color: #5c6049;
+  cursor: pointer;
+  transition:
+    background 0.5s,
+    box-shadow 0.5s;
+}
+.hwg-ritual > svg {
+  flex-shrink: 0;
+  color: #a38c55;
+}
+.hwg-ritual > span {
+  font: 24px var(--serif, Georgia, serif);
+}
+.hwg-ritual small {
+  display: block;
+  font: 11px var(--font-sans, sans-serif);
+  line-height: 1.7;
+  color: #72745f;
+  margin-top: 6px;
+}
+.hwg-ritual.is-lit {
+  background: #f4e8c9;
+  box-shadow: inset 0 0 35px #ecc97544;
+}
+.hwg-ritual.is-lit > svg {
+  fill: #e9b857;
+  color: #b88732;
+  filter: drop-shadow(0 0 8px #f3c154);
+}
+.hwg-ringing {
+  animation: hwg-bell 0.8s ease-in-out;
+  transform-origin: 50% 0;
+}
+.hwg-section button:focus-visible,
+.hwg-section a:focus-visible {
+  outline: 3px solid #a2803a;
+  outline-offset: 4px;
+}
+.hwg-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+@keyframes hwg-bell {
+  0%,
+  100% {
+    transform: rotate(0);
+  }
+  20%,
+  60% {
+    transform: rotate(18deg);
+  }
+  40%,
+  80% {
+    transform: rotate(-18deg);
+  }
+}
+@media (max-width: 800px) {
+  .hwg-games-grid {
+    grid-template-columns: 1fr;
+  }
+  .hwg-section {
+    padding: 70px 22px;
+  }
+  .hwg-card {
+    padding: 24px;
+  }
+  .hwg-rituals {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .hwg-section-heading {
+    margin-bottom: 32px;
+  }
+  .hwg-ritual {
+    padding: 22px;
+  }
+  .hwg-board {
+    max-width: 450px;
+    width: 100%;
+    margin: auto;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hwg-section *,
+  .hwg-section *:before,
+  .hwg-section *:after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
+.hwg-puzzle-guide:not(.is-complete) > img {
+  filter: blur(5px);
+}
+.hwg-puzzle-guide > img {
+  transition: filter 0.65s ease;
+}

@@ -5,6 +5,7 @@ import { Helmet } from "react-helmet";
 import Home from "./pages/Home";
 const Customizer = lazy(() => import("./pages/Customizer"));
 const Preview = lazy(() => import("./pages/Preview"));
+const Housewarming = lazy(() => import("./pages/Housewarming"));
 export default function App() {
   const location = useLocation();
   const reduced = useReducedMotion();
@@ -59,6 +60,7 @@ export default function App() {
               <Route path="/" element={<Home />} />
               <Route path="/customizer" element={<Customizer />} />
               <Route path="/preview" element={<Preview />} />
+              <Route path="/housewarming" element={<Housewarming />} />
               <Route
                 path="*"
                 element={

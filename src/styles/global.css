@@ -1510,7 +1510,7 @@ svg {
 }
 @media (max-width: 1100px) {
   .nav-links {
-    gap: 15px;
+    gap: 10px;
     font-size: 10px;
   }
   .navbar {

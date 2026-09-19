@@ -7,6 +7,7 @@ export default function Navbar() {
     ["Home", "/"],
     ["Templates", "/#templates"],
     ["Features", "/#features"],
+    ["Housewarming", "/housewarming"],
     ["Live Preview", "/preview"],
     ["Customizer", "/customizer"],
     ["Gallery", "/#gallery"],
