@@ -1,0 +1,467 @@
+.invitation .invite-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.invitation.invitation-layout-editorial .invite-photo {
+  inset: 0;
+  border-radius: 0;
+  opacity: 0.12;
+}
+.invitation.invitation-layout-editorial.invitation-modern .invite-photo {
+  opacity: 0.35;
+}
+.invitation-modern .invite-welcome h2,
+.invitation-modern .invite-event-motif {
+  color: color-mix(in srgb, var(--invite-accent) 65%, white);
+}
+.invitation.invitation-layout-editorial.invitation-bg-custom-image
+  .invite-photo {
+  opacity: 0.7;
+}
+.invitation .invite-welcome-copy {
+  margin-left: 0;
+  max-width: 800px;
+}
+.invitation .invite-welcome {
+  min-height: 820px;
+}
+.invite-event-motif {
+  display: flex;
+  justify-content: center;
+  color: var(--invite-accent);
+  margin: 0 auto 26px;
+}
+.invite-event-motif > div {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.invite-event-motif svg {
+  width: 64px;
+  height: 64px;
+  stroke-width: 1;
+}
+.invite-event-motif span {
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.invite-event-motif strong {
+  font-family: var(--invite-font);
+  font-weight: 400;
+  line-height: 1;
+}
+.invite-event-motif {
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+.event-entwined {
+  height: 62px;
+  width: 120px;
+}
+.event-entwined i {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  border: 2px solid currentColor;
+  border-radius: 50%;
+  left: 12px;
+}
+.event-entwined i + i {
+  left: 49px;
+}
+.event-ring {
+  width: 80px;
+  height: 90px;
+}
+.event-ring i {
+  width: 65px;
+  height: 65px;
+  border: 3px double currentColor;
+  border-radius: 50%;
+  position: absolute;
+  bottom: 0;
+}
+.event-ring svg {
+  position: absolute;
+  top: -10px;
+  width: 35px;
+  height: 35px;
+}
+.event-age {
+  gap: 13px;
+  flex-direction: column;
+}
+.event-age strong {
+  font-size: clamp(90px, 17cqw, 185px);
+  font-style: italic;
+}
+.event-age svg {
+  position: absolute;
+  right: -65px;
+  top: 20px;
+  transform: rotate(15deg);
+}
+.event-home {
+  flex-direction: column;
+  width: 240px;
+  min-height: 155px;
+  padding: 28px 20px 17px;
+  border: 1px solid currentColor;
+  border-radius: 100px 100px 0 0;
+  gap: 14px;
+}
+.event-home span {
+  font-size: 9px;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+.event-moon {
+  height: 130px;
+  width: 200px;
+}
+.event-moon > svg:first-child {
+  width: 110px;
+  height: 110px;
+  transform: rotate(-20deg);
+  fill: color-mix(in srgb, var(--invite-accent) 15%, transparent);
+}
+.event-moon > svg:nth-child(2) {
+  width: 27px;
+  position: absolute;
+  right: 26px;
+  top: -9px;
+}
+.event-moon i {
+  width: 110px;
+  height: 32px;
+  border-radius: 60%;
+  background: color-mix(in srgb, var(--invite-accent) 12%, var(--invite-paper));
+  position: absolute;
+  bottom: 0;
+  left: 10px;
+}
+.event-milestone {
+  flex-direction: column;
+  width: 150px;
+  height: 150px;
+  border: 4px double currentColor;
+  border-radius: 50%;
+  gap: 12px;
+}
+.event-milestone strong {
+  font-size: 76px;
+}
+.event-milestone span {
+  font-size: 8px;
+}
+.event-cradle {
+  flex-direction: column;
+  gap: 17px;
+  padding: 15px 25px 25px;
+  border-bottom: 3px double currentColor;
+  border-radius: 0 0 50% 50%;
+}
+.event-cradle svg {
+  width: 76px;
+  height: 76px;
+}
+.event-calendar {
+  flex-direction: column;
+  gap: 13px;
+  padding: 20px 30px;
+  border: 1px solid currentColor;
+  border-top: 8px solid currentColor;
+}
+.event-calendar strong {
+  font-size: 100px;
+}
+.event-gala {
+  gap: 17px;
+  height: 100px;
+}
+.event-gala svg {
+  width: 28px;
+}
+.event-gala i {
+  width: 70px;
+  height: 70px;
+  transform: rotate(45deg);
+  border: 4px double currentColor;
+}
+.event-henna {
+  padding: 15px;
+  border: 3px double currentColor;
+  border-radius: 50%;
+}
+.event-henna svg {
+  width: 55px;
+  height: 55px;
+}
+.event-henna svg:nth-child(2) {
+  transform: rotate(-35deg);
+}
+.event-sun {
+  width: 150px;
+  height: 125px;
+}
+.event-sun > svg:first-child {
+  width: 110px;
+  height: 110px;
+}
+.event-sun > svg:not(:first-child) {
+  position: absolute;
+  width: 35px;
+  bottom: -10px;
+  left: 10px;
+}
+.event-sun > svg:last-child {
+  left: auto;
+  right: 10px;
+}
+.event-party {
+  gap: 14px;
+  transform: rotate(-10deg);
+}
+.invitation-event-birthday .invite-welcome:before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(
+    circle,
+    var(--invite-accent) 2px,
+    transparent 3px
+  );
+  background-size: 43px 57px;
+  opacity: 0.14;
+  transform: rotate(-12deg) scale(1.2);
+}
+.invitation-event-birthday .invite-welcome h2 {
+  font-weight: 600;
+}
+.invitation-event-birthday .invite-welcome:after {
+  border-radius: 32px;
+}
+.invitation-event-housewarming .invite-welcome:after {
+  border-radius: 42% 42% 0 0;
+  inset: 25px 8%;
+}
+.invitation-event-baby-shower .invite-welcome:after {
+  border-radius: 48% 48% 30% 30%;
+  border-style: dashed;
+}
+.invitation-event-baby-shower .invite-date {
+  border-top: 1px solid currentColor;
+  padding-top: 20px;
+  width: fit-content;
+  margin-inline: auto;
+}
+.invitation-event-engagement .invite-welcome:after {
+  border-radius: 50% 50% 0 0;
+  border-width: 3px;
+  border-style: double;
+}
+.invitation-event-anniversary .invite-welcome:after {
+  border-width: 6px;
+  border-style: double;
+}
+.invitation-event-naming-ceremony .invite-welcome:after {
+  border-radius: 0 0 48% 48%;
+  border-bottom-width: 4px;
+}
+.invitation-event-save-the-date .invite-welcome-copy {
+  max-width: 610px;
+}
+.invitation-event-save-the-date .invite-welcome:after {
+  border-width: 0 1px;
+  inset-inline: 8%;
+}
+.invitation-event-save-the-date .invite-welcome h2 {
+  font-size: clamp(42px, 6cqw, 80px);
+}
+.invitation-event-reception .invite-welcome:after {
+  border-width: 5px 1px;
+  border-style: double;
+  inset: 22px 40px;
+}
+.invitation-event-reception .invite-overline {
+  letter-spacing: 0.4em;
+}
+.invitation-event-mehendi .invite-welcome:after {
+  border-radius: 45% 45% 0 0;
+  border-width: 4px;
+  border-style: double;
+}
+.invitation-event-mehendi .invite-section-title > span {
+  font-size: 38px;
+}
+.invitation-event-haldi .invite-welcome:after {
+  border: 7px dotted color-mix(in srgb, var(--invite-accent) 55%, transparent);
+  inset: 22px;
+}
+.invitation-event-other .invite-welcome:after {
+  transform: rotate(-2deg);
+  border-width: 2px;
+}
+.invitation-event-other .invite-welcome h2 {
+  font-weight: 600;
+  letter-spacing: -0.06em;
+}
+.invitation.invitation-layout-arch .invite-welcome {
+  padding-top: 310px;
+}
+.invitation.invitation-layout-arch .invite-photo {
+  inset: 35px auto auto 50%;
+  transform: translateX(-50%);
+  width: 235px;
+  height: 255px;
+  border-radius: 130px 130px 3px 3px;
+  opacity: 1;
+  mix-blend-mode: normal;
+}
+.invitation.invitation-layout-arch .invite-event-motif {
+  transform: scale(0.8);
+  margin-bottom: 10px;
+}
+.invitation.invitation-layout-arch .invite-overline {
+  margin-bottom: 20px;
+}
+.invitation.invitation-layout-arch .invite-welcome:not(.has-hero-photo) {
+  padding-top: 85px;
+}
+.invitation.invitation-layout-split .invite-welcome {
+  padding: 75px 5% 75px 51%;
+}
+.invitation.invitation-layout-split .invite-photo {
+  inset: 25px auto 25px 25px;
+  width: 42%;
+  height: calc(100% - 50px);
+  opacity: 0.95;
+  border-radius: 200px 200px 4px 4px;
+  mix-blend-mode: normal;
+}
+.invitation.invitation-layout-split .invite-welcome h2 {
+  font-size: clamp(38px, 6cqw, 76px);
+}
+.invitation.invitation-layout-split .invite-countdown {
+  gap: 15px;
+}
+.invitation.invitation-layout-split .invite-welcome:not(.has-hero-photo) {
+  padding-left: 10%;
+  padding-right: 10%;
+}
+.invitation.invitation-layout-split .invite-welcome:after {
+  z-index: 1;
+}
+.invitation .invite-family-grid a {
+  display: flex;
+  justify-content: center;
+  overflow-wrap: anywhere;
+}
+.invite-contact-map {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 25px;
+  font-size: 12px;
+}
+.invite-registry a {
+  border: 1px solid #80808030;
+  padding: 25px 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  text-decoration: none;
+  text-align: center;
+}
+.invite-registry p {
+  font-size: 12px;
+  line-height: 1.7;
+  margin: 0;
+}
+.invite-video video {
+  width: 100%;
+  height: 100%;
+}
+.invite-video > button {
+  background: #253027;
+}
+.invite-video > button:disabled {
+  cursor: default;
+}
+.invitation .invite-section {
+  scroll-margin-top: 100px;
+}
+.invitation.invitation-compact .invite-welcome {
+  min-height: 420px;
+  padding: 48px 23px;
+}
+.invitation.invitation-compact .invite-event-motif {
+  zoom: 0.58;
+  margin-bottom: 25px;
+}
+.invitation.invitation-compact .invite-overline {
+  margin-bottom: 17px;
+}
+.invitation.invitation-compact .invite-date {
+  margin-top: 20px;
+  font-size: 9px;
+}
+.invitation.invitation-compact .invite-welcome h2 {
+  font-size: clamp(27px, 9cqw, 48px);
+}
+.invitation.invitation-compact .invite-bottom-line {
+  bottom: 23px;
+  font-size: 6px;
+}
+.invitation.invitation-compact.invitation-layout-arch
+  .invite-welcome.has-hero-photo {
+  padding-top: 190px;
+}
+.invitation.invitation-compact.invitation-layout-arch .invite-photo {
+  width: 145px;
+  height: 155px;
+  top: 22px;
+}
+.invitation.invitation-compact.invitation-layout-split
+  .invite-welcome.has-hero-photo {
+  padding-left: 48%;
+  padding-right: 6%;
+}
+.invitation.invitation-compact.invitation-layout-split .invite-welcome h2 {
+  font-size: clamp(23px, 7cqw, 38px);
+}
+.invitation.invitation-compact.invitation-layout-split .invite-photo {
+  left: 15px;
+  width: 38%;
+}
+@container (max-width: 560px) {
+  .invitation:not(.invitation-compact).invitation-layout-split
+    .invite-welcome.has-hero-photo {
+    padding: 330px 30px 75px;
+  }
+  .invitation:not(.invitation-compact).invitation-layout-split .invite-photo {
+    inset: 25px 25px auto;
+    width: calc(100% - 50px);
+    height: 280px;
+    border-radius: 140px 140px 4px 4px;
+  }
+  .invitation:not(.invitation-compact) .invite-welcome h2 {
+    font-size: clamp(39px, 10cqw, 65px);
+  }
+  .invitation .invite-family-grid {
+    grid-template-columns: 1fr;
+  }
+  .invitation .invite-registry {
+    grid-template-columns: 1fr;
+  }
+  .invite-event-motif {
+    zoom: 0.8;
+  }
+  .invite-event-motif .event-age strong {
+    font-size: 120px;
+  }
+}

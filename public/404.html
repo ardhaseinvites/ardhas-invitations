@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Opening Ardhas…</title>
+  </head>
+  <body>
+    <p>Opening Ardhas…</p>
+    <script>
+      const base = "/ardhas-invitations/";
+      const route = location.pathname.startsWith(base)
+        ? location.pathname.slice(base.length)
+        : "";
+      sessionStorage.setItem(
+        "ardhas-pages-redirect",
+        "/" + route + location.search + location.hash,
+      );
+      location.replace(base);
+    </script>
+  </body>
+</html>
