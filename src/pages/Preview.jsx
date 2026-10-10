@@ -128,7 +128,15 @@ export default function Preview() {
           <button
             type="button"
             className="preview-action-btn primary"
-            title="Directly download invitation PDF with Ardhas Order Sheet"
+            title="Print or Save as PDF with browser print dialog (recommended for vector fonts & page breaks)"
+            onClick={() => window.print()}
+          >
+            <Printer size={15} /> <span>Print / Save PDF</span>
+          </button>
+          <button
+            type="button"
+            className="preview-action-btn"
+            title="Download quick client-side preview PDF with Ardhas Order Sheet"
             onClick={handleDownloadPdf}
             disabled={isPdfGenerating}
           >
@@ -137,15 +145,7 @@ export default function Preview() {
             ) : (
               <Download size={15} />
             )}
-            <span>{isPdfGenerating ? "PDF..." : "Download PDF"}</span>
-          </button>
-          <button
-            type="button"
-            className="preview-action-btn"
-            title="Print or Save as PDF with browser print dialog"
-            onClick={() => window.print()}
-          >
-            <Printer size={15} /> <span>Print</span>
+            <span>{isPdfGenerating ? "PDF..." : "Quick preview PDF"}</span>
           </button>
           <Link to="/customizer" className="preview-action-btn">
             <SlidersHorizontal size={15} /> <span>Customize</span>

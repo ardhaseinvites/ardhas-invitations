@@ -400,32 +400,130 @@ export async function downloadClientPdf(config, element = null) {
       throw new Error("Invitation element could not be found for PDF capture.");
     }
 
-    const orderSheet = target.querySelector(".ardhas-order-sheet");
-    let prevDisplay = "";
+    // Identify elements to manipulate
+    const orderSheet =
+      target.querySelector(".ardhas-order-sheet") ||
+      document.querySelector(".ardhas-order-sheet");
     const toolbar = target.querySelector(".invite-toolbar");
+    const scrollParent = target.closest(".customizer-preview-scroll");
+    const frameParent = target.closest(".customizer-preview-frame");
+
+    // Track original styles to restore in finally
+    let prevOrderSheetDisplay = "";
+    let prevOrderSheetWidth = "";
     let prevToolbarDisplay = "";
+    let prevTargetOverflow = "";
+    let prevTargetHeight = "";
+    let prevTargetMaxHeight = "";
+    let prevScrollOverflow = "";
+    let prevScrollHeight = "";
+    let prevScrollMaxHeight = "";
+    let prevFrameHeight = "";
+    let prevFrameMaxHeight = "";
+
+    // Track all reveal / motion sections so they can be set to opacity: 1 and restored
+    const animatedElements = Array.from(
+      target.querySelectorAll(
+        ".invite-section, [data-projection-id], section, article"
+      )
+    );
+    const originalAnimatedStyles = animatedElements.map((el) => ({
+      el,
+      opacity: el.style.opacity,
+      transform: el.style.transform,
+      visibility: el.style.visibility,
+      transition: el.style.transition,
+      animation: el.style.animation,
+    }));
+
+    // Add capturing class to document.body and target
+    document.body.classList.add("ardhas-pdf-capturing");
+    target.classList.add("ardhas-pdf-capturing");
 
     try {
-      // Unhide Ardhas Order Sheet during capture so it is included in the PDF
-      if (orderSheet) {
-        prevDisplay = orderSheet.style.display;
-        orderSheet.style.setProperty("display", "block", "important");
+      // 1. Force reveal on every animated section
+      animatedElements.forEach((el) => {
+        el.style.setProperty("opacity", "1", "important");
+        el.style.setProperty("transform", "none", "important");
+        el.style.setProperty("visibility", "visible", "important");
+        el.style.setProperty("transition", "none", "important");
+        el.style.setProperty("animation", "none", "important");
+      });
+
+      // 2. Expand scroll and frame containers so content isn't clipped
+      if (scrollParent) {
+        prevScrollOverflow = scrollParent.style.overflow;
+        prevScrollHeight = scrollParent.style.height;
+        prevScrollMaxHeight = scrollParent.style.maxHeight;
+        scrollParent.style.setProperty("overflow", "visible", "important");
+        scrollParent.style.setProperty("height", "auto", "important");
+        scrollParent.style.setProperty("max-height", "none", "important");
+      }
+      if (frameParent) {
+        prevFrameHeight = frameParent.style.height;
+        prevFrameMaxHeight = frameParent.style.maxHeight;
+        frameParent.style.setProperty("height", "auto", "important");
+        frameParent.style.setProperty("max-height", "none", "important");
       }
 
-      // Hide on-screen floating toolbar if present inside target
+      prevTargetOverflow = target.style.overflow;
+      prevTargetHeight = target.style.height;
+      prevTargetMaxHeight = target.style.maxHeight;
+      target.style.setProperty("overflow", "visible", "important");
+      target.style.setProperty("height", "auto", "important");
+      target.style.setProperty("max-height", "none", "important");
+
+      // 3. Hide floating toolbar during capture
       if (toolbar) {
         prevToolbarDisplay = toolbar.style.display;
         toolbar.style.display = "none";
       }
 
-      const dataUrl = await toPng(target, {
+      // 4. Hide order sheet while capturing the invitation itself
+      if (orderSheet) {
+        prevOrderSheetDisplay = orderSheet.style.display;
+        prevOrderSheetWidth = orderSheet.style.width;
+        orderSheet.style.setProperty("display", "none", "important");
+      }
+
+      // 5. Wait for fonts and images
+      if (document.fonts && document.fonts.ready) {
+        try {
+          await document.fonts.ready;
+        } catch {}
+      }
+
+      const imgs = Array.from(target.querySelectorAll("img"));
+      await Promise.all(
+        imgs.map((img) => {
+          img.loading = "eager";
+          if (img.complete && img.naturalHeight > 0) return Promise.resolve();
+          return new Promise((resolve) => {
+            img.onload = resolve;
+            img.onerror = resolve;
+            setTimeout(resolve, 1500);
+          });
+        })
+      );
+
+      // Brief reflow settle pause
+      await new Promise((resolve) => setTimeout(resolve, 180));
+
+      // 6. Capture Invitation Body (without Order Sheet)
+      const invitationWidth = target.scrollWidth || target.offsetWidth || 800;
+      const invitationHeight = target.scrollHeight || target.offsetHeight;
+
+      const invitationDataUrl = await toPng(target, {
         quality: 0.95,
         backgroundColor: "#ffffff",
+        width: invitationWidth,
+        height: invitationHeight,
         filter: (node) => {
           if (
             node.classList &&
             (node.classList.contains("invite-music") ||
-              node.classList.contains("invite-video-toggle"))
+              node.classList.contains("invite-video-toggle") ||
+              node.classList.contains("ardhas-order-sheet"))
           ) {
             return false;
           }
@@ -433,7 +531,26 @@ export async function downloadClientPdf(config, element = null) {
         },
       });
 
-      // Initialize jsPDF document (A4 format)
+      // 7. Capture Ardhas Order Sheet separately so it starts on its own page
+      let orderSheetDataUrl = null;
+      if (orderSheet) {
+        orderSheet.style.setProperty("display", "block", "important");
+        orderSheet.style.setProperty("visibility", "visible", "important");
+        orderSheet.style.setProperty("opacity", "1", "important");
+        orderSheet.style.setProperty("width", `${invitationWidth}px`, "important");
+
+        // Allow layout to calculate
+        await new Promise((resolve) => setTimeout(resolve, 80));
+
+        orderSheetDataUrl = await toPng(orderSheet, {
+          quality: 0.95,
+          backgroundColor: "#ffffff",
+          width: invitationWidth,
+          height: orderSheet.scrollHeight || orderSheet.offsetHeight,
+        });
+      }
+
+      // 8. Build multi-page PDF with jsPDF (A4 format)
       const pdf = new jsPDF({
         orientation: "portrait",
         unit: "mm",
@@ -443,41 +560,132 @@ export async function downloadClientPdf(config, element = null) {
       const pdfWidth = pdf.internal.pageSize.getWidth();
       const pdfHeight = pdf.internal.pageSize.getHeight();
 
-      const img = new Image();
-      img.src = dataUrl;
+      // Load invitation image
+      const invImg = new Image();
+      invImg.src = invitationDataUrl;
       await new Promise((resolve, reject) => {
-        img.onload = resolve;
-        img.onerror = reject;
+        invImg.onload = resolve;
+        invImg.onerror = reject;
       });
 
-      const imgWidth = pdfWidth;
-      const imgHeight = (img.height * pdfWidth) / img.width;
+      const invImgWidth = pdfWidth;
+      const invImgHeight = (invImg.height * pdfWidth) / invImg.width;
 
-      let heightLeft = imgHeight;
+      let heightLeft = invImgHeight;
       let position = 0;
 
       // Page 1
-      pdf.addImage(dataUrl, "PNG", 0, position, imgWidth, imgHeight, undefined, "FAST");
+      pdf.addImage(
+        invitationDataUrl,
+        "PNG",
+        0,
+        position,
+        invImgWidth,
+        invImgHeight,
+        undefined,
+        "FAST"
+      );
       heightLeft -= pdfHeight;
 
-      // Multi-page pagination
-      while (heightLeft > 0) {
-        position = heightLeft - imgHeight;
+      // Paginate subsequent invitation pages (5mm threshold prevents trailing blank pages)
+      while (heightLeft > 5) {
+        position = heightLeft - invImgHeight;
         pdf.addPage();
-        pdf.addImage(dataUrl, "PNG", 0, position, imgWidth, imgHeight, undefined, "FAST");
+        pdf.addImage(
+          invitationDataUrl,
+          "PNG",
+          0,
+          position,
+          invImgWidth,
+          invImgHeight,
+          undefined,
+          "FAST"
+        );
         heightLeft -= pdfHeight;
+      }
+
+      // 9. Order Sheet starts AT THE TOP of its own new page!
+      if (orderSheetDataUrl) {
+        pdf.addPage();
+
+        const osImg = new Image();
+        osImg.src = orderSheetDataUrl;
+        await new Promise((resolve, reject) => {
+          osImg.onload = resolve;
+          osImg.onerror = reject;
+        });
+
+        const osImgWidth = pdfWidth;
+        const osImgHeight = (osImg.height * pdfWidth) / osImg.width;
+
+        let osHeightLeft = osImgHeight;
+        let osPosition = 0;
+
+        pdf.addImage(
+          orderSheetDataUrl,
+          "PNG",
+          0,
+          osPosition,
+          osImgWidth,
+          osImgHeight,
+          undefined,
+          "FAST"
+        );
+        osHeightLeft -= pdfHeight;
+
+        while (osHeightLeft > 5) {
+          osPosition = osHeightLeft - osImgHeight;
+          pdf.addPage();
+          pdf.addImage(
+            orderSheetDataUrl,
+            "PNG",
+            0,
+            osPosition,
+            osImgWidth,
+            osImgHeight,
+            undefined,
+            "FAST"
+          );
+          osHeightLeft -= pdfHeight;
+        }
       }
 
       pdf.save(filename);
       return filename;
     } catch (err) {
       throw new Error(
-        `Direct PDF download failed: ${err.message}. Please use the "Print / Save as PDF" fallback button instead.`,
+        `Quick preview PDF generation failed: ${err.message}. Please use the "Print / Save as PDF" button instead.`,
       );
     } finally {
-      // Always restore DOM state
+      // 10. Guaranteed DOM Restoration
+      document.body.classList.remove("ardhas-pdf-capturing");
+      target.classList.remove("ardhas-pdf-capturing");
+
+      originalAnimatedStyles.forEach(({ el, opacity, transform, visibility, transition, animation }) => {
+        el.style.opacity = opacity;
+        el.style.transform = transform;
+        el.style.visibility = visibility;
+        el.style.transition = transition;
+        el.style.animation = animation;
+      });
+
+      if (scrollParent) {
+        scrollParent.style.overflow = prevScrollOverflow;
+        scrollParent.style.height = prevScrollHeight;
+        scrollParent.style.maxHeight = prevScrollMaxHeight;
+      }
+      if (frameParent) {
+        frameParent.style.height = prevFrameHeight;
+        frameParent.style.maxHeight = prevFrameMaxHeight;
+      }
+
+      target.style.overflow = prevTargetOverflow;
+      target.style.height = prevTargetHeight;
+      target.style.maxHeight = prevTargetMaxHeight;
+
       if (orderSheet) {
-        orderSheet.style.display = prevDisplay;
+        orderSheet.style.display = prevOrderSheetDisplay;
+        orderSheet.style.width = prevOrderSheetWidth;
       }
       if (toolbar) {
         toolbar.style.display = prevToolbarDisplay;

@@ -156,28 +156,12 @@ export default function ClientHandoffPanel({
       <div className="customizer-export-stack">
         {title && <span className="editor-subhead">{title}</span>}
 
-        {/* Primary Direct PDF Download Button */}
+        {/* Primary Recommended Action: Print / Save as PDF */}
         <button
           type="button"
           className="export-action-button primary"
-          onClick={handleDownloadPdf}
-          disabled={isPdfBusy}
-          title="Directly download invitation PDF with Ardhas Order Sheet"
-        >
-          {isPdfBusy ? (
-            <Loader2 size={14} className="animate-spin" />
-          ) : (
-            <Download size={14} />
-          )}
-          <span>{isPdfBusy ? "Generating PDF..." : "Download PDF"}</span>
-        </button>
-
-        {/* Fallback Print / Save as PDF Button */}
-        <button
-          type="button"
-          className="export-action-button"
           onClick={handlePrint}
-          title="Open browser print dialog to save as PDF"
+          title="Open browser print dialog to save as PDF with vector fonts and proper page breaks"
         >
           <Printer size={14} />
           <span>Print / Save as PDF</span>
@@ -187,11 +171,27 @@ export default function ClientHandoffPanel({
         <div className="pdf-print-tip">
           <Lightbulb size={13} className="pdf-print-tip-icon" />
           <span>
-            <strong>Tip:</strong> In the print dialog, choose{" "}
-            <strong>"Save as PDF"</strong> as the destination and tick{" "}
-            <strong>"Background graphics"</strong> to preserve colors and fonts.
+            <strong>Recommended for final PDF:</strong> In your browser print dialog, select{" "}
+            <strong>"Save as PDF"</strong> as Destination and tick{" "}
+            <strong>"Background graphics"</strong> for sharp vector quality and clean page breaks.
           </span>
         </div>
+
+        {/* Secondary Direct Action: Quick Preview PDF */}
+        <button
+          type="button"
+          className="export-action-button"
+          onClick={handleDownloadPdf}
+          disabled={isPdfBusy}
+          title="Download quick client-side preview PDF with Ardhas Order Sheet"
+        >
+          {isPdfBusy ? (
+            <Loader2 size={14} className="animate-spin" />
+          ) : (
+            <Download size={14} />
+          )}
+          <span>{isPdfBusy ? "Generating preview PDF..." : "Quick preview PDF"}</span>
+        </button>
 
         {/* JSON Export */}
         <button
@@ -229,13 +229,13 @@ export default function ClientHandoffPanel({
         {/* Disclaimers & Notes */}
         <div className="client-handoff-notes">
           <p className="editor-hint export-hint">
-            <strong>Source of truth:</strong> This JSON file is for sending to
-            Ardhas only. Videos are not downloaded this way; please send original
-            video files separately to Ardhas.
+            <strong>Official PDF note:</strong> The "Quick preview PDF" is generated directly in your browser for fast review. The final, high-resolution publication PDF is prepared by Ardhas using your client details JSON.
           </p>
           <p className="editor-hint export-hint">
-            <strong>Local session only:</strong> Photos and videos selected in
-            the browser preview are stored in your browser session only and have{" "}
+            <strong>Source of truth:</strong> The exported JSON file is the source of truth for Ardhas. Videos are not downloaded this way; please send original video files separately to Ardhas.
+          </p>
+          <p className="editor-hint export-hint">
+            <strong>Local session only:</strong> Photos and videos selected in the browser preview are stored in your browser session only and have{" "}
             <strong>NOT</strong> been sent to Ardhas.
           </p>
         </div>

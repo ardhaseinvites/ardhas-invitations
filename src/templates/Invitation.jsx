@@ -91,17 +91,17 @@ function PdfDownloadButton({ config }) {
   return (
     <>
       <button
-        onClick={handleDownload}
-        disabled={busy}
-        title="Directly download invitation PDF with Ardhas Order Sheet"
-      >
-        <Download size={16} /> {busy ? "Downloading..." : "Download PDF"}
-      </button>
-      <button
         onClick={() => window.print()}
         title="Print or Save as PDF (in dialog choose 'Save as PDF' & tick 'Background graphics')"
       >
-        <Printer size={16} /> Print
+        <Printer size={16} /> Print / Save PDF
+      </button>
+      <button
+        onClick={handleDownload}
+        disabled={busy}
+        title="Download quick client-side preview PDF with Ardhas Order Sheet"
+      >
+        <Download size={16} /> {busy ? "Generating..." : "Quick preview PDF"}
       </button>
     </>
   );

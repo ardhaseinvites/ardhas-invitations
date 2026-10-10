@@ -1039,6 +1039,22 @@
     transform: none !important;
   }
 }
+
+/* PDF Capture Overrides: forces all sections to be fully visible and disables animations */
+.ardhas-pdf-capturing,
+.ardhas-pdf-capturing * {
+  animation-duration: 0s !important;
+  transition-duration: 0s !important;
+}
+.ardhas-pdf-capturing .invite-section,
+.ardhas-pdf-capturing section,
+.ardhas-pdf-capturing article,
+.ardhas-pdf-capturing [data-projection-id] {
+  opacity: 1 !important;
+  transform: none !important;
+  visibility: visible !important;
+}
+
 @media print {
   body * {
     visibility: hidden !important;
