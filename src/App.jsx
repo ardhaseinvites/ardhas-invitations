@@ -32,7 +32,7 @@ export default function App() {
         <title>Ardhas — Invitations, beautifully reimagined</title>
         <meta
           name="description"
-          content="Explore 36 dedicated invitation designs for 12 celebrations. Personalize every detail, photo, and location with Ardhas."
+          content="Explore 80 dedicated invitation designs for 16 celebrations. Personalize every detail, photo, and location with Ardhas."
         />
       </Helmet>
       <a href="#main-content" className="skip-link">

@@ -27,10 +27,15 @@ import {
   Instagram,
   Flower2,
   MoveUpRight,
+  Eye,
 } from "lucide-react";
 import Navbar from "../components/Navbar";
 import Reveal from "../components/Reveal";
 import BookingDialog from "../components/BookingDialog";
+import FilterBar from "../components/discovery/FilterBar";
+import TemplateQuickViewModal from "../components/discovery/TemplateQuickViewModal";
+import ShortlistDrawer from "../components/discovery/ShortlistDrawer";
+import "../styles/discovery.css";
 import {
   photos,
   templates,
@@ -60,12 +65,13 @@ const featureList = [
   [MessageCircle, "One tap to connect", "WhatsApp, right at their fingertips."],
   [Heart, "Words to treasure", "A wall of love and good wishes."],
 ];
-function TemplateCard({ template, index }) {
+function TemplateCard({ template, index, isSaved, onToggleSave, onQuickView }) {
   const { config, applyTemplate } = useInvitation();
   const thumbnail = useRef(null);
   const [scale, setScale] = useState(0.5);
   useEffect(() => {
     const element = thumbnail.current;
+    if (!element) return;
     const observer = new ResizeObserver(([entry]) =>
       setScale(entry.contentRect.width / 640),
     );
@@ -79,7 +85,37 @@ function TemplateCard({ template, index }) {
     template.id;
   return (
     <Reveal delay={(index % 3) * 0.07}>
-      <article className="template-card">
+      <article className="template-card template-card-enhanced">
+        {/* Quick action buttons on card */}
+        <div className="card-quick-actions">
+          <button
+            type="button"
+            className="action-icon-btn"
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              onQuickView(template);
+            }}
+            title="Quick view design details"
+            aria-label={`Quick view ${template.name}`}
+          >
+            <Eye size={16} />
+          </button>
+          <button
+            type="button"
+            className={`action-icon-btn ${isSaved ? "saved" : ""}`}
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              onToggleSave(template.id);
+            }}
+            title={isSaved ? "Remove from moodboard" : "Save to moodboard"}
+            aria-label={`Save ${template.name} to moodboard`}
+          >
+            <Heart size={15} fill={isSaved ? "#ffffff" : "none"} />
+          </button>
+        </div>
+
         <Link
           className={"template-art event-template-art art-" + template.style}
           ref={thumbnail}
@@ -105,6 +141,10 @@ function TemplateCard({ template, index }) {
               />
             </Suspense>
           </div>
+          <div className="card-palette-badge">
+            <span className="card-palette-dot" style={{ backgroundColor: template.color }} />
+            <span>{template.style}</span>
+          </div>
           <span className="preview-hover">
             Explore this invitation <ArrowUpRight size={16} />
           </span>
@@ -127,6 +167,23 @@ function TemplateCard({ template, index }) {
           </button>
         </div>
         <div className="template-actions">
+          <button
+            type="button"
+            onClick={() => onQuickView(template)}
+            style={{
+              background: "none",
+              border: "none",
+              padding: 0,
+              font: "inherit",
+              cursor: "pointer",
+              display: "inline-flex",
+              alignItems: "center",
+              gap: 4,
+              color: "inherit",
+            }}
+          >
+            Quick view <Eye size={13} />
+          </button>
           <Link to={"/preview"} onClick={() => applyTemplate(template.id)}>
             Live preview <ArrowUpRight size={13} />
           </Link>
@@ -142,6 +199,88 @@ export default function Home() {
   const { config, applyTemplate } = useInvitation();
   const eventDate = new Date(config.date + "T12:00:00");
   const [selectedEvent, setSelectedEvent] = useState(config.eventType);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [activeVibe, setActiveVibe] = useState("all");
+  const [activeColor, setActiveColor] = useState("all");
+  const [activeLayout, setActiveLayout] = useState("all");
+  const [viewMode, setViewMode] = useState("masonry");
+  const [quickViewTemplate, setQuickViewTemplate] = useState(null);
+  const [shortlistOpen, setShortlistOpen] = useState(false);
+  const [savedIds, setSavedIds] = useState(() => {
+    try {
+      return JSON.parse(localStorage.getItem("ardhas_saved_templates") || "[]");
+    } catch {
+      return [];
+    }
+  });
+
+  useEffect(() => {
+    try {
+      localStorage.setItem("ardhas_saved_templates", JSON.stringify(savedIds));
+    } catch {}
+  }, [savedIds]);
+
+  const handleToggleSave = (templateId) => {
+    setSavedIds((prev) =>
+      prev.includes(templateId)
+        ? prev.filter((id) => id !== templateId)
+        : [...prev, templateId]
+    );
+  };
+
+  const hasActiveFilters = Boolean(
+    searchQuery ||
+    activeVibe !== "all" ||
+    activeColor !== "all" ||
+    activeLayout !== "all"
+  );
+
+  const handleResetFilters = () => {
+    setSearchQuery("");
+    setActiveVibe("all");
+    setActiveColor("all");
+    setActiveLayout("all");
+  };
+
+  const colorMap = {
+    gold: ["#c8a96a", "#8d7045", "#99763f", "#dec187", "#8b7254", "#92543a", "#d0b37c", "#a37b44", "#99774f", "#d6ba7d", "#987949", "#c6b078", "#b17a15", "#a65e1b", "#9c7623", "#917448", "#c4a35a", "#a38243", "#a35824", "#b8702b", "#b37418", "#caa258"],
+    ruby: ["#923c35", "#a55770", "#b05267", "#8a2b3d", "#943c4a", "#8d3444", "#8c2e42", "#9c3725", "#7d2b38", "#8f3a52"],
+    sage: ["#5e7857", "#60785b", "#7b8760", "#47683a", "#6f7940", "#25593e", "#2a6254", "#5c6b44"],
+    terracotta: ["#bc6c25", "#b25d3b", "#9c4927", "#a8714e", "#c9866b", "#a85d3b", "#9c572a", "#b0623a", "#98581d", "#bf6f2b", "#a86438"],
+    midnight: ["#38527a", "#2e4368", "#4a3c7c", "#687da0", "#7887a0", "#3b5373", "#4d658d", "#324a6e", "#293c5c", "#35408a", "#273f6a", "#2d3a54"],
+    rose: ["#a55770", "#b05267", "#a2717f", "#8b6373", "#8e6272", "#a66372", "#a06574", "#b03a72"],
+  };
+
+  const filteredTemplates = templates.filter((template) => {
+    if (!searchQuery && selectedEvent && template.eventType !== selectedEvent) {
+      return false;
+    }
+    if (searchQuery) {
+      const q = searchQuery.toLowerCase().trim();
+      const match =
+        template.name.toLowerCase().includes(q) ||
+        template.eventType.toLowerCase().includes(q) ||
+        template.description.toLowerCase().includes(q) ||
+        template.tag.toLowerCase().includes(q) ||
+        template.style.toLowerCase().includes(q) ||
+        template.layout.toLowerCase().includes(q);
+      if (!match) return false;
+    }
+    if (activeVibe !== "all" && template.style !== activeVibe) {
+      return false;
+    }
+    if (activeLayout !== "all" && template.layout !== activeLayout) {
+      return false;
+    }
+    if (activeColor !== "all") {
+      const allowed = colorMap[activeColor] || [];
+      if (!allowed.includes(template.color.toLowerCase())) {
+        return false;
+      }
+    }
+    return true;
+  });
+
   const [booking, setBooking] = useState(null);
   const hero = useRef(null);
   const reduced = useReducedMotion();
@@ -275,7 +414,7 @@ export default function Home() {
             </a>
             <span>PERSONAL. TIMELESS. UNFORGETTABLE.</span>
             <span className="hero-counter">
-              12 <span>CELEBRATIONS</span>
+              {eventTypes.length} <span>CELEBRATIONS</span>
             </span>
           </div>
         </section>
@@ -310,12 +449,42 @@ export default function Home() {
               Then make every little detail your own.
             </p>
           </Reveal>
+          <FilterBar
+            searchQuery={searchQuery}
+            onSearchChange={setSearchQuery}
+            activeVibe={activeVibe}
+            onVibeChange={setActiveVibe}
+            activeColor={activeColor}
+            onColorChange={setActiveColor}
+            activeLayout={activeLayout}
+            onLayoutChange={setActiveLayout}
+            viewMode={viewMode}
+            onViewModeChange={setViewMode}
+            totalResults={filteredTemplates.length}
+            totalTemplates={templates.length}
+            onResetFilters={handleResetFilters}
+            hasActiveFilters={hasActiveFilters}
+            savedCount={savedIds.length}
+            onOpenShortlist={() => setShortlistOpen(true)}
+          />
+
           <div className="collection-toolbar">
             <div
               className="filters"
               role="group"
               aria-label="Choose event collection"
             >
+              <button
+                type="button"
+                onClick={() => {
+                  setSelectedEvent("");
+                  handleResetFilters();
+                }}
+                aria-pressed={!selectedEvent && !searchQuery}
+                className={!selectedEvent && !searchQuery ? "active" : ""}
+              >
+                All ({templates.length})
+              </button>
               {eventTypes.map((item) => (
                 <button
                   key={item}
@@ -328,22 +497,49 @@ export default function Home() {
               ))}
             </div>
             <span className="collection-note">
-              36 SIGNATURE DESIGNS <Sparkles size={14} />
+              {templates.length} SIGNATURE DESIGNS <Sparkles size={14} />
             </span>
           </div>
+
           <h3 className="event-collection-title" aria-live="polite">
-            {selectedEvent} invitations{" "}
-            <span>Three designs, made for this moment.</span>
+            {selectedEvent ? `${selectedEvent} invitations` : "All Signature Invitations"}{" "}
+            <span>
+              {filteredTemplates.length} design{filteredTemplates.length === 1 ? "" : "s"} shown
+            </span>
           </h3>
-          <div className="template-grid" key={selectedEvent}>
-            {getEventTemplates(selectedEvent).map((template, index) => (
+
+          <div
+            className={viewMode === "masonry" ? "masonry-grid" : "template-grid"}
+            key={`${selectedEvent}-${searchQuery}-${activeVibe}-${activeColor}-${activeLayout}-${viewMode}`}
+          >
+            {filteredTemplates.map((template, index) => (
               <TemplateCard
                 key={template.id}
                 template={template}
                 index={index}
+                isSaved={savedIds.includes(template.id)}
+                onToggleSave={handleToggleSave}
+                onQuickView={setQuickViewTemplate}
               />
             ))}
           </div>
+
+          {filteredTemplates.length === 0 && (
+            <div style={{ textAlign: "center", padding: "60px 20px", color: "#8c827a" }}>
+              <Sparkles size={36} style={{ margin: "0 auto 12px", opacity: 0.4 }} />
+              <h3>No matching templates found</h3>
+              <p>Try clearing your search or filters to explore more designs.</p>
+              <button
+                type="button"
+                className="button light"
+                style={{ marginTop: 14 }}
+                onClick={handleResetFilters}
+              >
+                Clear all filters
+              </button>
+            </div>
+          )}
+
           <div className="collection-bottom">
             <span>Made for your story. Designed to be remembered.</span>
             <Link to="/customizer">
@@ -652,6 +848,23 @@ export default function Home() {
         </Link>
       </div>
       {booking && <BookingDialog onClose={() => setBooking(null)} />}
+      {quickViewTemplate && (
+        <TemplateQuickViewModal
+          template={quickViewTemplate}
+          onClose={() => setQuickViewTemplate(null)}
+          isSaved={savedIds.includes(quickViewTemplate.id)}
+          onToggleSave={handleToggleSave}
+          onApplyTemplate={applyTemplate}
+        />
+      )}
+      <ShortlistDrawer
+        isOpen={shortlistOpen}
+        onClose={() => setShortlistOpen(false)}
+        savedIds={savedIds}
+        onRemove={handleToggleSave}
+        onClear={() => setSavedIds([])}
+        onApplyTemplate={applyTemplate}
+      />
     </>
   );
 }

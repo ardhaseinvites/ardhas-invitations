@@ -306,6 +306,99 @@
 .invitation-custom .invite-welcome {
   background: color-mix(in srgb, var(--invite-accent) 10%, #faf7f0);
 }
+.invitation-celestial {
+  --invite-paper: #0b132b;
+  --invite-ink: #f0f3f8;
+  --invite-accent: #c8b6ff;
+}
+.invitation-celestial .invite-welcome {
+  background: radial-gradient(circle at 50% 20%, #1c2541, #0b132b 85%);
+  color: #f0f3f8;
+}
+.invitation-celestial .invite-photo {
+  opacity: 0.22;
+  mix-blend-mode: screen;
+}
+.invitation-celestial .invite-welcome:after {
+  border: 1px solid #64dfdf44;
+  outline: 1px dashed #c8b6ff33;
+  outline-offset: -7px;
+  inset: 20px;
+}
+.invitation-celestial .invite-welcome h2 {
+  text-shadow: 0 0 25px #64dfdf66, 0 0 50px #c8b6ff33;
+}
+.invitation-celestial .invite-decorations,
+.invitation-celestial .invite-event-motif {
+  color: #64dfdf;
+}
+.invitation-heritage {
+  --invite-paper: #210d12;
+  --invite-ink: #faedd7;
+  --invite-accent: #d4af37;
+}
+.invitation-heritage .invite-welcome {
+  background: radial-gradient(ellipse at center, #3d141d 0%, #1a080d 100%);
+  color: #faedd7;
+}
+.invitation-heritage .invite-welcome:after {
+  border: 5px double #d4af37;
+  outline: 1px solid #d4af3755;
+  outline-offset: -12px;
+  inset: 18px;
+}
+.invitation-heritage .invite-photo {
+  opacity: 0.16;
+  mix-blend-mode: luminosity;
+}
+.invitation-heritage .invite-welcome h2 {
+  font-family: Georgia, serif;
+  letter-spacing: 0.02em;
+  text-shadow: 0 2px 20px #d4af3740;
+}
+.invitation-boho {
+  --invite-paper: #fbf7f2;
+  --invite-ink: #3e2619;
+  --invite-accent: #bc6c25;
+}
+.invitation-boho .invite-welcome {
+  background: linear-gradient(135deg, #f7eee5 0%, #faebd7 50%, #f3dfcb 100%);
+  color: #3e2619;
+}
+.invitation-boho .invite-welcome:after {
+  border: 1.5px solid #bc6c2555;
+  border-radius: 40px;
+  inset: 22px;
+}
+.invitation-boho .invite-photo {
+  opacity: 0.45;
+  border-radius: 120px 120px 20px 20px;
+}
+.invitation-glassmorphic {
+  --invite-paper: #101216;
+  --invite-ink: #f2f4f8;
+  --invite-accent: #e5b95c;
+}
+.invitation-glassmorphic .invite-welcome {
+  background: radial-gradient(circle at 80% 20%, #1e222d 0%, #0d0f13 100%);
+  color: #f2f4f8;
+}
+.invitation-glassmorphic .invite-welcome-copy {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 24px;
+  padding: 40px 30px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+}
+.invitation-glassmorphic .invite-welcome:after {
+  border: 1px solid #e5b95c60;
+  inset: 18px;
+}
+.invitation-glassmorphic .invite-photo {
+  opacity: 0.25;
+}
 .invitation-bg-gradient .invite-welcome {
   background: linear-gradient(
     135deg,
@@ -1427,5 +1520,464 @@
     page-break-before: always;
     break-before: page;
   }
+  .preview-template-dock,
+  .envelope-experience {
+    display: none !important;
+  }
 }
+
+/* Luxury Envelope Opening Experience */
+.envelope-experience {
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at center, #f5efe6 0%, #ebe2d3 100%);
+  padding: 40px 20px;
+}
+
+.envelope-stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.envelope-box {
+  position: relative;
+  width: 380px;
+  max-width: 100%;
+  height: 250px;
+  background: #fbf7ee;
+  border-radius: 12px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15), 0 1px 3px rgba(0, 0, 0, 0.08);
+  perspective: 800px;
+}
+
+.envelope-flap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-left: 190px solid transparent;
+  border-right: 190px solid transparent;
+  border-top: 130px solid #ede3d1;
+  transform-origin: top;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 5;
+  filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.08));
+}
+
+@media (max-width: 420px) {
+  .envelope-flap {
+    border-left-width: 160px;
+    border-right-width: 160px;
+    border-top-width: 110px;
+  }
+}
+
+.is-opening .envelope-flap {
+  transform: rotateX(180deg);
+  z-index: 1;
+}
+
+.envelope-pocket {
+  position: absolute;
+  inset: 0;
+  border-radius: 12px;
+  overflow: hidden;
+  z-index: 3;
+}
+
+.envelope-liner {
+  position: absolute;
+  inset: 10px;
+  background-image: radial-gradient(circle at 50% 50%, #c4a36522 10%, transparent 10%);
+  background-size: 16px 16px;
+  border-radius: 8px;
+  opacity: 0.6;
+}
+
+.envelope-card-peek {
+  position: absolute;
+  top: 45px;
+  left: 30px;
+  right: 30px;
+  height: 180px;
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 24px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border: 1px solid rgba(196, 163, 101, 0.25);
+  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.is-opening .envelope-card-peek {
+  transform: translateY(-80px);
+}
+
+.peek-names {
+  font-family: var(--serif, "Cormorant Garamond", Georgia, serif);
+  font-size: 26px;
+  color: #8b3a46;
+  font-weight: 500;
+  margin-bottom: 6px;
+}
+
+.peek-tag {
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  color: #99763f;
+  text-transform: uppercase;
+}
+
+.envelope-wax-seal {
+  position: absolute;
+  top: 95px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #d4af37, #99763f);
+  border: 2px solid #846332;
+  box-shadow: 0 6px 18px rgba(132, 99, 50, 0.4), inset 0 2px 4px rgba(255, 255, 255, 0.4);
+  cursor: pointer;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.envelope-wax-seal:hover {
+  transform: translateX(-50%) scale(1.08);
+  box-shadow: 0 8px 22px rgba(132, 99, 50, 0.5);
+}
+
+.seal-monogram {
+  font-family: var(--serif, "Cormorant Garamond", Georgia, serif);
+  font-size: 20px;
+  font-weight: 700;
+  color: #fff8eb;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+}
+
+.is-opening .envelope-wax-seal {
+  transform: translateX(-50%) scale(0.6);
+  opacity: 0;
+  transition: transform 0.4s ease, opacity 0.4s ease;
+}
+
+.envelope-prompt {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.envelope-prompt p {
+  font-size: 13px;
+  color: #7a7066;
+  margin: 0;
+  letter-spacing: 0.05em;
+}
+
+.envelope-prompt h3 {
+  font-family: var(--serif, "Cormorant Garamond", Georgia, serif);
+  font-size: 32px;
+  color: #2b241e;
+  margin: 0 0 6px;
+}
+
+.envelope-open-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #231f1d;
+  color: #ffffff;
+  padding: 12px 28px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+  transition: all 0.2s ease;
+}
+
+.envelope-open-action:hover {
+  background: #c4a365;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(196, 163, 101, 0.35);
+}
+
+.envelope-skip-btn {
+  background: none;
+  border: none;
+  font-size: 12px;
+  color: #8c827a;
+  cursor: pointer;
+  text-decoration: underline;
+  padding: 4px;
+}
+
+/* Floating Template Switcher Dock on Preview */
+.preview-template-dock {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 999;
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 8px 14px;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.14);
+  max-width: 95vw;
+  overflow-x: auto;
+}
+
+.dock-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #7a6e63;
+  white-space: nowrap;
+}
+
+.dock-pills {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.dock-pill {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: transparent;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  padding: 5px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  color: #444;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+}
+
+.dock-pill:hover {
+  background: rgba(0, 0, 0, 0.04);
+}
+
+.dock-pill.active {
+  background: #231f1d;
+  color: #ffffff;
+  border-color: #231f1d;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+}
+
+.dock-pill-color {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  flex-shrink: 0;
+}
+
+.dock-check {
+  margin-left: 2px;
+  color: #c4a365;
+}
+
+.dock-customize-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: #c4a365;
+  color: #ffffff;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+}
+
+.dock-customize-btn:hover {
+  background: #a88746;
+  transform: translateY(-1px);
+}
+
+/* YouTube Hero Media & Gallery Integration */
+.invite-hero-media-wrap {
+  position: relative;
+  width: 100%;
+}
+
+.invite-hero-yt-play-btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(18, 14, 11, 0.78);
+  backdrop-filter: blur(8px);
+  color: #fff;
+  border: 1.5px solid rgba(255, 255, 255, 0.4);
+  padding: 12px 22px;
+  border-radius: 999px;
+  font-family: var(--invite-font, "Cormorant Garamond", Georgia, serif);
+  font-size: 15px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  z-index: 5;
+}
+
+.invite-hero-yt-play-btn:hover {
+  background: rgba(220, 38, 38, 0.92);
+  border-color: rgba(255, 255, 255, 0.85);
+  transform: translate(-50%, -50%) scale(1.05);
+  box-shadow: 0 12px 32px rgba(220, 38, 38, 0.4);
+}
+
+.invite-hero-yt-play-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.invite-hero-yt-compact-tag {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: rgba(0, 0, 0, 0.75);
+  color: #fff;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  padding: 3px 6px;
+  border-radius: 4px;
+  z-index: 4;
+}
+
+.invite-hero-yt-player-modal {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.94);
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: inherit;
+}
+
+.invite-hero-yt-player-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.invite-hero-yt-player-container iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.invite-hero-yt-close-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  z-index: 11;
+  transition: all 0.2s ease;
+}
+
+.invite-hero-yt-close-btn:hover {
+  background: #dc2626;
+  border-color: #dc2626;
+}
+
+/* Gallery YouTube items */
+.invite-gallery-item-yt {
+  position: relative;
+}
+
+.invite-gallery-yt-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: rgba(220, 38, 38, 0.9);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+  z-index: 3;
+}
+
+.invite-lightbox-yt-wrap {
+  position: relative;
+  width: 90vw;
+  max-width: 900px;
+  aspect-ratio: 16 / 9;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7);
+  background: #000;
+}
+
+.invite-lightbox-yt-wrap iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
 

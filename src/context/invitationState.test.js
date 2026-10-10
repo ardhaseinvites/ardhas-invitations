@@ -8,13 +8,13 @@ import {
 } from "../data/events.js";
 import { createInvitationState, invitationReducer } from "./invitationState.js";
 
-test("every occasion has three dedicated designs and its own content", () => {
-  assert.equal(eventTypes.length, 12);
-  assert.equal(new Set(templates.map((item) => item.id)).size, 36);
+test("every occasion has dedicated designs and its own content", () => {
+  assert.equal(eventTypes.length, 16);
+  assert.equal(new Set(templates.map((item) => item.id)).size, 80);
   for (const eventType of eventTypes) {
     const designs = getEventTemplates(eventType);
-    assert.equal(designs.length, 3);
-    assert.equal(new Set(designs.map((item) => item.layout)).size, 3);
+    assert.equal(designs.length, 5);
+    assert.equal(new Set(designs.map((item) => item.layout)).size, 5);
     for (const design of designs) {
       const config = getEventDefaults(eventType, design.id);
       assert.equal(config.eventType, eventType);

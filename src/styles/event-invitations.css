@@ -465,3 +465,358 @@
     font-size: 120px;
   }
 }
+
+.invitation.invitation-layout-framed .invite-welcome {
+  padding-top: 320px;
+}
+.invitation.invitation-layout-framed .invite-photo {
+  inset: 40px auto auto 50%;
+  transform: translateX(-50%);
+  width: 230px;
+  height: 230px;
+  border-radius: 50%;
+  border: 5px double var(--invite-accent);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+  opacity: 1;
+}
+.invitation.invitation-layout-framed .invite-welcome:not(.has-hero-photo) {
+  padding-top: 85px;
+}
+.invitation.invitation-compact.invitation-layout-framed .invite-welcome.has-hero-photo {
+  padding-top: 185px;
+}
+.invitation.invitation-compact.invitation-layout-framed .invite-photo {
+  width: 125px;
+  height: 125px;
+  top: 25px;
+}
+
+.invitation.invitation-layout-floating .invite-welcome {
+  padding: 85px 35px;
+}
+.invitation.invitation-layout-floating .invite-welcome-copy {
+  background: var(--invite-paper);
+  padding: 55px 40px;
+  border-radius: 24px;
+  box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.28), 0 0 0 1px color-mix(in srgb, var(--invite-accent) 25%, transparent);
+  position: relative;
+}
+.invitation.invitation-layout-floating .invite-photo {
+  opacity: 0.16;
+  inset: 0;
+}
+.invitation.invitation-compact.invitation-layout-floating .invite-welcome-copy {
+  padding: 24px 18px;
+}
+
+.event-sangeet,
+.event-pooja,
+.event-grad,
+.event-dinner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+.event-sangeet svg,
+.event-pooja svg,
+.event-grad svg,
+.event-dinner svg {
+  width: 32px;
+  height: 32px;
+}
+
+[class*="invitation-event-sangeet"] .invite-welcome:after {
+  border: 1px dashed color-mix(in srgb, var(--invite-accent) 60%, transparent);
+  border-radius: 20px;
+}
+[class*="invitation-event-pooja"] .invite-welcome:after {
+  border: 3px double color-mix(in srgb, var(--invite-accent) 55%, transparent);
+  outline: 1px solid color-mix(in srgb, var(--invite-accent) 30%, transparent);
+  outline-offset: -8px;
+}
+.invitation-event-graduation .invite-welcome:after {
+  border: 2px solid color-mix(in srgb, var(--invite-accent) 45%, transparent);
+}
+.invitation-event-dinner-party .invite-welcome:after {
+  border: 1px solid color-mix(in srgb, var(--invite-accent) 40%, transparent);
+  border-radius: 28px;
+}
+
+/* ==========================================================================
+   Pinterest & Mobile Luxury Layouts: Deckle, Velure, Polaroid & Estate
+   ========================================================================== */
+
+/* 1. Deckle Torn-Paper Layout (Images 1 & 2: AreOne / Memories Deckle) */
+.invitation.invitation-layout-deckle .invite-welcome {
+  padding-top: 420px;
+}
+.invitation.invitation-layout-deckle .invite-hero-media-wrap {
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 400px;
+  overflow: hidden;
+}
+.invitation.invitation-layout-deckle .invite-photo {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  opacity: 1;
+}
+.invite-deckle-edge {
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 100%;
+  height: 32px;
+  z-index: 3;
+  pointer-events: none;
+}
+.invite-deckle-edge .deckle-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.invitation.invitation-compact.invitation-layout-deckle .invite-welcome {
+  padding-top: 220px;
+}
+.invitation.invitation-compact.invitation-layout-deckle .invite-hero-media-wrap {
+  height: 200px;
+}
+
+/* 4-Box Deckle Countdown */
+.invite-countdown-deckle {
+  display: grid !important;
+  grid-template-columns: repeat(4, 1fr) !important;
+  gap: 8px !important;
+  max-width: 380px !important;
+  margin: 30px auto !important;
+}
+.deckle-countdown-box {
+  background: var(--invite-paper, #ffffff) !important;
+  border: 1px solid color-mix(in srgb, var(--invite-accent, #8d7045) 45%, transparent) !important;
+  border-radius: 4px !important;
+  padding: 12px 6px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04) !important;
+}
+.deckle-countdown-box strong {
+  font-family: var(--invite-font, "Cormorant Garamond", Georgia, serif) !important;
+  font-size: 26px !important;
+  line-height: 1 !important;
+  color: var(--invite-ink, #231f1d) !important;
+  font-weight: 500 !important;
+}
+.deckle-countdown-box span {
+  font-size: 9px !important;
+  letter-spacing: 1.5px !important;
+  text-transform: uppercase !important;
+  color: color-mix(in srgb, var(--invite-ink, #231f1d) 65%, transparent) !important;
+  margin-top: 4px !important;
+}
+
+/* Deckle Social & Playlist Cards */
+.invite-deckle-socials {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  margin: 24px auto 16px;
+}
+.deckle-hashtag-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 18px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--invite-accent, #8d7045) 40%, transparent);
+  background: color-mix(in srgb, var(--invite-accent, #8d7045) 8%, var(--invite-paper));
+  font-size: 13px;
+  letter-spacing: 0.5px;
+  font-weight: 600;
+  color: var(--invite-ink, #231f1d);
+}
+.deckle-playlist-card {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border-radius: 999px;
+  background: #1db9541a;
+  border: 1px solid #1db95455;
+  color: #15803d;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.deckle-playlist-card:hover {
+  background: #1db9542a;
+  transform: translateY(-1px);
+}
+
+/* 2. Velure Olive Linen Layout (Image 3: Velure Digital Invitations) */
+.invitation.invitation-layout-velure .invite-welcome {
+  padding-top: 100px;
+}
+.invite-velure-seal {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 72px;
+  height: 88px;
+  border: 2px solid color-mix(in srgb, var(--invite-accent, #706f54) 70%, transparent);
+  border-radius: 50%;
+  margin: 0 auto 20px;
+  background: color-mix(in srgb, var(--invite-accent, #706f54) 6%, transparent);
+  box-shadow: inset 0 0 0 3px var(--invite-paper, #f7f4ee), 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+.invite-velure-initials {
+  font-family: var(--invite-font, "Cormorant Garamond", Georgia, serif);
+  font-size: 20px;
+  letter-spacing: 2px;
+  color: var(--invite-accent, #706f54);
+  font-weight: 600;
+}
+.invite-velure-player {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  max-width: 340px;
+  margin: 24px auto 16px;
+  padding: 10px 16px;
+  background: color-mix(in srgb, var(--invite-paper, #f7f4ee) 90%, #000);
+  border: 1px solid color-mix(in srgb, var(--invite-accent, #706f54) 30%, transparent);
+  border-radius: 30px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+}
+.invite-velure-play-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--invite-accent, #706f54);
+  color: #fff;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+.invite-velure-play-btn:hover {
+  transform: scale(1.08);
+}
+.invite-velure-player-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.invite-velure-song-title {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--invite-ink, #231f1d);
+  letter-spacing: 0.3px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.invite-velure-scrubber {
+  height: 4px;
+  background: rgba(0, 0, 0, 0.08);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.invite-velure-scrubber-fill {
+  height: 100%;
+  background: var(--invite-accent, #706f54);
+  border-radius: 2px;
+  transition: width 0.3s ease;
+}
+.invite-velure-time {
+  font-size: 10px;
+  color: #8c8275;
+  font-variant-numeric: tabular-nums;
+}
+.invite-velure-palette {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  margin: 20px auto 10px;
+}
+.invite-palette-label {
+  font-size: 9px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #8c8275;
+  font-weight: 600;
+}
+.invite-palette-dots {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.invite-palette-dot {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid #ffffff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  transition: transform 0.2s ease;
+}
+.invite-palette-dot:hover {
+  transform: scale(1.2);
+}
+
+/* 3. Polaroid Layout (Image 5: Olivia and Ethan) */
+.invitation.invitation-layout-polaroid .invite-welcome {
+  padding-top: 360px;
+}
+.invitation.invitation-layout-polaroid .invite-photo {
+  inset: 40px auto auto 50%;
+  transform: translateX(-50%) rotate(-2deg);
+  width: 250px;
+  height: 290px;
+  padding: 12px 12px 42px;
+  background: #ffffff;
+  border-radius: 4px;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.18), 0 2px 6px rgba(0, 0, 0, 0.08);
+  object-fit: cover;
+  opacity: 1;
+}
+.invitation.invitation-compact.invitation-layout-polaroid .invite-welcome {
+  padding-top: 200px;
+}
+.invitation.invitation-compact.invitation-layout-polaroid .invite-photo {
+  width: 140px;
+  height: 165px;
+  padding: 8px 8px 24px;
+  top: 20px;
+}
+
+/* 4. Architectural Estate Layout (Image 4: Maplewood Estate) */
+.invitation.invitation-layout-estate .invite-welcome {
+  padding-top: 80px;
+}
+.invitation.invitation-layout-estate .invite-welcome h2 {
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-size: clamp(32px, 8cqw, 54px);
+}
+.invitation.invitation-layout-estate .invite-photo {
+  opacity: 0.18;
+}
+
+/* Theme presets for deckle & velure */
+.invitation-deckle {
+  --invite-paper: #faf7f2;
+  --invite-ink: #2b2520;
+}
+.invitation-velure {
+  --invite-paper: #f7f4ee;
+  --invite-ink: #2d2b27;
+}
+

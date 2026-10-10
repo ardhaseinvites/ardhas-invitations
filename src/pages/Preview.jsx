@@ -22,6 +22,8 @@ import {
 } from "../utils/clientExport.js";
 import ClientHandoffPanel from "../components/ClientHandoffPanel";
 import Invitation from "../templates/Invitation";
+import EnvelopeOpening from "../components/preview/EnvelopeOpening";
+import TemplateSwitcherDock from "../components/preview/TemplateSwitcherDock";
 
 export default function Preview() {
   const { config, updateConfig } = useInvitation();
@@ -176,8 +178,11 @@ export default function Preview() {
         />
       </div>
       <main id="main-content">
-        <Invitation config={config} />
+        <EnvelopeOpening config={config}>
+          <Invitation config={config} />
+        </EnvelopeOpening>
       </main>
+      <TemplateSwitcherDock />
     </>
   );
 }

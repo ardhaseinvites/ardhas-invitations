@@ -1,5 +1,6 @@
 const picture = (id) =>
   `https://images.unsplash.com/${id}?auto=format&fit=crop&w=1200&q=80`;
+
 const images = {
   wedding: picture("photo-1519741497674-611481863552"),
   couple: picture("photo-1529636798458-92182e662485"),
@@ -9,7 +10,15 @@ const images = {
   baby: picture("photo-1519689680058-324335c77eba"),
   nursery: picture("photo-1515488042361-ee00e0ddd4e4"),
   party: picture("photo-1511795409834-ef04bbd61622"),
+  sangeet: picture("photo-1492684223066-81342ee5ff30"),
+  pooja: picture("photo-1609599006353-e629aaabfeae"),
+  graduation: picture("photo-1523240795612-9a054b0db644"),
+  dinner: picture("photo-1544025162-d76694265947"),
+  celestial: picture("photo-1506703719100-a0f3a48c0f86"),
+  heritage: picture("photo-1582510003544-4d00b7f74220"),
+  boho: picture("photo-1513519245088-0e12902e5a38"),
 };
+
 const events = {
   Wedding: {
     type: "Wedding",
@@ -26,9 +35,11 @@ const events = {
     address: "The Leela Ashtamudi, Thevally, Kollam, Kerala",
     dress: "Festive elegance · Soft, joyful colors",
     designs: [
-      ["Ivory Vows", "minimal", "#8d7045"],
+      ["Memories Deckle", "deckle", "#8d7045"],
       ["Temple Promise", "classic", "#923c35"],
-      ["Garden Forever", "floral", "#5e7857"],
+      ["Velure Linen", "velure", "#706f54"],
+      ["Royal Darbar", "heritage", "#a38243"],
+      ["Starry Infinity", "celestial", "#38527a"],
     ],
     memories: ["The first hello", "A thousand memories", "Our forever begins"],
     schedule: [
@@ -55,6 +66,8 @@ const events = {
       ["The Golden Yes", "minimal", "#99763f"],
       ["Blush Promise", "romantic", "#a55770"],
       ["Moonlit Rings", "royal", "#c8a96a"],
+      ["Velvet Courtyard", "heritage", "#8a2b3d"],
+      ["Celestial Constellation", "celestial", "#2e4368"],
     ],
     memories: [
       "We crossed paths",
@@ -85,6 +98,8 @@ const events = {
       ["Confetti Club", "modern", "#825a9b"],
       ["Birthday Wishes", "romantic", "#b05267"],
       ["After Dark", "royal", "#dec187"],
+      ["Terracotta Fiesta", "boho", "#b25d3b"],
+      ["Midnight Starlight", "celestial", "#4a3c7c"],
     ],
     memories: ["The little moments", "The big adventures", "The next chapter"],
     schedule: [
@@ -111,6 +126,8 @@ const events = {
       ["The Open Door", "minimal", "#8b7254"],
       ["Griha Pravesh", "classic", "#92543a"],
       ["A Place to Belong", "floral", "#60785b"],
+      ["Auspicious Abode", "heritage", "#9c4927"],
+      ["Earthy Haven", "boho", "#a8714e"],
     ],
     memories: ["A little dream", "Made with love", "Ready for you"],
     schedule: [
@@ -137,6 +154,8 @@ const events = {
       ["Over the Moon", "minimal", "#687da0"],
       ["Little Cloud", "romantic", "#a2717f"],
       ["A Tiny Bloom", "floral", "#7b8760"],
+      ["Golden Cradle", "heritage", "#a38243"],
+      ["Boho Pampas Nest", "boho", "#c9866b"],
     ],
     memories: ["The sweetest news", "Dreaming of you", "Almost in our arms"],
     schedule: [
@@ -163,6 +182,8 @@ const events = {
       ["Silver Stories", "minimal", "#797b81"],
       ["A Golden Journey", "royal", "#d0b37c"],
       ["Still in Bloom", "floral", "#8b6373"],
+      ["Heritage Garland", "heritage", "#943c4a"],
+      ["Midnight Starlight", "celestial", "#3b5373"],
     ],
     memories: [
       "The day we said yes",
@@ -193,6 +214,8 @@ const events = {
       ["Little Lotus", "floral", "#8e6272"],
       ["A Name in the Stars", "minimal", "#7887a0"],
       ["Blessed Beginning", "classic", "#a37b44"],
+      ["Vedic Cradle", "heritage", "#a85d3b"],
+      ["Celestial Moonbeam", "celestial", "#4d658d"],
     ],
     memories: [
       "Hello, little one",
@@ -223,6 +246,8 @@ const events = {
       ["Mark the Moment", "modern", "#436568"],
       ["A Date to Keep", "minimal", "#99774f"],
       ["Postcard from Forever", "romantic", "#a66372"],
+      ["Regal Announcement", "heritage", "#8d3444"],
+      ["Constellation Calendar", "celestial", "#324a6e"],
     ],
     memories: ["We found our person", "We picked a day", "Now we need you"],
     schedule: [
@@ -248,6 +273,8 @@ const events = {
       ["The Evening Edit", "royal", "#d6ba7d"],
       ["Champagne Hours", "minimal", "#987949"],
       ["Under the Lights", "modern", "#77639a"],
+      ["Grand Ballroom", "heritage", "#8c2e42"],
+      ["Midnight Gala", "celestial", "#293c5c"],
     ],
     memories: ["A day of promises", "An evening of joy", "Memories after dark"],
     schedule: [
@@ -274,6 +301,8 @@ const events = {
       ["Henna & Harmony", "classic", "#47683a"],
       ["The Mehfil Garden", "floral", "#6f7940"],
       ["Emerald Afternoons", "royal", "#c6b078"],
+      ["Zari & Marigold", "heritage", "#9c572a"],
+      ["Boho Sunset Palm", "boho", "#b0623a"],
     ],
     memories: [
       "A little bridal joy",
@@ -304,6 +333,8 @@ const events = {
       ["Marigold Morning", "floral", "#b17a15"],
       ["Golden Blessings", "classic", "#a65e1b"],
       ["Hello Sunshine", "modern", "#9c7623"],
+      ["Peeli Champa", "heritage", "#98581d"],
+      ["Warm Terracotta Sun", "boho", "#bf6f2b"],
     ],
     memories: [
       "Before the big day",
@@ -334,6 +365,8 @@ const events = {
       ["The Gathering", "modern", "#416e75"],
       ["Something Special", "minimal", "#917448"],
       ["Good Company", "romantic", "#a06574"],
+      ["Palace Rendezvous", "heritage", "#8a3a48"],
+      ["Starlit Evening", "celestial", "#3a4a6e"],
     ],
     memories: ["A good reason", "A thoughtful gathering", "A memory to keep"],
     schedule: [
@@ -342,11 +375,142 @@ const events = {
       ["19:00", "A shared table"],
     ],
   },
+  "Sangeet & Cocktail": {
+    type: "Sangeet & Cocktail",
+    slug: "sangeet",
+    names: "Rohan & Rhea",
+    eyebrow: "MUSIC, DANCING & HIGH SPIRITS",
+    line: "Step onto the dance floor and celebrate the beats of our love",
+    storyTitle: "Turn the music up",
+    story:
+      "An electric night of rhythm, dhol beats, glamorous toasts, and non-stop celebration! Put on your dancing shoes and join us for the ultimate musical evening.",
+    imageKey: "sangeet",
+    time: "19:00",
+    venue: "Kochi, Kerala",
+    address: "Grand Hyatt Ballroom, Mulavukad, Kochi, Kerala",
+    dress: "Glamorous festive wear & cocktail evening attire",
+    designs: [
+      ["Rhythm of the Night", "modern", "#793da8"],
+      ["Velvet & Starlight", "royal", "#c4a35a"],
+      ["Disco Glamour", "glassmorphic", "#b03a72"],
+      ["Mehfil e Sangeet", "heritage", "#8c2e42"],
+      ["Electric Midnight", "celestial", "#35408a"],
+    ],
+    memories: [
+      "The music begins",
+      "A dance to remember",
+      "Toasts under the stars",
+    ],
+    schedule: [
+      ["19:00", "Red carpet & cocktails"],
+      ["20:00", "Family dance performances"],
+      ["21:30", "DJ & midnight feast"],
+    ],
+  },
+  "Pooja & House Blessing": {
+    type: "Pooja & House Blessing",
+    slug: "pooja",
+    names: "The Sharma Family",
+    eyebrow: "AUSPICIOUS BLESSINGS & SACRED CHANTS",
+    line: "Join us in invoking peace, prosperity, and divine grace",
+    storyTitle: "In sacred company",
+    story:
+      "With the lighting of sacred lamps, fragrance of fresh marigolds, and sacred mantras, we seek the almighty's blessings for our family, home, and endeavors.",
+    imageKey: "pooja",
+    time: "08:30",
+    venue: "Thrissur, Kerala",
+    address: "Sree Krishna Kripa, Punkunnam, Thrissur, Kerala",
+    dress: "Traditional white, gold, or silk attire",
+    designs: [
+      ["Sacred Diya", "classic", "#a35824"],
+      ["Vedic Lotus", "floral", "#b8702b"],
+      ["Auspicious Mangal", "heritage", "#9c3725"],
+      ["Pure Serenity", "minimal", "#8b7245"],
+      ["Temple Bells", "boho", "#a86438"],
+    ],
+    memories: [
+      "Lighting the lamp",
+      "Sacred blessings",
+      "Prasadam together",
+    ],
+    schedule: [
+      ["08:30", "Ganapati homam & pooja"],
+      ["10:30", "Maha Aarti & blessings"],
+      ["12:00", "Traditional Sadya feast"],
+    ],
+  },
+  Graduation: {
+    type: "Graduation",
+    slug: "graduation",
+    names: "Dr. Siddharth Menon",
+    eyebrow: "HONORING AN INCREDIBLE MILESTONE",
+    line: "Years of dedication, late nights, and a future full of promise",
+    storyTitle: "The cap is thrown. The journey begins.",
+    story:
+      "After seasons of relentless focus, exams, and perseverance, the milestone is reached! Join us as we celebrate graduation and toast to brilliant new horizons.",
+    imageKey: "graduation",
+    time: "16:00",
+    venue: "Bengaluru, Karnataka",
+    address: "The Oberoi, MG Road, Bengaluru, Karnataka",
+    dress: "Smart formal & celebratory chic",
+    designs: [
+      ["Golden Laurel", "royal", "#caa258"],
+      ["Summit & Future", "minimal", "#3b5c7a"],
+      ["Modern Scholar", "modern", "#2a6254"],
+      ["Heritage Honors", "heritage", "#7d2b38"],
+      ["Cosmic Horizon", "celestial", "#273f6a"],
+    ],
+    memories: [
+      "The first chapter",
+      "Milestones conquered",
+      "The journey ahead",
+    ],
+    schedule: [
+      ["16:00", "Arrival & commencement toast"],
+      ["17:00", "Honors & speeches"],
+      ["18:30", "Celebration reception"],
+    ],
+  },
+  "Dinner Party": {
+    type: "Dinner Party",
+    slug: "dinner",
+    names: "The Summer Soirée",
+    eyebrow: "AN INTIMATE EVENING OF GOOD FOOD & COMPANY",
+    line: "Pull up a chair. Great food, fine wine, and wonderful conversations await.",
+    storyTitle: "Gather around the table",
+    story:
+      "The best evenings are those spent with favorite people around an abundant table, sharing stories, clinking glasses, and laughing into the night.",
+    imageKey: "dinner",
+    time: "19:30",
+    venue: "Fort Kochi, Kerala",
+    address: "Brunton Boatyard Terrace, Fort Kochi, Kerala",
+    dress: "Smart casual & warm evening elegance",
+    designs: [
+      ["Candlelit Terrace", "romantic", "#8f3a52"],
+      ["Olive & Linen", "boho", "#5c6b44"],
+      ["Midnight Feast", "celestial", "#2d3a54"],
+      ["Vintage Bistro", "classic", "#85583b"],
+      ["The Modern Table", "minimal", "#4d5b63"],
+    ],
+    memories: [
+      "A warm greeting",
+      "A feast shared",
+      "Stories under candlelight",
+    ],
+    schedule: [
+      ["19:30", "Aperitifs & hors d'oeuvres"],
+      ["20:30", "Seated seasonal dinner"],
+      ["22:00", "Dessert & digestifs"],
+    ],
+  },
 };
+
 export const eventTypes = Object.keys(events);
+
 export const eventStories = Object.fromEntries(
   eventTypes.map((type) => [type, events[type].story]),
 );
+
 export const templates = eventTypes.flatMap((eventType) =>
   events[eventType].designs.map(([name, style, color], index) => ({
     id: `${events[eventType].slug}-${index + 1}`,
@@ -354,16 +518,37 @@ export const templates = eventTypes.flatMap((eventType) =>
     name,
     style,
     color,
-    layout: ["editorial", "arch", "split"][index],
-    font: style === "modern" ? "Modern" : "Serif",
+    layout:
+      style === "deckle"
+        ? "deckle"
+        : style === "velure"
+          ? "velure"
+          : ["editorial", "arch", "split", "framed", "floating"][index % 5],
+    font:
+      style === "modern" || style === "glassmorphic"
+        ? "Modern"
+        : style === "royal" || style === "heritage"
+          ? "Royal"
+          : style === "boho" || style === "velure"
+            ? "Minimal"
+            : style === "deckle"
+              ? "Handwritten"
+              : "Serif",
     background: "Plain",
-    description: `${["A signature", "An intimate", "An expressive"][index]} ${eventType.toLowerCase()} invitation, made personal.`,
+    description: `${["A signature", "An intimate", "An expressive", "A regal", "A celestial"][index % 5]} ${eventType.toLowerCase()} invitation, made personal.`,
     category: eventType,
-    tag: ["SIGNATURE", "TIMELESS", "EDITORIAL"][index],
+    tag:
+      style === "deckle"
+        ? "DECKLE"
+        : style === "velure"
+          ? "VELURE"
+          : ["SIGNATURE", "TIMELESS", "EDITORIAL", "HERITAGE", "CELESTIAL"][index % 5],
   })),
 );
+
 export const getEventTemplates = (eventType) =>
   templates.filter((template) => template.eventType === eventType);
+
 export function getEventDefaults(eventType = "Wedding", templateId) {
   const type = events[eventType] ? eventType : "Wedding";
   const event = events[type];
@@ -435,7 +620,12 @@ export function getEventDefaults(eventType = "Wedding", templateId) {
     registryDemoText:
       "This registry is a preview. Add a registry URL in the customizer to connect it.",
     contactsEyebrow: "HERE TO HELP YOU FEEL AT HOME",
-    contactsTitle: ["Wedding", "Engagement", "Reception"].includes(type)
+    contactsTitle: [
+      "Wedding",
+      "Engagement",
+      "Reception",
+      "Sangeet & Cocktail",
+    ].includes(type)
       ? "With love, from our families"
       : "Your hosts are here to help",
     contactMapLabel: "Find the celebration",
@@ -454,6 +644,10 @@ export function getEventDefaults(eventType = "Wedding", templateId) {
     Mehendi: ["flowers", "party", "couple"],
     Haldi: ["flowers", "wedding", "party"],
     Other: ["party", "flowers", "birthday"],
+    "Sangeet & Cocktail": ["sangeet", "party", "flowers"],
+    "Pooja & House Blessing": ["pooja", "flowers", "home"],
+    Graduation: ["graduation", "party", "couple"],
+    "Dinner Party": ["dinner", "flowers", "party"],
   };
   return {
     template: design.id,
@@ -501,15 +695,23 @@ export function getEventDefaults(eventType = "Wedding", templateId) {
     milestone: type === "Anniversary" ? "25" : "",
     copy,
     decorations: {
-      Flowers: ["Wedding", "Mehendi", "Haldi", "Naming Ceremony"].includes(
-        type,
-      ),
-      Leaves: ["Housewarming", "Mehendi"].includes(type),
+      Flowers: [
+        "Wedding",
+        "Mehendi",
+        "Haldi",
+        "Naming Ceremony",
+        "Pooja & House Blessing",
+      ].includes(type),
+      Leaves: ["Housewarming", "Mehendi", "Dinner Party"].includes(type),
       Sparkles: true,
-      Lanterns: type === "Reception",
+      Lanterns: ["Reception", "Sangeet & Cocktail"].includes(type),
       Butterflies: type === "Baby Shower",
       Hearts: ["Wedding", "Engagement", "Anniversary"].includes(type),
-      "Temple Pattern": ["Housewarming", "Haldi"].includes(type),
+      "Temple Pattern": [
+        "Housewarming",
+        "Haldi",
+        "Pooja & House Blessing",
+      ].includes(type),
     },
     sections: {
       story: true,
@@ -546,7 +748,7 @@ export function getEventDefaults(eventType = "Wedding", templateId) {
     })),
     gallery: galleryKeys[type].map((key, index) => ({
       id: `photo-${index + 1}`,
-      src: images[key],
+      src: images[key] || images.party,
       alt: `${type} inspiration ${index + 1}`,
     })),
     wishes: [
@@ -573,7 +775,9 @@ export function getEventDefaults(eventType = "Wedding", templateId) {
         id: "gift-1",
         title: ["Baby Shower", "Naming Ceremony"].includes(type)
           ? "For our little one"
-          : "A little wish",
+          : type === "Graduation"
+            ? "Future aspirations fund"
+            : "A little wish",
         description: "Something special for our next chapter.",
         url: "",
       },
@@ -587,14 +791,28 @@ export function getEventDefaults(eventType = "Wedding", templateId) {
     contacts: [
       {
         id: "contact-1",
-        name: type === "Wedding" ? "Aarav’s family" : "Our family",
+        name: [
+          "Wedding",
+          "Engagement",
+          "Reception",
+          "Sangeet & Cocktail",
+        ].includes(type)
+          ? "Rohan’s family"
+          : "Our family",
         role: "Event host",
         phone: "",
         email: "",
       },
       {
         id: "contact-2",
-        name: type === "Wedding" ? "Diya’s family" : "Celebration coordinator",
+        name: [
+          "Wedding",
+          "Engagement",
+          "Reception",
+          "Sangeet & Cocktail",
+        ].includes(type)
+          ? "Rhea’s family"
+          : "Celebration coordinator",
         role: "Guest support",
         phone: "",
         email: "",
@@ -602,4 +820,5 @@ export function getEventDefaults(eventType = "Wedding", templateId) {
     ],
   };
 }
+
 export const defaultConfig = getEventDefaults();

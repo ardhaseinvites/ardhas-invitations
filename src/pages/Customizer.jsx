@@ -13,6 +13,7 @@ import {
   FileText,
   ImagePlus,
   Monitor,
+  Play,
   Plus,
   RotateCcw,
   Search,
@@ -20,6 +21,7 @@ import {
   Sparkles,
   Trash2,
   Video,
+  X,
 } from "lucide-react";
 import { useInvitation } from "../context/InvitationContext";
 import { eventTypes, getEventTemplates } from "../data/content";
@@ -27,6 +29,7 @@ import {
   validateProjectId,
   validateCustomFieldId,
 } from "../data/mediaSlots.js";
+import { parseYouTubeUrl, getMediaThumbnail } from "../utils/media.js";
 import ClientHandoffPanel from "../components/ClientHandoffPanel";
 import Invitation from "../templates/Invitation";
 import "../styles/customizer.css";
@@ -40,6 +43,31 @@ const backgrounds = [
   "Glass",
   "Traditional Pattern",
   "Custom Image",
+];
+const layouts = [
+  { value: "editorial", label: "Editorial (Signature Full-Bleed)" },
+  { value: "deckle", label: "Deckle (Torn Paper Edge & Boxed Countdown)" },
+  { value: "velure", label: "Velure (Monogram Crest & Love Song Bar)" },
+  { value: "arch", label: "Arch (Temple & Curved Frame)" },
+  { value: "split", label: "Split (Side-by-Side Hero)" },
+  { value: "framed", label: "Framed (Cameo Oval)" },
+  { value: "floating", label: "Floating (Layered Card)" },
+  { value: "polaroid", label: "Polaroid (Story Film Stack)" },
+  { value: "estate", label: "Estate (Architectural Sketch)" },
+];
+const styles = [
+  { value: "deckle", label: "Deckle Torn-Paper Romance" },
+  { value: "velure", label: "Velure Olive Linen Luxury" },
+  { value: "minimal", label: "Minimal Luxury" },
+  { value: "classic", label: "Classic Traditional" },
+  { value: "romantic", label: "Modern Romantic" },
+  { value: "floral", label: "Floral Elegant" },
+  { value: "royal", label: "Royal Premium" },
+  { value: "modern", label: "Contemporary Modern" },
+  { value: "heritage", label: "Heritage Velvet" },
+  { value: "celestial", label: "Celestial Midnight" },
+  { value: "boho", label: "Boho Terracotta" },
+  { value: "glassmorphic", label: "Glassmorphic Noir" },
 ];
 const decorations = [
   "Flowers",
@@ -120,10 +148,16 @@ function TextField({
 function ImageField({ slotId, label, value, onChange, required = false }) {
   const [error, setError] = useState("");
   const [busy, setBusy] = useState(false);
+  const [showPlayer, setShowPlayer] = useState(false);
   const sequence = useRef(0);
   const fileInput = useRef(null);
   const latestChange = useRef(onChange);
   latestChange.current = onChange;
+
+  const ytMeta = parseYouTubeUrl(value);
+  const isYouTube = ytMeta.isYouTube;
+  const thumbnail = getMediaThumbnail(value);
+
   useEffect(
     () => () => {
       sequence.current++;
@@ -189,24 +223,91 @@ function ImageField({ slotId, label, value, onChange, required = false }) {
         </div>
       )}
       <TextField
-        label={slotId ? "Photo URL" : label + " URL"}
+        label={slotId ? "Photo or YouTube Video URL" : label + " URL / YouTube"}
         value={value?.startsWith("data:") ? "" : value}
         onChange={change}
         placeholder={
           value?.startsWith("data:")
-            ? "Local preview photo selected · paste a URL to replace"
-            : "https://…"
+            ? "Local preview photo selected · paste URL or YouTube link to replace"
+            : "Paste image URL or YouTube link (e.g. https://www.youtube.com/watch?v=…)"
         }
       />
-      {value && <img src={value} alt={label + " thumbnail"} loading="lazy" />}
+      {thumbnail && (
+        <div className="editor-media-preview-container">
+          <img
+            src={thumbnail}
+            alt={label + (isYouTube ? " YouTube thumbnail" : " thumbnail")}
+            loading="lazy"
+          />
+          {isYouTube && (
+            <>
+              <span className="editor-yt-badge">
+                <Play size={10} fill="currentColor" /> YouTube Video
+              </span>
+              <button
+                type="button"
+                className="editor-yt-play-overlay"
+                onClick={() => setShowPlayer(true)}
+                title="Watch YouTube video preview"
+                aria-label="Watch YouTube video preview"
+              >
+                <Play size={22} fill="#ffffff" />
+              </button>
+            </>
+          )}
+        </div>
+      )}
+      {showPlayer && isYouTube && (
+        <div
+          className="editor-yt-modal-backdrop"
+          onClick={() => setShowPlayer(false)}
+        >
+          <div
+            className="editor-yt-modal-card"
+            onClick={(e) => e.stopPropagation()}
+            role="dialog"
+            aria-label="YouTube video preview"
+          >
+            <div className="editor-yt-modal-header">
+              <span>YouTube Video Preview</span>
+              <button
+                type="button"
+                className="editor-yt-modal-close"
+                onClick={() => setShowPlayer(false)}
+                aria-label="Close video preview"
+              >
+                <X size={16} />
+              </button>
+            </div>
+            <div className="editor-yt-iframe-wrap">
+              <iframe
+                src={ytMeta.embedUrl}
+                title="YouTube video player"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              />
+            </div>
+          </div>
+        </div>
+      )}
       <div className="editor-image-actions">
+        {isYouTube && (
+          <button
+            type="button"
+            className="editor-small-button editor-yt-preview-btn"
+            onClick={() => setShowPlayer(true)}
+          >
+            <Play size={13} fill="currentColor" />
+            Watch video preview
+          </button>
+        )}
         <button
           type="button"
           className="editor-small-button"
           onClick={() => fileInput.current?.click()}
         >
           <ImagePlus size={14} />
-          {busy ? "Reading image…" : value ? "Replace image" : "Upload image (preview)"}
+          {busy ? "Reading image…" : value ? "Upload local file" : "Upload image (preview)"}
         </button>
         {value && (
           <button
@@ -232,9 +333,15 @@ function ImageField({ slotId, label, value, onChange, required = false }) {
           <Check size={12} /> Local preview image selected ({slotId || "Image"})
         </p>
       )}
-      <p className="editor-hint">
-        JPG, PNG, WebP or GIF · up to 5 MB. Preview is local to this session and has NOT been sent to Ardhas.
-      </p>
+      {isYouTube ? (
+        <p className="editor-hint editor-yt-hint">
+          ✓ YouTube video active · official high-resolution thumbnail extracted. Interactive player will be available in the invitation.
+        </p>
+      ) : (
+        <p className="editor-hint">
+          Supports image URLs, YouTube video links, or uploaded JPG, PNG, WebP, GIF files up to 5 MB.
+        </p>
+      )}
       {error && (
         <p className="editor-error" role="alert">
           {error}
@@ -757,14 +864,13 @@ export default function Customizer() {
                     className={"theme-color theme-color-" + template.style}
                     style={{ backgroundColor: template.color }}
                   >
-                    <span>
-                      {template.layout === "birthday"
-                        ? "Make a wish"
-                        : config.eventType}
-                    </span>
+                    <span>{template.tag}</span>
                     {config.template === template.id && <Check size={13} />}
                   </span>
-                  <span>{template.name}</span>
+                  <span className="theme-name" style={{ fontWeight: 600 }}>{template.name}</span>
+                  <small style={{ fontSize: "10px", color: "#8c827a", textTransform: "capitalize" }}>
+                    {template.style} · {template.layout}
+                  </small>
                 </button>
               ))}
             </div>
@@ -1139,6 +1245,42 @@ export default function Customizer() {
                     aria-label="Choose any signature color"
                   />
                 </div>
+                <label className="editor-field">
+                  Layout structure
+                  <div className="customizer-select">
+                    <select
+                      value={config.layout || "editorial"}
+                      onChange={(event) =>
+                        updateConfig({ layout: event.target.value })
+                      }
+                    >
+                      {layouts.map(({ value, label }) => (
+                        <option key={value} value={value}>
+                          {label}
+                        </option>
+                      ))}
+                    </select>
+                    <ChevronDown size={14} />
+                  </div>
+                </label>
+                <label className="editor-field">
+                  Aesthetic theme
+                  <div className="customizer-select">
+                    <select
+                      value={config.style || "minimal"}
+                      onChange={(event) =>
+                        updateConfig({ style: event.target.value })
+                      }
+                    >
+                      {styles.map(({ value, label }) => (
+                        <option key={value} value={value}>
+                          {label}
+                        </option>
+                      ))}
+                    </select>
+                    <ChevronDown size={14} />
+                  </div>
+                </label>
                 {[
                   { key: "font", title: "Font style", options: fonts },
                   {

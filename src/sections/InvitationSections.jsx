@@ -21,6 +21,7 @@ import {
 } from "lucide-react";
 import "swiper/css";
 import "swiper/css/pagination";
+import { parseYouTubeUrl } from "../utils/media.js";
 
 function Reveal({ children, className = "", id }) {
   const reducedMotion = useReducedMotion();
@@ -60,26 +61,19 @@ function videoSource(value) {
   if (value.startsWith("blob:")) {
     return { type: "file", src: value };
   }
+  const yt = parseYouTubeUrl(value);
+  if (yt.isYouTube && yt.embedUrl) {
+    return {
+      type: "youtube",
+      src: yt.embedUrl,
+    };
+  }
   try {
     const url = new URL(value);
     if (url.protocol !== "https:") return null;
     if (/\.(mp4|webm)$/i.test(url.pathname))
       return { type: "file", src: url.href };
-    const host = url.hostname.replace(/^www\./, "");
-    let id;
-    if (host === "youtu.be") id = url.pathname.slice(1);
-    else if (
-      ["youtube.com", "youtube-nocookie.com", "m.youtube.com"].includes(host)
-    )
-      id =
-        url.searchParams.get("v") ||
-        url.pathname.match(/^\/(?:embed|shorts)\/([^/]+)/)?.[1];
-    return /^[\w-]{11}$/.test(id || "")
-      ? {
-          type: "youtube",
-          src: `https://www.youtube-nocookie.com/embed/${id}?autoplay=1`,
-        }
-      : null;
+    return null;
   } catch {
     return null;
   }
@@ -138,25 +132,35 @@ export default function InvitationSections({ config }) {
       if (previousFocus?.isConnected) previousFocus.focus();
     };
   }, [open]);
-  const renderPhoto = (photo, index) => (
-    <button
-      key={photo.id}
-      onClick={() => setLightboxId(photo.id)}
-      aria-label={`${copy.galleryTitle}: ${photo.alt || index + 1}`}
-    >
-      <img
-        src={photo.src}
-        alt={photo.alt}
-        loading="lazy"
-        width="600"
-        height={index % 2 ? 540 : 750}
-      />
-      <span>
-        {copy.galleryTitle}
-        <ArrowUpRight size={15} />
-      </span>
-    </button>
-  );
+  const renderPhoto = (photo, index) => {
+    const yt = parseYouTubeUrl(photo.src);
+    const thumb = yt.isYouTube ? yt.thumbnailUrl : photo.src;
+    return (
+      <button
+        key={photo.id}
+        onClick={() => setLightboxId(photo.id)}
+        aria-label={`${copy.galleryTitle}: ${photo.alt || index + 1}`}
+        className={yt.isYouTube ? "invite-gallery-item-yt" : ""}
+      >
+        <img
+          src={thumb}
+          alt={photo.alt}
+          loading="lazy"
+          width="600"
+          height={index % 2 ? 540 : 750}
+        />
+        {yt.isYouTube && (
+          <span className="invite-gallery-yt-badge">
+            <Play size={16} fill="currentColor" />
+          </span>
+        )}
+        <span>
+          {copy.galleryTitle}
+          <ArrowUpRight size={15} />
+        </span>
+      </button>
+    );
+  };
   const eventDate = new Date(`${config.date}T${config.time || "10:00"}:00`);
   const date = Number.isFinite(eventDate.getTime())
     ? eventDate.toLocaleDateString("en-GB", {
@@ -541,11 +545,31 @@ export default function InvitationSections({ config }) {
               >
                 <ChevronLeft />
               </button>
-              <img
-                src={selected.src}
-                alt={selected.alt}
-                onClick={(event) => event.stopPropagation()}
-              />
+              {(() => {
+                const yt = parseYouTubeUrl(selected.src);
+                if (yt.isYouTube) {
+                  return (
+                    <div
+                      className="invite-lightbox-yt-wrap"
+                      onClick={(event) => event.stopPropagation()}
+                    >
+                      <iframe
+                        src={yt.embedUrl}
+                        title={selected.alt || "Gallery Video"}
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                      />
+                    </div>
+                  );
+                }
+                return (
+                  <img
+                    src={selected.src}
+                    alt={selected.alt}
+                    onClick={(event) => event.stopPropagation()}
+                  />
+                );
+              })()}
               <button
                 aria-label="Next photo"
                 onClick={(event) => {

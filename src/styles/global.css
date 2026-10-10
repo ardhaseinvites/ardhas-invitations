@@ -850,6 +850,43 @@ svg {
   display: block;
   color: #806251;
 }
+.art-celestial {
+  background: radial-gradient(circle at 60% 40%, #1e284a, #0b132b);
+}
+.art-celestial .mini-invite {
+  background: #0d1633;
+  color: #d1dcff;
+  border: 1px solid #64dfdf55;
+  box-shadow: 0 0 15px #64dfdf22;
+}
+.art-heritage {
+  background: radial-gradient(circle, #381018, #1c080d);
+}
+.art-heritage .mini-invite {
+  background: #2b0c13;
+  color: #f7e2bd;
+  border: 2px double #d4af37;
+  outline: 1px solid #d4af3744;
+  outline-offset: -6px;
+}
+.art-boho {
+  background: linear-gradient(145deg, #f7eee4, #edd6c0);
+}
+.art-boho .mini-invite {
+  background: #faf4ed;
+  color: #4a2818;
+  border: 1.5px solid #bc6c2566;
+  border-radius: 20px;
+}
+.art-glassmorphic {
+  background: #0f1115;
+}
+.art-glassmorphic .mini-invite {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(8px);
+  color: #f0f3f8;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
 .template-meta {
   display: flex;
   justify-content: space-between;

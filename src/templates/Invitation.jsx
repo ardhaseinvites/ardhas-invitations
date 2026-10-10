@@ -12,6 +12,12 @@ import FloralElegant from "./FloralElegant";
 import RoyalPremium from "./RoyalPremium";
 import Contemporary from "./Contemporary";
 import CustomTheme from "./CustomTheme";
+import CelestialMidnight from "./CelestialMidnight";
+import HeritageVelvet from "./HeritageVelvet";
+import BohoTerracotta from "./BohoTerracotta";
+import GlassmorphicNoir from "./GlassmorphicNoir";
+import DeckleRomance from "./DeckleRomance";
+import VelureMinimal from "./VelureMinimal";
 
 const templates = {
   minimal: MinimalLuxury,
@@ -21,6 +27,12 @@ const templates = {
   royal: RoyalPremium,
   modern: Contemporary,
   custom: CustomTheme,
+  celestial: CelestialMidnight,
+  heritage: HeritageVelvet,
+  boho: BohoTerracotta,
+  glassmorphic: GlassmorphicNoir,
+  deckle: DeckleRomance,
+  velure: VelureMinimal,
 };
 
 function MusicButton({ copy }) {
