@@ -116,11 +116,11 @@ export default function Welcome({ config, compact }) {
   const reducedMotion = useReducedMotion();
   const heroVideo = useRef(null);
   const [paused, setPaused] = useState(false);
-  const videoSource = /^https:\/\/.+\.(mp4|webm)(\?.*)?$/i.test(
-    config.heroVideoUrl || "",
-  )
-    ? config.heroVideoUrl
-    : null;
+  const videoSource =
+    config.heroVideoUrl?.startsWith("blob:") ||
+    /^https:\/\/.+\.(mp4|webm)(\?.*)?$/i.test(config.heroVideoUrl || "")
+      ? config.heroVideoUrl
+      : null;
   useEffect(() => {
     if (!heroVideo.current) return;
     if (paused || reducedMotion !== false) heroVideo.current.pause();

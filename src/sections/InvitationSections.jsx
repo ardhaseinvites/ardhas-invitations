@@ -56,6 +56,10 @@ function safeLink(value) {
   }
 }
 function videoSource(value) {
+  if (!value) return null;
+  if (value.startsWith("blob:")) {
+    return { type: "file", src: value };
+  }
   try {
     const url = new URL(value);
     if (url.protocol !== "https:") return null;

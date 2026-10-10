@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import {
+  AlertCircle,
   ArrowDown,
   ArrowLeft,
   ArrowUp,
@@ -8,6 +9,8 @@ import {
   Check,
   CheckCheck,
   ChevronDown,
+  FileDown,
+  FileText,
   ImagePlus,
   Monitor,
   Plus,
@@ -16,9 +19,19 @@ import {
   Smartphone,
   Sparkles,
   Trash2,
+  Video,
 } from "lucide-react";
 import { useInvitation } from "../context/InvitationContext";
 import { eventTypes, getEventTemplates } from "../data/content";
+import {
+  validateProjectId,
+  validateCustomFieldId,
+} from "../data/mediaSlots.js";
+import {
+  downloadClientJson,
+  downloadMediaChecklist,
+  downloadRenamedImages,
+} from "../utils/clientExport.js";
 import Invitation from "../templates/Invitation";
 import "../styles/customizer.css";
 
@@ -108,7 +121,7 @@ function TextField({
   );
 }
 
-function ImageField({ label, value, onChange }) {
+function ImageField({ slotId, label, value, onChange, required = false }) {
   const [error, setError] = useState("");
   const [busy, setBusy] = useState(false);
   const sequence = useRef(0);
@@ -172,13 +185,20 @@ function ImageField({ label, value, onChange }) {
   };
   return (
     <div className="editor-image-field">
+      {slotId && (
+        <div className="media-slot-header">
+          <span className="media-slot-badge">{slotId}</span>
+          <span className="media-slot-title">{label}</span>
+          {required && <span className="media-slot-req">REQUIRED</span>}
+        </div>
+      )}
       <TextField
-        label={label + " URL"}
+        label={slotId ? "Photo URL" : label + " URL"}
         value={value?.startsWith("data:") ? "" : value}
         onChange={change}
         placeholder={
           value?.startsWith("data:")
-            ? "Local image selected · paste a URL to replace"
+            ? "Local preview photo selected · paste a URL to replace"
             : "https://…"
         }
       />
@@ -190,7 +210,7 @@ function ImageField({ label, value, onChange }) {
           onClick={() => fileInput.current?.click()}
         >
           <ImagePlus size={14} />
-          {busy ? "Reading image…" : value ? "Replace image" : "Upload image"}
+          {busy ? "Reading image…" : value ? "Replace image" : "Upload image (preview)"}
         </button>
         {value && (
           <button
@@ -211,14 +231,303 @@ function ImageField({ label, value, onChange }) {
         aria-label={"Upload " + label.toLowerCase()}
         onChange={upload}
       />
+      {value?.startsWith("data:") && (
+        <p className="editor-local-tag">
+          <Check size={12} /> Local preview image selected ({slotId || "Image"})
+        </p>
+      )}
       <p className="editor-hint">
-        JPG, PNG, WebP or GIF · up to 5 MB. Images stay in this session.
+        JPG, PNG, WebP or GIF · up to 5 MB. Preview is local to this session and has NOT been sent to Ardhas.
       </p>
       {error && (
         <p className="editor-error" role="alert">
           {error}
         </p>
       )}
+    </div>
+  );
+}
+
+function VideoField({
+  slotId,
+  label,
+  value,
+  onChange,
+  placeholder = "https://…",
+  required = false,
+}) {
+  const [error, setError] = useState("");
+  const fileInput = useRef(null);
+  const prevBlobUrl = useRef(null);
+
+  useEffect(() => {
+    return () => {
+      if (prevBlobUrl.current && prevBlobUrl.current.startsWith("blob:")) {
+        try {
+          URL.revokeObjectURL(prevBlobUrl.current);
+        } catch {}
+      }
+    };
+  }, []);
+
+  const handleUrlChange = (next) => {
+    if (value?.startsWith("blob:")) {
+      try {
+        URL.revokeObjectURL(value);
+      } catch {}
+      prevBlobUrl.current = null;
+    }
+    setError("");
+    onChange(next);
+  };
+
+  const uploadVideoFile = (event) => {
+    const file = event.target.files?.[0];
+    event.target.value = "";
+    if (!file) return;
+
+    if (!["video/mp4", "video/webm"].includes(file.type)) {
+      setError("Please choose an MP4 or WebM video file.");
+      return;
+    }
+
+    if (file.size > 50 * 1024 * 1024) {
+      setError("Video file must be under 50 MB for local browser preview.");
+      return;
+    }
+
+    if (value?.startsWith("blob:")) {
+      try {
+        URL.revokeObjectURL(value);
+      } catch {}
+    }
+
+    const objectUrl = URL.createObjectURL(file);
+    prevBlobUrl.current = objectUrl;
+    setError("");
+    onChange(objectUrl);
+  };
+
+  const removeLocalVideo = () => {
+    if (value?.startsWith("blob:")) {
+      try {
+        URL.revokeObjectURL(value);
+      } catch {}
+      prevBlobUrl.current = null;
+    }
+    setError("");
+    onChange("");
+  };
+
+  const isLocalFile = Boolean(value?.startsWith("blob:"));
+
+  return (
+    <div className="editor-video-field">
+      {slotId && (
+        <div className="media-slot-header">
+          <span className="media-slot-badge">{slotId}</span>
+          <span className="media-slot-title">{label}</span>
+          {required && <span className="media-slot-req">REQUIRED</span>}
+        </div>
+      )}
+      <TextField
+        label={label + " URL"}
+        value={isLocalFile ? "" : value}
+        onChange={handleUrlChange}
+        placeholder={
+          isLocalFile
+            ? "Local video file active for preview · paste URL to replace"
+            : placeholder
+        }
+      />
+      <div className="editor-video-actions">
+        <button
+          type="button"
+          className="editor-small-button"
+          onClick={() => fileInput.current?.click()}
+        >
+          <Video size={14} />
+          {isLocalFile ? "Replace local video file" : "Upload local video file (preview)"}
+        </button>
+        {value && (
+          <button
+            type="button"
+            className="editor-small-button"
+            onClick={removeLocalVideo}
+          >
+            <Trash2 size={13} />
+            Remove video
+          </button>
+        )}
+      </div>
+      <input
+        ref={fileInput}
+        className="editor-file-input"
+        type="file"
+        accept="video/mp4,video/webm"
+        aria-label={"Upload " + label.toLowerCase()}
+        onChange={uploadVideoFile}
+      />
+      {isLocalFile && (
+        <p className="editor-local-tag">
+          <Check size={12} /> Local video file preview active ({slotId || "Video"})
+        </p>
+      )}
+      <p className="editor-hint">
+        MP4 or WebM · up to 50 MB, or YouTube link. Preview is local to this browser session and has NOT been sent to Ardhas.
+      </p>
+      {error && (
+        <p className="editor-error" role="alert">
+          {error}
+        </p>
+      )}
+    </div>
+  );
+}
+
+function CustomFieldsManager({ items = [], onChange }) {
+  const [errorId, setErrorId] = useState({});
+
+  const updateItem = (index, key, val) => {
+    const updated = items.map((item, idx) => {
+      if (idx !== index) return item;
+      return { ...item, [key]: val };
+    });
+
+    if (key === "id") {
+      const otherIds = items.filter((_, idx) => idx !== index).map((f) => f.id);
+      const validation = validateCustomFieldId(val, otherIds);
+      setErrorId((prev) => ({
+        ...prev,
+        [index]: validation.error,
+      }));
+    }
+
+    onChange(updated);
+  };
+
+  const addField = () => {
+    let base = "custom_field";
+    let candidate = base;
+    let counter = 1;
+    const existing = items.map((f) => f.id);
+    while (existing.includes(candidate)) {
+      candidate = `${base}_${counter++}`;
+    }
+    onChange([
+      ...items,
+      {
+        id: candidate,
+        label: "New Custom Field",
+        type: "text",
+        value: "",
+      },
+    ]);
+  };
+
+  const removeField = (index) => {
+    onChange(items.filter((_, idx) => idx !== index));
+    setErrorId((prev) => {
+      const copy = { ...prev };
+      delete copy[index];
+      return copy;
+    });
+  };
+
+  return (
+    <div className="editor-custom-fields">
+      <p className="editor-hint">
+        Add custom fields for special ceremonies, family members, or cultural requirements. Format for IDs must be <code>lower_snake</code> (e.g. <code>grooms_grandfather</code>). Custom fields are exported in your client JSON and are not automatically shown in templates.
+      </p>
+
+      {items.map((item, index) => {
+        const error = errorId[index];
+        return (
+          <div key={index} className="editor-repeat-card custom-field-card">
+            <div className="editor-repeat-heading">
+              <strong>Custom Field {index + 1}</strong>
+              <button
+                type="button"
+                onClick={() => removeField(index)}
+                aria-label={`Remove custom field ${index + 1}`}
+              >
+                <Trash2 size={13} />
+              </button>
+            </div>
+
+            <div className="customizer-field-pair">
+              <label className="editor-field">
+                Field ID (lower_snake)
+                <input
+                  type="text"
+                  value={item.id}
+                  placeholder="e.g. grooms_grandfather"
+                  onChange={(e) => updateItem(index, "id", e.target.value)}
+                />
+              </label>
+
+              <label className="editor-field">
+                Field Type
+                <div className="customizer-select">
+                  <select
+                    value={item.type}
+                    onChange={(e) => updateItem(index, "type", e.target.value)}
+                  >
+                    <option value="text">Text (single line)</option>
+                    <option value="longtext">Long Text (paragraph)</option>
+                    <option value="date">Date</option>
+                    <option value="time">Time</option>
+                    <option value="url">URL</option>
+                  </select>
+                  <ChevronDown size={14} />
+                </div>
+              </label>
+            </div>
+
+            {error && <p className="editor-error" role="alert">{error}</p>}
+
+            <TextField
+              label="Field Label"
+              value={item.label}
+              onChange={(val) => updateItem(index, "label", val)}
+              placeholder="e.g. Groom's Grandfather"
+            />
+
+            {item.type === "longtext" ? (
+              <TextField
+                label="Field Value"
+                multiline
+                value={item.value}
+                onChange={(val) => updateItem(index, "value", val)}
+              />
+            ) : (
+              <TextField
+                label="Field Value"
+                type={
+                  item.type === "date"
+                    ? "date"
+                    : item.type === "time"
+                    ? "time"
+                    : item.type === "url"
+                    ? "url"
+                    : "text"
+                }
+                value={item.value}
+                onChange={(val) => updateItem(index, "value", val)}
+              />
+            )}
+          </div>
+        );
+      })}
+
+      <button
+        type="button"
+        className="editor-add-button"
+        onClick={addField}
+      >
+        <Plus size={14} />
+        Add custom field
+      </button>
     </div>
   );
 }
@@ -278,7 +587,8 @@ function Repeater({ label, items = [], fields, onChange, image = false }) {
           </div>
           {image && (
             <ImageField
-              label="Gallery image"
+              slotId={`GALLERY_IMAGE_${String(index + 1).padStart(2, "0")}`}
+              label={`Gallery photograph ${index + 1}`}
               value={item.src}
               onChange={(value) => edit(item.id, "src", value)}
             />
@@ -331,6 +641,8 @@ export default function Customizer() {
   const tabButtons = useRef([]);
   const [showReset, setShowReset] = useState(false);
   const [uploadGeneration, setUploadGeneration] = useState(0);
+  const [exportError, setExportError] = useState("");
+  const [exportSuccess, setExportSuccess] = useState("");
   const initialSelection = useRef({
     event: params.get("event"),
     theme: params.get("theme"),
@@ -404,7 +716,106 @@ export default function Customizer() {
               yours.
             </p>
           </div>
-          <ControlGroup number="01" title="Start with your occasion">
+          <ControlGroup number="01" title="Project ID & Client Export">
+            <TextField
+              label="Project ID"
+              value={config.projectId}
+              onChange={(value) => {
+                setExportError("");
+                setExportSuccess("");
+                updateConfig({ projectId: value.toLowerCase().trim() });
+              }}
+              placeholder="e.g. nikhil-weds-anjali"
+            />
+            <p className="editor-hint">
+              Assigned by Ardhas to the client. (3 to 40 characters: lowercase letters, numbers, and hyphens only; no spaces).
+            </p>
+            {config.projectId ? (
+              validateProjectId(config.projectId).valid ? (
+                <p className="project-id-badge valid">
+                  <CheckCheck size={13} /> Valid Project ID: <strong>{config.projectId}</strong>
+                </p>
+              ) : (
+                <p className="project-id-badge invalid" role="alert">
+                  <AlertCircle size={13} /> {validateProjectId(config.projectId).error}
+                </p>
+              )
+            ) : (
+              <p className="project-id-badge empty">
+                <Sparkles size={13} /> Demo mode (no Project ID). Enter assigned ID to enable exports.
+              </p>
+            )}
+
+            <div className="customizer-export-stack">
+              <span className="editor-subhead">Client handoff files</span>
+              <button
+                type="button"
+                className="export-action-button primary"
+                onClick={() => {
+                  try {
+                    downloadClientJson(config);
+                    setExportSuccess(`Downloaded client-details-${config.projectId}.json`);
+                    setExportError("");
+                  } catch (err) {
+                    setExportError(err.message);
+                    setExportSuccess("");
+                  }
+                }}
+              >
+                <FileDown size={14} />
+                Download client details (JSON)
+              </button>
+
+              <button
+                type="button"
+                className="export-action-button"
+                onClick={() => {
+                  downloadMediaChecklist(config);
+                  setExportSuccess("Downloaded media checklist (.txt)");
+                  setExportError("");
+                }}
+              >
+                <FileText size={14} />
+                Download media checklist
+              </button>
+
+              <button
+                type="button"
+                className="export-action-button"
+                onClick={() => {
+                  try {
+                    const res = downloadRenamedImages(config);
+                    if (res.downloadedCount === 0) {
+                      setExportSuccess("No locally uploaded photos found in preview to download. Upload preview photos to download renamed files.");
+                    } else {
+                      setExportSuccess(`Downloaded ${res.downloadedCount} pre-named photo file(s).`);
+                    }
+                    setExportError("");
+                  } catch (err) {
+                    setExportError(err.message);
+                    setExportSuccess("");
+                  }
+                }}
+              >
+                <ImagePlus size={14} />
+                Download my images
+              </button>
+              <p className="editor-hint export-hint">
+                This JSON file is for sending to Ardhas only. Videos are not downloaded this way; send original video files separately to Ardhas.
+              </p>
+              {exportError && (
+                <p className="editor-error" role="alert">
+                  <AlertCircle size={13} /> {exportError}
+                </p>
+              )}
+              {exportSuccess && (
+                <p className="editor-success" role="status">
+                  <CheckCheck size={13} /> {exportSuccess}
+                </p>
+              )}
+            </div>
+          </ControlGroup>
+          <ControlGroup number="02" title="Start with your occasion">
             <label className="editor-field">
               Event type
               <div className="customizer-select">
@@ -499,6 +910,55 @@ export default function Customizer() {
                     label="Names / family / host"
                     {...field("names")}
                   />
+                  <div className="customizer-field-pair">
+                    <TextField
+                      label="Groom's full name"
+                      {...field("groomFullName")}
+                      placeholder="e.g. Nikhil Suresh Menon"
+                    />
+                    <TextField
+                      label="Bride's full name"
+                      {...field("brideFullName")}
+                      placeholder="e.g. Anjali Rajan Pillai"
+                    />
+                  </div>
+                  <div className="customizer-field-pair">
+                    <TextField
+                      label="Groom's father"
+                      {...field("groomFatherName")}
+                      placeholder="e.g. Suresh Menon"
+                    />
+                    <TextField
+                      label="Groom's mother"
+                      {...field("groomMotherName")}
+                      placeholder="e.g. Latha Menon"
+                    />
+                  </div>
+                  <div className="customizer-field-pair">
+                    <TextField
+                      label="Bride's father"
+                      {...field("brideFatherName")}
+                      placeholder="e.g. Rajan Pillai"
+                    />
+                    <TextField
+                      label="Bride's mother"
+                      {...field("brideMotherName")}
+                      placeholder="e.g. Suma Pillai"
+                    />
+                  </div>
+                  <Accordion title={"Additional family members (" + (config.additionalFamily?.length || 0) + ")"}>
+                    <Repeater
+                      label="Family member"
+                      {...collection("additionalFamily")}
+                      fields={[
+                        { key: "name", label: "Full name" },
+                        {
+                          key: "relationship",
+                          label: "Relationship / Role (e.g. Grandfather, Sister)",
+                        },
+                      ]}
+                    />
+                  </Accordion>
                   {config.eventType === "Birthday" && (
                     <TextField
                       label="Age / birthday number"
@@ -558,22 +1018,48 @@ export default function Customizer() {
                   </p>
                   <TextField label="Dress code" {...field("dressCode")} />
                 </Accordion>
+                <Accordion title={"Events & ceremonies (" + (config.events?.length || 1) + ")"}>
+                  <p className="editor-hint">
+                    Multiple-events schedule with individual dates, timings, venues, and addresses.
+                  </p>
+                  <Repeater
+                    label="Event"
+                    {...collection("events")}
+                    fields={[
+                      { key: "name", label: "Event name (e.g. Wedding, Reception, Haldi)" },
+                      { key: "date", label: "Date", type: "date" },
+                      { key: "time", label: "Time", type: "time" },
+                      { key: "venue", label: "Venue name" },
+                      { key: "address", label: "Full address", multiline: true },
+                    ]}
+                  />
+                </Accordion>
                 <Accordion title="Photos & video">
-                  <ImageField label="Welcome image" {...field("heroImage")} />
-                  <TextField
-                    label="Welcome video URL (optional MP4)"
+                  <ImageField
+                    slotId="HERO_IMAGE"
+                    label="Welcome image"
+                    required
+                    {...field("heroImage")}
+                  />
+                  <VideoField
+                    slotId="HERO_VIDEO"
+                    label="Welcome background video"
                     {...field("heroVideoUrl")}
                     placeholder="https://…/film.mp4"
                   />
-                  <ImageField label="Video cover" {...field("videoPoster")} />
-                  <TextField
-                    label="Video URL (YouTube or MP4)"
+                  <ImageField
+                    slotId="VIDEO_POSTER"
+                    label="Video cover"
+                    {...field("videoPoster")}
+                  />
+                  <VideoField
+                    slotId="WEDDING_VIDEO"
+                    label={config.eventType === "Wedding" ? "Wedding video" : "Celebration video"}
                     {...field("videoUrl")}
                     placeholder="https://www.youtube.com/watch?v=…"
                   />
                   <p className="editor-hint">
-                    Use publicly accessible image and video links. Uploaded
-                    photos are previews stored in memory.
+                    Preview media is stored locally in your browser. Original files must be sent separately to Ardhas.
                   </p>
                 </Accordion>
                 <Accordion
@@ -709,6 +1195,18 @@ export default function Customizer() {
                     </p>
                   )}
                 </Accordion>
+                <Accordion
+                  title={
+                    "Custom fields · " +
+                    (config.customFields?.length || 0) +
+                    " added"
+                  }
+                >
+                  <CustomFieldsManager
+                    items={config.customFields || []}
+                    onChange={(customFields) => updateConfig({ customFields })}
+                  />
+                </Accordion>
               </>
             )}
             {tab === "Design" && (
@@ -773,6 +1271,7 @@ export default function Customizer() {
                   open={config.background === "Custom Image"}
                 >
                   <ImageField
+                    slotId="BACKGROUND_IMAGE"
                     label="Background image"
                     value={config.image}
                     onChange={(image) =>

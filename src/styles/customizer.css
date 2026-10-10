@@ -244,6 +244,12 @@
     font-size: 13px;
   }
 }
+@media (max-width: 500px) {
+  .customizer .customizer-field-pair {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+}
 .customizer button,
 .customizer input,
 .customizer select,
@@ -972,3 +978,157 @@
     font-size: 24px;
   }
 }
+
+/* Media Slot identification headers */
+.media-slot-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 7px;
+}
+.media-slot-badge {
+  font-family: monospace;
+  font-size: 9px;
+  font-weight: 600;
+  padding: 2px 6px;
+  background: #f1ece1;
+  color: #84683a;
+  border: 1px solid #dfd6c5;
+  border-radius: 3px;
+  letter-spacing: 0.5px;
+}
+.media-slot-title {
+  font-size: 11px;
+  font-weight: 600;
+  color: #554d3f;
+}
+.media-slot-req {
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  background: #e8d7d3;
+  color: #923c35;
+  padding: 1px 5px;
+  border-radius: 3px;
+}
+.editor-local-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 10px;
+  color: #276749;
+  background: #e6f4ea;
+  border: 1px solid #b7e1cd;
+  border-radius: 3px;
+  padding: 3px 7px;
+  margin: 5px 0 8px;
+}
+
+/* Project ID status badges */
+.project-id-badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  padding: 8px 10px;
+  border-radius: 4px;
+  margin: 0 0 16px;
+}
+.project-id-badge.valid {
+  background: #edf7ed;
+  color: #1e4620;
+  border: 1px solid #c8e6c9;
+}
+.project-id-badge.invalid {
+  background: #fde8e8;
+  color: #9b1c1c;
+  border: 1px solid #f8b4b4;
+}
+.project-id-badge.empty {
+  background: #f5f2eb;
+  color: #796c56;
+  border: 1px solid #e5decb;
+}
+
+/* Customizer Export Actions */
+.customizer-export-stack {
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid #e8e2d6;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.editor-subhead {
+  display: block;
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #8c7d67;
+  margin-bottom: 4px;
+}
+.export-action-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 11px 14px;
+  border: 1px solid #d4c8b2;
+  border-radius: 4px;
+  background: #fbf8f0;
+  color: #51442d;
+  font-size: 11px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.export-action-button:hover {
+  background: #f3ecde;
+  border-color: #baa788;
+}
+.export-action-button.primary {
+  background: #423623;
+  color: #fff9ed;
+  border-color: #2b2316;
+}
+.export-action-button.primary:hover {
+  background: #2b2316;
+}
+.export-hint {
+  font-size: 10px;
+  line-height: 1.5;
+  color: #8a7c68;
+  margin-top: 6px;
+}
+.editor-success {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  color: #1e4620;
+  background: #edf7ed;
+  border: 1px solid #c8e6c9;
+  border-radius: 4px;
+  padding: 8px 10px;
+  margin-top: 6px;
+}
+
+/* Video Field */
+.editor-video-field {
+  margin-bottom: 20px;
+}
+.editor-video-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+/* Custom Field Cards */
+.custom-field-card {
+  border-left: 3px solid #8d7045;
+}
+

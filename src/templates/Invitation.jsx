@@ -3,6 +3,7 @@ import { Music2, VolumeX, Printer } from "lucide-react";
 import InvitationSections from "../sections/InvitationSections";
 import "../styles/invitation.css";
 import "../styles/event-invitations.css";
+import ArdhasOrderSheet from "../components/ArdhasOrderSheet";
 import MinimalLuxury from "./MinimalLuxury";
 import ClassicTraditional from "./ClassicTraditional";
 import ModernRomantic from "./ModernRomantic";
@@ -116,6 +117,7 @@ export default function Invitation({ config, compact = false }) {
             </button>
           </div>
           <InvitationSections key={config.eventType} config={config} />
+          <ArdhasOrderSheet config={config} />
         </>
       )}
     </article>

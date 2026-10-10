@@ -1379,8 +1379,9 @@ svg {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 15px;
-  padding: 15px 4%;
+  flex-wrap: wrap;
+  gap: 10px 15px;
+  padding: 12px 4%;
   font-size: 11px;
   background: #f8f5ef;
   position: sticky;
@@ -1388,23 +1389,82 @@ svg {
   z-index: 40;
   border-bottom: 1px solid #dfd5c6;
 }
-.preview-toolbar a,
-.preview-toolbar button {
+.preview-brand-link {
   display: flex;
   align-items: center;
   gap: 8px;
+  font-weight: 500;
+  color: inherit;
+  text-decoration: none;
 }
-.preview-toolbar > div {
-  display: flex;
-  gap: 20px;
-}
-.preview-toolbar button {
-  background: transparent;
-}
-.preview-toolbar > span {
-  font-size: 8px;
-  letter-spacing: 2px;
+.preview-project-indicator {
+  font-size: 8.5px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
   color: #877967;
+  font-weight: 600;
+}
+.preview-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.preview-action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 11px;
+  border: 1px solid #dcd2c0;
+  border-radius: 4px;
+  background: #fffdfa;
+  color: #4b3e2a;
+  font-size: 11px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.preview-action-btn:hover {
+  background: #f3ece0;
+  border-color: #c2b29a;
+}
+.preview-action-btn.primary {
+  background: #3c3221;
+  color: #fffaf0;
+  border-color: #2b2316;
+}
+.preview-action-btn.primary:hover {
+  background: #251e13;
+}
+.preview-export-banner {
+  position: sticky;
+  top: 52px;
+  z-index: 39;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 10px 4%;
+  font-size: 11px;
+}
+.preview-export-banner.success {
+  background: #edf7ed;
+  color: #1e4620;
+  border-bottom: 1px solid #c8e6c9;
+}
+.preview-export-banner.error {
+  background: #fde8e8;
+  color: #9b1c1c;
+  border-bottom: 1px solid #f8b4b4;
+}
+.preview-banner-close {
+  background: transparent;
+  border: 0;
+  font-size: 16px;
+  line-height: 1;
+  cursor: pointer;
+  color: inherit;
+  padding: 0 4px;
 }
 .not-found {
   padding: 20vh 10%;
@@ -2052,11 +2112,20 @@ svg {
     font-size: 35px;
   }
   .preview-toolbar {
-    padding: 14px 4%;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+    padding: 10px 14px;
     font-size: 10px;
   }
-  .preview-toolbar > div {
-    gap: 13px;
+  .preview-actions {
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .preview-action-btn {
+    padding: 6px 9px;
+    font-size: 10px;
   }
 }
 @media (prefers-reduced-motion: reduce) {

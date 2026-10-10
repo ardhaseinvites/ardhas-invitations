@@ -1,0 +1,291 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ardhas.in/schemas/client-details.schema.json",
+  "title": "ArdhasClientDetails",
+  "description": "Schema definition for Ardhas invitation client details exported from the design studio.",
+  "type": "object",
+  "required": [
+    "schema",
+    "schemaVersion",
+    "projectId",
+    "exportedAt",
+    "eventType",
+    "template",
+    "wedding",
+    "events",
+    "content",
+    "design",
+    "sections",
+    "customFields",
+    "media"
+  ],
+  "properties": {
+    "schema": {
+      "type": "string",
+      "const": "ardhas-client/1.0"
+    },
+    "schemaVersion": {
+      "type": "string",
+      "const": "1.0"
+    },
+    "projectId": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]{3,40}$",
+      "description": "Unique project identifier assigned by Ardhas to the client (3-40 characters, lowercase letters, digits, and hyphens)."
+    },
+    "exportedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp of export."
+    },
+    "eventType": {
+      "type": "string",
+      "enum": [
+        "Wedding",
+        "Engagement",
+        "Birthday",
+        "Housewarming",
+        "Baby Shower",
+        "Anniversary",
+        "Naming Ceremony",
+        "Save the Date",
+        "Reception",
+        "Mehendi",
+        "Haldi",
+        "Other"
+      ]
+    },
+    "template": {
+      "type": "object",
+      "required": ["id", "name"],
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "style": { "type": "string" },
+        "layout": { "type": "string" }
+      }
+    },
+    "wedding": {
+      "type": "object",
+      "required": [
+        "groomFullName",
+        "brideFullName",
+        "groomFatherName",
+        "groomMotherName",
+        "brideFatherName",
+        "brideMotherName",
+        "additionalFamily"
+      ],
+      "properties": {
+        "groomFullName": { "type": "string" },
+        "brideFullName": { "type": "string" },
+        "groomFatherName": { "type": "string" },
+        "groomMotherName": { "type": "string" },
+        "brideFatherName": { "type": "string" },
+        "brideMotherName": { "type": "string" },
+        "additionalFamily": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["id", "name", "relationship"],
+            "properties": {
+              "id": { "type": "string" },
+              "name": { "type": "string" },
+              "relationship": { "type": "string" }
+            }
+          }
+        }
+      }
+    },
+    "events": {
+      "type": "array",
+      "description": "List of celebration events/ceremonies with specific timings and venues.",
+      "items": {
+        "type": "object",
+        "required": ["id", "name", "date", "time", "venue", "address"],
+        "properties": {
+          "id": { "type": "string" },
+          "name": { "type": "string" },
+          "date": { "type": "string" },
+          "time": { "type": "string" },
+          "venue": { "type": "string" },
+          "address": { "type": "string" }
+        }
+      }
+    },
+    "content": {
+      "type": "object",
+      "required": [
+        "names",
+        "date",
+        "time",
+        "timezone",
+        "venue",
+        "address",
+        "mapQuery",
+        "mapUrl",
+        "dressCode",
+        "story",
+        "schedule",
+        "memories",
+        "wishes",
+        "registry",
+        "contacts",
+        "copy"
+      ],
+      "properties": {
+        "names": { "type": "string" },
+        "date": { "type": "string" },
+        "time": { "type": "string" },
+        "timezone": { "type": "string" },
+        "venue": { "type": "string" },
+        "address": { "type": "string" },
+        "mapQuery": { "type": "string" },
+        "mapUrl": { "type": "string" },
+        "dressCode": { "type": "string" },
+        "story": { "type": "string" },
+        "age": { "type": "string" },
+        "milestone": { "type": "string" },
+        "schedule": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["id", "time", "title", "text"],
+            "properties": {
+              "id": { "type": "string" },
+              "time": { "type": "string" },
+              "title": { "type": "string" },
+              "text": { "type": "string" }
+            }
+          }
+        },
+        "memories": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["id", "title", "text"],
+            "properties": {
+              "id": { "type": "string" },
+              "title": { "type": "string" },
+              "text": { "type": "string" }
+            }
+          }
+        },
+        "wishes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["id", "quote", "author"],
+            "properties": {
+              "id": { "type": "string" },
+              "quote": { "type": "string" },
+              "author": { "type": "string" }
+            }
+          }
+        },
+        "registry": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["id", "title", "description", "url"],
+            "properties": {
+              "id": { "type": "string" },
+              "title": { "type": "string" },
+              "description": { "type": "string" },
+              "url": { "type": "string" }
+            }
+          }
+        },
+        "contacts": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["id", "name", "role", "email"],
+            "properties": {
+              "id": { "type": "string" },
+              "name": { "type": "string" },
+              "role": { "type": "string" },
+              "phone": { "type": "string" },
+              "email": { "type": "string" }
+            }
+          }
+        },
+        "copy": {
+          "type": "object",
+          "additionalProperties": { "type": "string" }
+        }
+      }
+    },
+    "design": {
+      "type": "object",
+      "required": ["font", "color", "style", "layout", "background", "decorations"],
+      "properties": {
+        "font": { "type": "string" },
+        "color": { "type": "string" },
+        "style": { "type": "string" },
+        "layout": { "type": "string" },
+        "background": { "type": "string" },
+        "decorations": {
+          "type": "object",
+          "additionalProperties": { "type": "boolean" }
+        }
+      }
+    },
+    "sections": {
+      "type": "object",
+      "additionalProperties": { "type": "boolean" }
+    },
+    "customFields": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "label", "type", "value"],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]*$",
+            "description": "Unique identifier in lower_snake format."
+          },
+          "label": { "type": "string" },
+          "type": {
+            "type": "string",
+            "enum": ["text", "longtext", "date", "time", "url"]
+          },
+          "value": { "type": "string" }
+        }
+      }
+    },
+    "media": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "required": [
+          "slotId",
+          "label",
+          "type",
+          "required",
+          "status",
+          "suggestedFilename",
+          "originalFileRequiredSeparately"
+        ],
+        "properties": {
+          "slotId": { "type": "string" },
+          "label": { "type": "string" },
+          "type": { "type": "string", "enum": ["image", "video"] },
+          "required": { "type": "boolean" },
+          "section": { "type": "string" },
+          "recommendedAspectRatio": { "type": "string" },
+          "status": {
+            "type": "string",
+            "enum": ["provided_locally", "url", "empty"]
+          },
+          "suggestedFilename": { "type": "string" },
+          "originalFileRequiredSeparately": { "type": "boolean", "const": true },
+          "url": { "type": ["string", "null"] }
+        }
+      }
+    },
+    "note": { "type": "string" }
+  }
+}
+

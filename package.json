@@ -7,7 +7,7 @@
     "dev": "vite --host 127.0.0.1",
     "build": "vite build",
     "preview": "vite preview --host 127.0.0.1",
-    "test": "node --test src/context/invitationState.test.js src/pages/Housewarming.test.js"
+    "test": "node --test src/context/invitationState.test.js src/pages/Housewarming.test.js src/utils/clientExport.test.js"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.2.0",

@@ -2206,3 +2206,21 @@ These are the first actions to take after this document has been reviewed.
 
 *This document should be updated whenever a decision changes, a feature is built, or a test result is recorded. It is the primary reference for the Ardhas invitation project.*
 
+---
+
+## 39. Milestone 1 Verified Progress Notes (2026-10-10)
+
+- **Completed Milestone 1: Client Data Collection and Export**:
+  - Implemented client Project ID validation (`^[a-z0-9-]{3,40}$`) with clear UX messaging.
+  - Added wedding fields to existing reducer state: groom and bride full names, fathers' and mothers' names, additional family members repeater, and multiple-events repeater defaulting to one "Wedding" ceremony.
+  - Implemented custom fields manager with `lower_snake` ID format validation, duplicate detection, and input types (`text`, `longtext`, `date`, `time`, `url`).
+  - Created central `src/data/mediaSlots.js` defining unique media slots across all templates (`HERO_IMAGE`, `HERO_VIDEO`, `VIDEO_POSTER`, `WEDDING_VIDEO`, `BACKGROUND_IMAGE`, `GALLERY_IMAGE_01`...); each slot defines type, required flag, location, and recommended aspect ratio.
+  - Added local video file preview via `URL.createObjectURL` and automatic revocation, with type (`video/mp4`, `video/webm`) and 50 MB size limits.
+  - Added "Download client details (JSON)" exporting versioned schema (`ardhas-client/1.0`), stripping all Base64 and local video blobs while preserving remote URLs.
+  - Added "Download media checklist" (`.txt`) dynamically generated for the selected template with expected filenames (`<project-id>_<SLOT_ID>.<ext>`) and delivery instructions.
+  - Added "Download my images" converting local preview photos to pre-named files with slot IDs.
+  - Added print-only "Ardhas Order Sheet" inside invitations (`display: none` on screen, visible during `window.print()`).
+  - Added `docs/client-details.schema.json`.
+  - Added automated test suite (`src/utils/clientExport.test.js`) verifying all new functionality; 16 tests passing in CI test runner (`npm test`) and production build passing (`npm run build`).
+
+
