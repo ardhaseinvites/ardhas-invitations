@@ -18,6 +18,8 @@ import BohoTerracotta from "./BohoTerracotta";
 import GlassmorphicNoir from "./GlassmorphicNoir";
 import DeckleRomance from "./DeckleRomance";
 import VelureMinimal from "./VelureMinimal";
+import PolaroidStory from "./PolaroidStory";
+import EstateStory from "./EstateStory";
 
 const templates = {
   minimal: MinimalLuxury,
@@ -33,6 +35,8 @@ const templates = {
   glassmorphic: GlassmorphicNoir,
   deckle: DeckleRomance,
   velure: VelureMinimal,
+  polaroid: PolaroidStory,
+  estate: EstateStory,
 };
 
 function MusicButton({ copy }) {
@@ -120,7 +124,15 @@ function PdfDownloadButton({ config }) {
 }
 
 export default function Invitation({ config, compact = false }) {
-  const Template = templates[config.style || config.template] || MinimalLuxury;
+  const currentKey = config.style || config.template;
+  const isPinterestTemplate =
+    ["deckle", "velure", "polaroid", "estate"].includes(currentKey) ||
+    ["deckle", "velure", "polaroid", "estate"].includes(config.layout);
+
+  const Template =
+    templates[currentKey] ||
+    (isPinterestTemplate ? templates[config.layout] : null) ||
+    MinimalLuxury;
   const channels = (
     config.color.match(/[a-f\d]{2}/gi) || ["00", "00", "00"]
   ).map((value) => {
@@ -158,7 +170,9 @@ export default function Invitation({ config, compact = false }) {
             )}
             <PdfDownloadButton config={config} />
           </div>
-          <InvitationSections key={config.eventType} config={config} />
+          {!isPinterestTemplate && (
+            <InvitationSections key={config.eventType} config={config} />
+          )}
           <ArdhasOrderSheet config={config} />
         </>
       )}

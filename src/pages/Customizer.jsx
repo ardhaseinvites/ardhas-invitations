@@ -56,8 +56,10 @@ const layouts = [
   { value: "estate", label: "Estate (Architectural Sketch)" },
 ];
 const styles = [
-  { value: "deckle", label: "Deckle Torn-Paper Romance" },
-  { value: "velure", label: "Velure Olive Linen Luxury" },
+  { value: "deckle", label: "Deckle Torn-Paper Romance (Lucia & Juan)" },
+  { value: "velure", label: "Velure Olive Linen Luxury (Alejandra & Mateo)" },
+  { value: "polaroid", label: "Polaroid Story Stack (Olivia & Ethan)" },
+  { value: "estate", label: "Estate Architectural Romance (Jason & Melani)" },
   { value: "minimal", label: "Minimal Luxury" },
   { value: "classic", label: "Classic Traditional" },
   { value: "romantic", label: "Modern Romantic" },

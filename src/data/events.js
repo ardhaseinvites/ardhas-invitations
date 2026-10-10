@@ -64,7 +64,7 @@ const events = {
     dress: "Pastel festive wear",
     designs: [
       ["The Golden Yes", "minimal", "#99763f"],
-      ["Blush Promise", "romantic", "#a55770"],
+      ["Blush Promise", "estate", "#a55770"],
       ["Moonlit Rings", "royal", "#c8a96a"],
       ["Velvet Courtyard", "heritage", "#8a2b3d"],
       ["Celestial Constellation", "celestial", "#2e4368"],
@@ -245,7 +245,7 @@ const events = {
     designs: [
       ["Mark the Moment", "modern", "#436568"],
       ["A Date to Keep", "minimal", "#99774f"],
-      ["Postcard from Forever", "romantic", "#a66372"],
+      ["Postcard from Forever", "polaroid", "#a66372"],
       ["Regal Announcement", "heritage", "#8d3444"],
       ["Constellation Calendar", "celestial", "#324a6e"],
     ],
@@ -523,7 +523,11 @@ export const templates = eventTypes.flatMap((eventType) =>
         ? "deckle"
         : style === "velure"
           ? "velure"
-          : ["editorial", "arch", "split", "framed", "floating"][index % 5],
+          : style === "polaroid"
+            ? "polaroid"
+            : style === "estate"
+              ? "estate"
+              : ["editorial", "arch", "split", "framed", "floating"][index % 5],
     font:
       style === "modern" || style === "glassmorphic"
         ? "Modern"
@@ -531,7 +535,7 @@ export const templates = eventTypes.flatMap((eventType) =>
           ? "Royal"
           : style === "boho" || style === "velure"
             ? "Minimal"
-            : style === "deckle"
+            : style === "deckle" || style === "polaroid" || style === "estate"
               ? "Handwritten"
               : "Serif",
     background: "Plain",
@@ -542,7 +546,11 @@ export const templates = eventTypes.flatMap((eventType) =>
         ? "DECKLE"
         : style === "velure"
           ? "VELURE"
-          : ["SIGNATURE", "TIMELESS", "EDITORIAL", "HERITAGE", "CELESTIAL"][index % 5],
+          : style === "polaroid"
+            ? "POLAROID"
+            : style === "estate"
+              ? "ESTATE"
+              : ["SIGNATURE", "TIMELESS", "EDITORIAL", "HERITAGE", "CELESTIAL"][index % 5],
   })),
 );
 

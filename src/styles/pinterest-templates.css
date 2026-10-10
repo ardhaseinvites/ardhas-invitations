@@ -1,0 +1,1088 @@
+/* ==========================================================================
+   Pinterest Mobile Invitation Templates:
+   Deckle Romance, Velure Linen, Polaroid Story, & Maplewood Estate
+   ========================================================================== */
+
+/* Shared Mobile Card Container */
+.pinterest-mobile-card {
+  max-width: 480px;
+  margin: 0 auto;
+  background: var(--pm-bg, #faf6f0);
+  color: var(--pm-ink, #2c2520);
+  font-family: var(--pm-font, "Cormorant Garamond", Georgia, serif);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12);
+  border-radius: 18px;
+  overflow: hidden;
+  position: relative;
+  text-align: center;
+}
+
+/* ==========================================================================
+   1. DECKLE ROMANCE (AreOne / Memories Deckle - Images 1 & 2)
+   ========================================================================== */
+.deckle-template {
+  --pm-bg: #faf7f2;
+  --pm-ink: #2b2520;
+  --pm-accent: #6f7558;
+}
+
+.deckle-hero {
+  position: relative;
+  width: 100%;
+  height: 520px;
+  overflow: hidden;
+  background: #201d1a;
+}
+
+.deckle-hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  opacity: 0.88;
+}
+
+.deckle-hero-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 24px 70px;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.3) 0%,
+    rgba(0, 0, 0, 0.15) 50%,
+    rgba(0, 0, 0, 0.5) 100%
+  );
+  color: #ffffff;
+  text-align: center;
+}
+
+.deckle-hero-eyebrow {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  font-weight: 500;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.deckle-hero-names {
+  font-family: "Italianno", cursive;
+  font-size: clamp(54px, 14vw, 76px);
+  line-height: 1.05;
+  margin: 4px 0 10px;
+  font-weight: 400;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
+}
+
+.deckle-hero-date {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 16px;
+  letter-spacing: 2px;
+  margin-bottom: 12px;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+}
+
+.deckle-hero-sprig {
+  font-size: 18px;
+  opacity: 0.9;
+  letter-spacing: 4px;
+}
+
+/* Torn Deckle Edge Divider */
+.deckle-torn-edge {
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 38px;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.deckle-torn-edge.top {
+  top: -2px;
+  bottom: auto;
+  transform: rotate(180deg);
+}
+
+.deckle-torn-edge svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Countdown Bar */
+.deckle-countdown-section {
+  padding: 34px 20px 24px;
+  background: #faf7f2;
+}
+
+.deckle-countdown-label {
+  font-size: 10px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: #797167;
+  font-weight: 600;
+  margin-bottom: 14px;
+}
+
+.deckle-countdown-grid {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.deckle-countdown-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 55px;
+}
+
+.deckle-countdown-num {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 34px;
+  line-height: 1;
+  font-weight: 400;
+  color: #2b2520;
+}
+
+.deckle-countdown-unit {
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #797167;
+  margin-top: 4px;
+}
+
+.deckle-countdown-sep {
+  width: 1px;
+  height: 38px;
+  background: #dcd4c7;
+}
+
+.deckle-ornament-sprig {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  color: #8c8273;
+  margin: 16px auto 0;
+  font-size: 12px;
+}
+
+.deckle-ornament-sprig:before,
+.deckle-ornament-sprig:after {
+  content: "";
+  display: block;
+  width: 45px;
+  height: 1px;
+  background: #ded5c8;
+}
+
+/* Ceremony & Reception Cards */
+.deckle-card-section {
+  padding: 24px 24px 32px;
+}
+
+.deckle-event-card {
+  padding: 16px 16px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.deckle-event-icon {
+  width: 44px;
+  height: 44px;
+  color: #555b44;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.deckle-event-title {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 26px;
+  font-style: italic;
+  font-weight: 400;
+  color: #2b2520;
+  margin-bottom: 6px;
+}
+
+.deckle-event-time {
+  font-size: 13px;
+  letter-spacing: 2px;
+  color: #6c6458;
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.deckle-event-venue {
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: #38322c;
+  margin-bottom: 4px;
+}
+
+.deckle-event-address {
+  font-size: 12px;
+  color: #797167;
+  margin-bottom: 18px;
+}
+
+.deckle-pill-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 11px 28px;
+  border-radius: 999px;
+  background: #6e7456;
+  color: #ffffff !important;
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-weight: 600;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 14px rgba(110, 116, 86, 0.28);
+}
+
+.deckle-pill-btn:hover {
+  background: #5b6145;
+  transform: translateY(-1px);
+}
+
+.deckle-divider-line {
+  width: 80%;
+  height: 1px;
+  background: #ded5c8;
+  margin: 12px auto;
+}
+
+/* Inter-Section Photo with Torn Deckle Edges */
+.deckle-photo-block {
+  position: relative;
+  width: 100%;
+  height: 380px;
+  overflow: hidden;
+  background: #201d1a;
+}
+
+.deckle-photo-block img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Itinerary Timeline */
+.deckle-timeline-section {
+  padding: 40px 24px 34px;
+  background: #faf7f2;
+}
+
+.deckle-timeline-heading {
+  margin-bottom: 30px;
+}
+
+.deckle-script-brand {
+  font-family: "Italianno", cursive;
+  font-size: 38px;
+  line-height: 1;
+  color: #2b2520;
+  margin-bottom: 2px;
+}
+
+.deckle-timeline-title {
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #6c6458;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.deckle-timeline-list {
+  position: relative;
+  max-width: 280px;
+  margin: 0 auto;
+  padding-left: 54px;
+  text-align: left;
+}
+
+.deckle-timeline-line {
+  position: absolute;
+  top: 15px;
+  bottom: 20px;
+  left: 17px;
+  width: 2px;
+  background: #c9bea9;
+}
+
+.deckle-timeline-item {
+  position: relative;
+  margin-bottom: 30px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.deckle-timeline-dot {
+  position: absolute;
+  left: -43px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #8b816e;
+  border: 3px solid #faf7f2;
+  box-shadow: 0 0 0 1px #c9bea9;
+}
+
+.deckle-timeline-icon {
+  width: 32px;
+  height: 32px;
+  color: #555b44;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.deckle-timeline-content time {
+  display: block;
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  color: #797167;
+  font-weight: 600;
+}
+
+.deckle-timeline-content span {
+  font-size: 14px;
+  color: #2b2520;
+  font-weight: 500;
+}
+
+/* Instagram & Playlist Sections */
+.deckle-instagram-block {
+  position: relative;
+  background: #d8e1e7;
+  padding: 44px 24px;
+  color: #25333d;
+}
+
+.deckle-block-title {
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin: 12px 0 8px;
+}
+
+.deckle-block-sub {
+  font-size: 13px;
+  line-height: 1.5;
+  color: #43525d;
+  max-width: 300px;
+  margin: 0 auto 18px;
+}
+
+.deckle-playlist-block {
+  padding: 40px 24px 34px;
+  background: #faf7f2;
+}
+
+/* ==========================================================================
+   2. VELURE MINIMAL (Alejandra y Mateo - Image 3)
+   ========================================================================== */
+.velure-template {
+  --pm-bg: #f7f4ee;
+  --pm-ink: #2c2925;
+  --pm-accent: #706f54;
+  --pm-sand: #ded5c4;
+}
+
+.velure-hero-section {
+  padding: 48px 24px 24px;
+  text-align: center;
+}
+
+.velure-monogram-oval {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 66px;
+  height: 84px;
+  border: 1.5px solid #8c826e;
+  border-radius: 50%;
+  margin: 0 auto 20px;
+  background: #f7f4ee;
+  box-shadow: inset 0 0 0 3px #f7f4ee, 0 4px 12px rgba(0, 0, 0, 0.04);
+  position: relative;
+}
+
+.velure-monogram-text {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 18px;
+  line-height: 1.1;
+  letter-spacing: 1px;
+  color: #5d5b43;
+  font-weight: 600;
+}
+
+.velure-hero-eyebrow {
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #7a756b;
+  margin-bottom: 12px;
+  font-weight: 600;
+}
+
+.velure-hero-names {
+  margin-bottom: 14px;
+}
+
+.velure-name-line {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(34px, 9vw, 44px);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #2c2925;
+  font-weight: 500;
+  display: block;
+  line-height: 1.1;
+}
+
+.velure-and-script {
+  font-family: "Italianno", cursive;
+  font-size: 34px;
+  line-height: 0.9;
+  color: #706f54;
+  display: block;
+  margin: 2px 0;
+}
+
+.velure-date-strip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  font-size: 13px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #4f4b43;
+  margin-bottom: 20px;
+  font-weight: 500;
+}
+
+.velure-arch-photo {
+  position: relative;
+  width: 85%;
+  max-width: 320px;
+  margin: 0 auto 20px;
+  border-radius: 160px 160px 4px 4px;
+  overflow: hidden;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+}
+
+.velure-arch-photo img {
+  width: 100%;
+  height: 380px;
+  object-fit: cover;
+  display: block;
+}
+
+.velure-quote-text {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 15px;
+  font-style: italic;
+  color: #555048;
+  max-width: 300px;
+  margin: 0 auto 16px;
+  line-height: 1.5;
+}
+
+/* Velure Music Player Widget */
+.velure-music-card {
+  max-width: 340px;
+  margin: 18px auto 28px;
+  padding: 16px 20px;
+  background: #f1ecdf;
+  border-radius: 20px;
+  border: 1px solid #ddd3c0;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.05);
+}
+
+.velure-music-header {
+  font-size: 9px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #837a6b;
+  margin-bottom: 4px;
+  font-weight: 600;
+}
+
+.velure-music-track {
+  font-size: 13px;
+  font-weight: 600;
+  color: #2c2925;
+  margin-bottom: 12px;
+}
+
+.velure-music-scrubber {
+  position: relative;
+  height: 4px;
+  background: #d8cebc;
+  border-radius: 2px;
+  margin-bottom: 8px;
+  cursor: pointer;
+}
+
+.velure-music-fill {
+  height: 100%;
+  background: #706f54;
+  border-radius: 2px;
+  position: relative;
+}
+
+.velure-music-fill:after {
+  content: "";
+  position: absolute;
+  right: -5px;
+  top: -4px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #706f54;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+}
+
+.velure-music-time-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 10px;
+  color: #837a6b;
+  margin-bottom: 12px;
+  font-variant-numeric: tabular-nums;
+}
+
+.velure-music-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.velure-music-btn {
+  background: transparent;
+  border: none;
+  color: #5e594c;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.velure-music-btn.play-circle {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: #706f54;
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(112, 111, 84, 0.35);
+}
+
+/* Velure Details Cards */
+.velure-details-card {
+  padding: 24px 20px;
+  border-top: 1px solid #e2d9c8;
+}
+
+.velure-detail-box {
+  margin-bottom: 24px;
+}
+
+.velure-detail-title {
+  font-size: 14px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #38342c;
+  font-weight: 600;
+  margin: 10px 0 4px;
+}
+
+.velure-detail-time {
+  font-size: 13px;
+  color: #706f54;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.velure-btn-outline {
+  display: inline-block;
+  padding: 9px 22px;
+  border: 1px solid #8c826e;
+  border-radius: 4px;
+  background: transparent;
+  color: #423d33 !important;
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: all 0.2s ease;
+}
+
+.velure-btn-outline:hover {
+  background: #706f54;
+  color: #ffffff !important;
+  border-color: #706f54;
+}
+
+/* Dress Code Palette Circles */
+.velure-dresscode-card {
+  padding: 28px 20px;
+  border-top: 1px solid #e2d9c8;
+}
+
+.velure-palette-dots {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin: 16px auto 6px;
+}
+
+.velure-palette-circle {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: 2px solid #ffffff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  transition: transform 0.2s ease;
+}
+
+.velure-palette-circle:hover {
+  transform: scale(1.15);
+}
+
+/* Gift Registry with QR Code */
+.velure-registry-box {
+  background: #e9e1d1;
+  margin: 20px 24px 34px;
+  padding: 28px 20px;
+  border-radius: 12px;
+  border: 1px solid #d5cbba;
+}
+
+.velure-qr-card {
+  width: 140px;
+  height: 140px;
+  margin: 16px auto 8px;
+  padding: 10px;
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.velure-qr-card svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* Recommendations Grid */
+.velure-recs-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  max-width: 340px;
+  margin: 20px auto 30px;
+  text-align: left;
+}
+
+.velure-rec-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.velure-rec-icon {
+  width: 28px;
+  height: 28px;
+  color: #706f54;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.velure-rec-text {
+  font-size: 12px;
+  line-height: 1.5;
+  color: #555048;
+}
+
+/* ==========================================================================
+   3. POLAROID STORY (Olivia and Ethan - Image 5)
+   ========================================================================== */
+.polaroid-template {
+  --pm-bg: #f9f6f0;
+  --pm-ink: #2b2723;
+  --pm-accent: #7c886e;
+}
+
+.polaroid-hero-block {
+  position: relative;
+  width: 100%;
+  height: 560px;
+  overflow: hidden;
+  background: #1b1916;
+}
+
+.polaroid-hero-block img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  opacity: 0.85;
+}
+
+.polaroid-hero-content {
+  position: absolute;
+  inset: 0;
+  padding: 40px 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  color: #ffffff;
+  text-align: center;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.4) 0%,
+    transparent 40%,
+    rgba(0, 0, 0, 0.65) 100%
+  );
+}
+
+.polaroid-names-title {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(38px, 10vw, 52px);
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  font-weight: 500;
+  line-height: 1.1;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+.polaroid-names-title span {
+  font-family: "Italianno", cursive;
+  text-transform: none;
+  font-size: 38px;
+  display: block;
+  letter-spacing: 0;
+}
+
+/* Polaroid Photo Milestone Stack */
+.polaroid-story-section {
+  padding: 48px 24px 30px;
+  background: #f9f6f0;
+  position: relative;
+}
+
+.polaroid-section-title {
+  font-family: "Italianno", cursive;
+  font-size: 48px;
+  line-height: 1;
+  color: #2b2723;
+  margin-bottom: 28px;
+}
+
+.polaroid-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+  max-width: 340px;
+  margin: 0 auto;
+}
+
+.polaroid-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  text-align: left;
+}
+
+.polaroid-frame {
+  width: 120px;
+  height: 145px;
+  padding: 8px 8px 26px;
+  background: #ffffff;
+  border-radius: 3px;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12), 0 2px 6px rgba(0, 0, 0, 0.05);
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+
+.polaroid-item:nth-child(even) .polaroid-frame {
+  transform: rotate(2deg);
+}
+.polaroid-item:nth-child(odd) .polaroid-frame {
+  transform: rotate(-2deg);
+}
+
+.polaroid-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.polaroid-info time {
+  font-size: 15px;
+  font-weight: 700;
+  color: #7c886e;
+  display: block;
+  margin-bottom: 2px;
+}
+
+.polaroid-info h4 {
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #2b2723;
+  margin-bottom: 4px;
+}
+
+.polaroid-info p {
+  font-size: 12px;
+  color: #6a645d;
+  line-height: 1.4;
+}
+
+/* ==========================================================================
+   4. MAPLEWOOD ESTATE (Jason & Melani - Image 4)
+   ========================================================================== */
+.estate-template {
+  --pm-bg: #f9f6f2;
+  --pm-ink: #2b2724;
+  --pm-espresso: #241d1a;
+}
+
+.estate-hero-section {
+  padding: 44px 24px 20px;
+}
+
+.estate-script-names {
+  font-family: "Italianno", cursive;
+  font-size: 52px;
+  line-height: 1.1;
+  color: #2b2724;
+  margin-bottom: 4px;
+}
+
+.estate-sketch-card {
+  padding: 24px;
+  text-align: center;
+}
+
+.estate-sketch-frame {
+  max-width: 320px;
+  margin: 14px auto 18px;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.estate-sketch-frame img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  display: block;
+}
+
+/* Curvy S-Timeline Path */
+.estate-wavy-timeline {
+  position: relative;
+  padding: 30px 20px;
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+/* Contrast Dark Espresso Card (RSVP) */
+.estate-dark-rsvp {
+  background: #241d1a;
+  color: #f7f3ee;
+  padding: 44px 24px 50px;
+  border-radius: 24px;
+  margin: 20px 16px;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.25);
+}
+
+.estate-dark-rsvp h3 {
+  font-family: "Italianno", cursive;
+  font-size: 42px;
+  line-height: 1;
+  color: #ffffff;
+  margin-bottom: 24px;
+}
+
+.estate-dark-field {
+  margin-bottom: 18px;
+  text-align: left;
+}
+
+.estate-dark-field label {
+  display: block;
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #a89f95;
+  margin-bottom: 6px;
+}
+
+.estate-dark-field input {
+  width: 100%;
+  padding: 10px 14px;
+  background: #332b27;
+  border: 1px solid #4a403a;
+  border-radius: 6px;
+  color: #ffffff;
+  font-size: 13px;
+}
+
+.estate-counter-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin: 12px 0 20px;
+}
+
+.estate-counter-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 6px;
+  background: #332b27;
+  border: 1px solid #4a403a;
+  color: #ffffff;
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.estate-send-btn {
+  width: 100%;
+  padding: 12px;
+  border-radius: 999px;
+  background: #f4ede1;
+  color: #241d1a;
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  margin-top: 14px;
+}
+
+/* ==========================================================================
+   YouTube Video Overlay & Modal Player (Pinterest Templates)
+   ========================================================================== */
+.pinterest-video-play-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: rgba(26, 23, 20, 0.82);
+  border: 2px solid rgba(255, 255, 255, 0.9);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+  transition: transform 0.2s ease, background 0.2s ease;
+  z-index: 5;
+}
+
+.pinterest-video-play-overlay:hover {
+  transform: translate(-50%, -50%) scale(1.08);
+  background: rgba(220, 38, 38, 0.92);
+}
+
+.pinterest-video-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  background: rgba(0, 0, 0, 0.88);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.pinterest-video-modal-content {
+  position: relative;
+  width: 100%;
+  max-width: 800px;
+  aspect-ratio: 16 / 9;
+  background: #000;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+}
+
+.pinterest-video-modal-content iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}
+
+.pinterest-video-close-btn {
+  position: absolute;
+  top: -42px;
+  right: 0;
+  background: transparent;
+  border: none;
+  color: #ffffff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 6px 10px;
+}
+
