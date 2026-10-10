@@ -2,6 +2,13 @@
 
 A premium, responsive invitation website showcase and live design studio. React frontend only, with no backend, authentication, or personal-data submissions.
 
+## AI & System Documentation
+
+- [AGENTS.md](AGENTS.md) — Comprehensive AI agent reference, system invariants, and playbooks.
+- [llms.txt](llms.txt) — High-signal repository index adhering to the [llms.txt](https://llmstxt.org) standard.
+- [llms-full.txt](llms-full.txt) — Complete single-file context document for LLM ingestion.
+- [docs/AI_ARCHITECTURE.md](docs/AI_ARCHITECTURE.md) — Architectural diagrams, state machine, and data dictionaries.
+
 ## Run locally
 
 Requires Node.js 22.12+ or 24+ and npm.

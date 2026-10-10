@@ -1,0 +1,161 @@
+# ARDHAS INVITATIONS — COMPLETE REPOSITORY CONTEXT & LLM REFERENCE
+
+> This single file provides complete, unambiguous context for LLMs, AI coding assistants, and automated agents operating on the Ardhas Invitations codebase.
+
+---
+
+## 1. PROJECT SUMMARY & DOMAIN
+- **Name:** Ardhas (`ardhas-invitations`)
+- **Domain:** Luxury mobile-first digital invitation studio and client delivery platform for Indian celebrations (weddings, engagements, housewarmings, birthdays, etc.).
+- **Headquarters:** Kerala, India. Brand handles: Instagram `ardhas_wedding_company`, WhatsApp `+91 9048503717`.
+- **Architecture:** 100% frontend React Single Page Application (React 19 + Vite 7 + Tailwind CSS v4).
+- **Backend Assumption:** ZERO backend. No database, no user accounts, no server API calls. State is held in-memory via React reducer context.
+- **Service Workflow:** The application functions as both an interactive demo portfolio and an internal production workstation where client handoff deliverables (PDF briefs, sanitized JSON configurations, and media checklists) are generated in-browser.
+
+---
+
+## 2. NON-NEGOTIABLE INVARIANTS
+1. **Automated Test Invariants (`npm test`):**
+   - 24 automated unit tests must always pass cleanly.
+   - Exactly 16 celebration types (`eventTypes.length === 16`).
+   - Exactly 80 templates total (`templates.length === 80`), 5 templates per celebration.
+   - Exactly 80 unique template IDs (`new Set(templates.map(t => t.id)).size === 80`).
+   - Each celebration type features 5 distinct layout styles (`new Set(designs.map(d => d.layout)).size === 5`).
+2. **React StrictMode Invariant:**
+   - In `src/main.jsx`, `<App />` is rendered inside `<InvitationProvider>` WITHOUT `<React.StrictMode>`. This avoids console warnings from `react-helmet` 6.1.0's legacy lifecycle methods under React 19.
+3. **No Base64 Blobs in Exported JSON:**
+   - Exported client JSON (`client-details.json`) must strictly conform to `docs/client-details.schema.json`. Base64 images and video blobs must be stripped out; local files are mapped to canonical filenames (`<project-id>_<SLOT_ID>.<ext>`) and remote URLs preserved.
+4. **Universal Media Support:**
+   - Every media slot accepts image URLs, local image uploads, MP4 videos, and any YouTube link format (standard watch URL, `youtu.be`, `/embed/`, or `/shorts/`). YouTube URLs are parsed using `src/utils/media.js`.
+5. **Project ID Regex:**
+   - Client project IDs must strictly conform to `^[a-z0-9-]{3,40}$` (lowercase letters, digits, and hyphens; 3-40 characters).
+
+---
+
+## 3. CELEBRATION TYPES & TEMPLATES CATALOG
+The 16 supported celebrations and their default design themes:
+1. **Wedding:** Aarav & Diya (Designs: Memories Deckle, Temple Promise, Velure Linen, Royal Darbar, Starry Infinity)
+2. **Engagement:** Arjun & Meera (Designs: The Golden Yes, Blush Promise, Moonlit Rings, Velvet Courtyard, Celestial Constellation)
+3. **Birthday:** Ananya (Designs: Confetti Club, Birthday Wishes, After Dark, Crown Jubilee, Cosmic Glow)
+4. **Housewarming:** The Varma Family / Vazhappalli Thekkathil (Designs: Warm Hearth, House Blessing, Open Door, Heritage Manor, Starlit Sanctuary)
+5. **Baby Shower:** Welcoming Baby Varma (Designs: Tiny Miracles, Sweet Arrival, Little Sunshine, Royal Lullaby, Starlit Cradle)
+6. **Anniversary:** Vikram & Sunita (Designs: Silver Journey, Golden Years, Together Forever, Royal Milestone, Constellation of Love)
+7. **Naming Ceremony:** Baby Aadhya (Designs: Little Lotus, A Name in the Stars, Blessed Beginning, Vedic Cradle, Celestial Moonbeam)
+8. **Save the Date:** Aarav & Diya (Designs: Mark the Moment, A Date to Keep, Postcard from Forever, Regal Announcement, Constellation Calendar)
+9. **Reception:** Aarav & Diya (Designs: Midnight Celebration, Evening Elegance, Toast to Forever, Grand Palace Reception, Starlit Ballroom)
+10. **Mehendi:** Diya (Designs: Henna Whispers, Marigold Festive, Green Courtyard, Royal Henna Darbar, Celestial Mehndi Night)
+11. **Haldi:** Aarav & Diya (Designs: Sunshine Yellow, Golden Turmeric, Joyful Splash, Royal Pitambari, Celestial Dawn)
+12. **Other:** A Gathering of Good Things (Designs: The Gathering, Something Special, Good Company, Palace Rendezvous, Starlit Evening)
+13. **Sangeet & Cocktail:** Rohan & Rhea (Designs: Rhythm of the Night, Velvet & Starlight, Disco Glamour, Mehfil e Sangeet, Electric Midnight)
+14. **Pooja & House Blessing:** The Sharma Family (Designs: Sacred Diya, Vedic Lotus, Auspicious Mangal, Pure Serenity, Temple Bells)
+15. **Graduation:** Dr. Siddharth Menon (Designs: The Milestone, Cap & Honor, Bold Tomorrow, Convocation Gala, Stellar Ascent)
+16. **Dinner Party:** An Evening in Good Company (Designs: Candlelit Terrace, Olive & Linen, Midnight Feast, Vintage Bistro, The Modern Table)
+
+---
+
+## 4. TEMPLATE STYLES & RENDERING PIPELINE
+Master Dispatcher: `src/templates/Invitation.jsx`.
+
+### Dedicated Mobile Stationery
+- `DeckleRomance.jsx` (`style === "deckle"`): Deckle torn paper edges, romantic cursive typography, gold accents.
+- `VelureMinimal.jsx` (`style === "velure"`): Fine woven linen texture, understated modern typography, calm earthy tones.
+- `EstateStory.jsx` (`style === "estate"`): Classical columns, architectural editorial framing.
+- `PolaroidStory.jsx` (`style === "polaroid"`): Overlapping Polaroid photo frames with handwritten tape labels.
+- `MinimalismPurple.jsx` (`style === "purple"` or `"lavender"`): Inspired by ChungDoi demo. Interactive wax seal envelope entrance, tilted pocket photo (`-10deg`), mini month calendar with heart pin, schedule timeline, and dress code swatches.
+*Note: Dedicated stationery templates are self-contained and do not render the shared `InvitationSections` below them.*
+
+### Classic Luxury Templates
+- `MinimalLuxury.jsx` (`style === "minimal"`): Quiet luxury, generous white space.
+- `ClassicTraditional.jsx` (`style === "classic"`): Deep reds, temple motifs, auspicious gold.
+- `ModernRomantic.jsx` (`style === "romantic"`): Warm pastels, modern editorial serif.
+- `FloralElegant.jsx` (`style === "floral"`): Soft botanicals and organic flourishes.
+- `RoyalPremium.jsx` (`style === "royal"`): Ornate palace borders and royal emblems.
+- `Contemporary.jsx` (`style === "modern"`): Clean grid, contemporary sans-serif.
+- `CelestialMidnight.jsx` (`style === "celestial"`): Midnight navy with star clusters.
+- `HeritageVelvet.jsx` (`style === "heritage"`): Regal darbar velvet and gold brocade.
+- `BohoTerracotta.jsx` (`style === "boho"`): Warm terracotta and desert botanical tones.
+- `GlassmorphicNoir.jsx` (`style === "glassmorphic"`): Translucent frosted glass over dark gradients.
+- `CustomTheme.jsx` (`style === "custom"`): User-defined color palettes.
+*Note: Classic templates render the hero presentation component followed by modular `InvitationSections` (`src/sections/InvitationSections.jsx`).*
+
+---
+
+## 5. STATE MACHINE SPECIFICATION (`src/context/invitationState.js`)
+
+### Initial State
+```javascript
+export const createInvitationState = () => ({
+  activeEvent: "Wedding",
+  drafts: { Wedding: getEventDefaults("Wedding") },
+});
+```
+
+### Action Reducer
+1. `action.type === "event"`:
+   - Validates `action.eventType` exists in `eventTypes`.
+   - Sets `activeEvent = action.eventType`.
+   - Initializes draft with `getEventDefaults(action.eventType)` if not already created.
+2. `action.type === "template"`:
+   - Locates design in `templates` by `action.id`.
+   - Applies `template`, `style`, `layout`, `color`, `font`, and `background` to the corresponding draft.
+   - Sets `activeEvent = design.eventType`.
+3. `action.type === "reset"`:
+   - Resets only `drafts[state.activeEvent]` back to `getEventDefaults(state.activeEvent)`.
+4. `action.type === "update"`:
+   - Merges `action.patch` into active event's draft.
+
+---
+
+## 6. CLIENT EXPORT & HANDOFF (`src/utils/clientExport.js`)
+
+- `validateProjectId(id)`: Regex `^[a-z0-9-]{3,40}$`.
+- `validateCustomFieldId(id, existingIds)`: Regex `^[a-z][a-z0-9_]*$` (`lower_snake`).
+- `buildClientDetails(config)`: Builds the canonical handoff object:
+  ```json
+  {
+    "schema": "ardhas-client/1.0",
+    "schemaVersion": "1.0",
+    "projectId": "ard-2026-aarav-diya",
+    "exportedAt": "2026-10-11T00:00:00.000Z",
+    "eventType": "Wedding",
+    "template": { "id": "wedding-1", "name": "Memories Deckle", "style": "deckle", "layout": "deckle" },
+    "wedding": { ... },
+    "events": [ ... ],
+    "content": { ... },
+    "design": { ... },
+    "sections": { ... },
+    "customFields": [ ... ],
+    "media": { ... }
+  }
+  ```
+- `downloadClientPdf(config)`: Uses `jsPDF` to build a 3-page luxury client brief document with full event schedule, venue directions, family members, and media checklist.
+- `downloadMediaChecklist(config)`: Markdown file detailing required image aspect ratios and expected filenames.
+- `downloadAllUploadedImages(config)`: Sequential download of in-memory client images with canonical filenames (`<project-id>_<SLOT_ID>.<ext>`).
+
+---
+
+## 7. UNIVERSAL MEDIA UTILITY (`src/utils/media.js`)
+
+- `parseYouTubeUrl(input)`:
+  - Supports: `youtube.com/watch?v=ID`, `youtu.be/ID`, `/embed/ID`, `/shorts/ID`, `m.youtube.com`, `youtube-nocookie.com`, or raw 11-char ID.
+  - Outputs `isYouTube: boolean`, `videoId`, `embedUrl` (using `youtube-nocookie.com`), `thumbnailUrl` (using `img.youtube.com/vi/<ID>/hqdefault.jpg`), and `standardUrl`.
+- `isVideoUrl(input)`: Returns true if input is YouTube or has video extension (`.mp4`, `.webm`, or `blob:`).
+- `getMediaThumbnail(input)`: Extracts YouTube thumbnail or returns original URL.
+- `getMediaDisplayType(input)`: `'youtube'` | `'video'` | `'image'` | `'empty'`.
+
+---
+
+## 8. CLI COMMANDS & WORKFLOWS
+```bash
+# Start local development server
+npm run dev
+
+# Run full 24-test suite
+npm test
+
+# Build production bundle
+npm run build
+
+# Preview production build locally
+npm run preview
+```

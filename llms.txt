@@ -1,0 +1,34 @@
+# Ardhas Invitations
+
+> A luxury, mobile-first digital invitation studio and client delivery platform built with React 19, Vite 7, and Tailwind CSS v4. Zero backend, 100% client-side state machine, supporting 16 celebration types and 80 dedicated template variations.
+
+## Core Documentation
+- [AGENTS.md](AGENTS.md): Complete system reference, strict non-negotiable invariants, and developer playbooks for AI agents.
+- [AI_ARCHITECTURE.md](docs/AI_ARCHITECTURE.md): System architecture, state machine transitions, template pipeline, and schema contracts.
+- [ARDHAS_MASTER_PLAN.md](ARDHAS_MASTER_PLAN.md): End-to-end business and operational master plan (service model, client lifecycle, media workflow).
+- [client-details.schema.json](docs/client-details.schema.json): Formal JSON Schema (Draft 2020-12) for exported client invitation handoffs.
+
+## Architecture Highlights
+- **100% Client-Side SPA:** Zero backend APIs or database. State is managed via pure in-memory reducer (`src/context/invitationState.js`).
+- **Independent Draft Isolation:** Switching between any of the 16 occasion types preserves in-memory drafts without cross-contamination.
+- **80 Templates across 16 Occasions:** Every occasion features 5 unique layout styles (Deckle, Velure, Estate, Polaroid, Minimal, Royal, Floral, Heritage, Celestial, etc.).
+- **Universal Media Engine:** Supports image URLs, local uploads, MP4 videos, and all YouTube video links (`src/utils/media.js`).
+- **Production Client Handoff:** In-browser generation of sanitized JSON (`ardhas-client/1.0`), jsPDF dossiers, media asset checklists, and image packages (`src/utils/clientExport.js`).
+
+## Key Source Files
+- `src/App.jsx`: SPA root router, hash-based section scroll restoration, lazy-loaded route views.
+- `src/main.jsx`: Application mount point (Note: React StrictMode intentionally omitted due to React Helmet 6 legacy lifecycles).
+- `src/context/InvitationContext.jsx`: Global context provider and `useInvitation` hook.
+- `src/context/invitationState.js`: Synchronous pure state reducer for drafts and template selection.
+- `src/data/events.js`: Catalog of 16 celebration presets, metadata, and 80 template configurations.
+- `src/data/mediaSlots.js`: Media slot registry (`HERO_IMAGE`, `GALLERY_IMAGE_01..06`, `WEDDING_VIDEO`, etc.), Project ID validation (`^[a-z0-9-]{3,40}$`), and Custom Field ID rules.
+- `src/templates/Invitation.jsx`: Master invitation dispatcher rendering dedicated stationery or classic modular sections.
+- `src/sections/InvitationSections.jsx`: Modular invitation blocks (Hero, Couple, Schedule, Venue, RSVP, Gallery, Video, Family, Registry, Wishes).
+- `src/components/ClientHandoffPanel.jsx`: Collapsible export drawer for PDF, JSON, checklist, and image downloads.
+- `src/utils/clientExport.js`: Multi-page jsPDF generator and Base64-stripping JSON export builder.
+- `src/utils/media.js`: Regex-based YouTube URL parser and video thumbnail resolver.
+
+## Testing & Verification
+- `npm test`: Executes 24 automated unit and jsdom tests with zero external test runners (`node:test`).
+- `npm run build`: Production static asset compilation into `/dist`.
+- `npm run dev`: Starts local Vite development server at `http://127.0.0.1:5173`.
