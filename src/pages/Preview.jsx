@@ -4,6 +4,8 @@ import {
   ArrowLeft,
   SlidersHorizontal,
   Printer,
+  Download,
+  Loader2,
   FileDown,
   FileText,
   ImagePlus,
@@ -16,12 +18,15 @@ import {
   downloadClientJson,
   downloadMediaChecklist,
   downloadRenamedImages,
+  downloadClientPdf,
 } from "../utils/clientExport.js";
+import ClientHandoffPanel from "../components/ClientHandoffPanel";
 import Invitation from "../templates/Invitation";
 
 export default function Preview() {
-  const { config } = useInvitation();
+  const { config, updateConfig } = useInvitation();
   const [exportMessage, setExportMessage] = useState({ text: "", isError: false });
+  const [isPdfGenerating, setIsPdfGenerating] = useState(false);
 
   const handleExportJson = () => {
     try {
@@ -36,11 +41,15 @@ export default function Preview() {
   };
 
   const handleExportChecklist = () => {
-    downloadMediaChecklist(config);
-    setExportMessage({
-      text: "Downloaded media checklist (.txt)",
-      isError: false,
-    });
+    try {
+      downloadMediaChecklist(config);
+      setExportMessage({
+        text: "Downloaded media checklist (.txt)",
+        isError: false,
+      });
+    } catch (err) {
+      setExportMessage({ text: err.message, isError: true });
+    }
   };
 
   const handleExportImages = () => {
@@ -59,6 +68,21 @@ export default function Preview() {
       }
     } catch (err) {
       setExportMessage({ text: err.message, isError: true });
+    }
+  };
+
+  const handleDownloadPdf = async () => {
+    try {
+      setIsPdfGenerating(true);
+      const res = await downloadClientPdf(config);
+      setExportMessage({
+        text: `Downloaded ${res}`,
+        isError: false,
+      });
+    } catch (err) {
+      setExportMessage({ text: err.message, isError: true });
+    } finally {
+      setIsPdfGenerating(false);
     }
   };
 
@@ -101,10 +125,29 @@ export default function Preview() {
           >
             <ImagePlus size={15} /> <span>Images</span>
           </button>
-          <button type="button" className="preview-action-btn" onClick={() => window.print()}>
-            <Printer size={15} /> <span>Save PDF</span>
+          <button
+            type="button"
+            className="preview-action-btn primary"
+            title="Directly download invitation PDF with Ardhas Order Sheet"
+            onClick={handleDownloadPdf}
+            disabled={isPdfGenerating}
+          >
+            {isPdfGenerating ? (
+              <Loader2 size={15} className="animate-spin" />
+            ) : (
+              <Download size={15} />
+            )}
+            <span>{isPdfGenerating ? "PDF..." : "Download PDF"}</span>
           </button>
-          <Link to="/customizer" className="preview-action-btn primary">
+          <button
+            type="button"
+            className="preview-action-btn"
+            title="Print or Save as PDF with browser print dialog"
+            onClick={() => window.print()}
+          >
+            <Printer size={15} /> <span>Print</span>
+          </button>
+          <Link to="/customizer" className="preview-action-btn">
             <SlidersHorizontal size={15} /> <span>Customize</span>
           </Link>
         </div>
@@ -125,6 +168,13 @@ export default function Preview() {
           </button>
         </div>
       )}
+      <div className="preview-handoff-wrapper no-print">
+        <ClientHandoffPanel
+          config={config}
+          updateConfig={updateConfig}
+          title="Client handoff files"
+        />
+      </div>
       <main id="main-content">
         <Invitation config={config} />
       </main>

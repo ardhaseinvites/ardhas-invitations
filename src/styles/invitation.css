@@ -1294,9 +1294,114 @@
   color: var(--invite-ink);
 }
 
-/* Ardhas Order Sheet: hidden on screen, visible only when printing */
+/* Ardhas Order Sheet: hidden on screen by default, rendered during print or direct PDF capture */
 .ardhas-order-sheet {
   display: none !important;
+  background: #ffffff !important;
+  color: #1a1a1a !important;
+  padding: 36px 24px !important;
+  margin-top: 40px !important;
+  border-top: 3px solid #8d7045 !important;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+}
+.order-sheet-header h2 {
+  font-size: 20px;
+  color: #8d7045;
+  margin: 0 0 4px;
+}
+.order-sheet-tag {
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #666;
+  font-weight: 600;
+}
+.order-sheet-disclaimer {
+  background: #fdfaf4;
+  border-left: 3px solid #8d7045;
+  padding: 10px 14px;
+  font-size: 11px;
+  margin: 14px 0 20px;
+  line-height: 1.5;
+}
+.order-sheet-meta-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 24px;
+  font-size: 11px;
+}
+.order-sheet-meta-item {
+  border-bottom: 1px solid #eee;
+  padding-bottom: 6px;
+}
+.order-sheet-meta-item .meta-label {
+  display: block;
+  color: #777;
+  font-size: 9px;
+  text-transform: uppercase;
+  margin-bottom: 2px;
+}
+.order-sheet-meta-item .meta-value {
+  color: #111;
+}
+.order-sheet-section h3 {
+  font-size: 14px;
+  margin: 20px 0 6px;
+}
+.order-sheet-hint {
+  font-size: 10px;
+  color: #666;
+  margin: 0 0 12px;
+}
+.order-sheet-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 10px;
+}
+.order-sheet-table th,
+.order-sheet-table td {
+  border: 1px solid #e0e0e0;
+  padding: 6px 8px;
+  text-align: left;
+}
+.order-sheet-table th {
+  background: #f7f7f7;
+  font-weight: 600;
+}
+.order-sheet-table code {
+  font-family: monospace;
+  font-size: 9.5px;
+  background: #f4f4f4;
+  padding: 1px 4px;
+  border-radius: 2px;
+}
+.status-badge {
+  display: inline-block;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-size: 9px;
+  font-weight: 500;
+}
+.status-provided_locally {
+  background: #e6f4ea;
+  color: #137333;
+}
+.status-url {
+  background: #e8f0fe;
+  color: #1a73e8;
+}
+.status-empty {
+  background: #f1f3f4;
+  color: #5f6368;
+}
+.order-sheet-footer {
+  margin-top: 30px;
+  font-size: 9px;
+  color: #888;
+  text-align: center;
+  border-top: 1px solid #eee;
+  padding-top: 10px;
 }
 
 @media print {
@@ -1305,111 +1410,6 @@
     visibility: visible !important;
     page-break-before: always;
     break-before: page;
-    background: #ffffff !important;
-    color: #1a1a1a !important;
-    padding: 36px 24px !important;
-    margin-top: 40px !important;
-    border-top: 3px solid #8d7045 !important;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
-  }
-  .order-sheet-header h2 {
-    font-size: 20px;
-    color: #8d7045;
-    margin: 0 0 4px;
-  }
-  .order-sheet-tag {
-    font-size: 10px;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    color: #666;
-    font-weight: 600;
-  }
-  .order-sheet-disclaimer {
-    background: #fdfaf4;
-    border-left: 3px solid #8d7045;
-    padding: 10px 14px;
-    font-size: 11px;
-    margin: 14px 0 20px;
-    line-height: 1.5;
-  }
-  .order-sheet-meta-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
-    margin-bottom: 24px;
-    font-size: 11px;
-  }
-  .order-sheet-meta-item {
-    border-bottom: 1px solid #eee;
-    padding-bottom: 6px;
-  }
-  .order-sheet-meta-item .meta-label {
-    display: block;
-    color: #777;
-    font-size: 9px;
-    text-transform: uppercase;
-    margin-bottom: 2px;
-  }
-  .order-sheet-meta-item .meta-value {
-    color: #111;
-  }
-  .order-sheet-section h3 {
-    font-size: 14px;
-    margin: 20px 0 6px;
-  }
-  .order-sheet-hint {
-    font-size: 10px;
-    color: #666;
-    margin: 0 0 12px;
-  }
-  .order-sheet-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 10px;
-  }
-  .order-sheet-table th,
-  .order-sheet-table td {
-    border: 1px solid #e0e0e0;
-    padding: 6px 8px;
-    text-align: left;
-  }
-  .order-sheet-table th {
-    background: #f7f7f7;
-    font-weight: 600;
-  }
-  .order-sheet-table code {
-    font-family: monospace;
-    font-size: 9.5px;
-    background: #f4f4f4;
-    padding: 1px 4px;
-    border-radius: 2px;
-  }
-  .status-badge {
-    display: inline-block;
-    padding: 2px 6px;
-    border-radius: 3px;
-    font-size: 9px;
-    font-weight: 500;
-  }
-  .status-provided_locally {
-    background: #e6f4ea;
-    color: #137333;
-  }
-  .status-url {
-    background: #e8f0fe;
-    color: #1a73e8;
-  }
-  .status-empty {
-    background: #f1f3f4;
-    color: #5f6368;
-  }
-  .order-sheet-footer {
-    margin-top: 30px;
-    font-size: 9px;
-    color: #888;
-    text-align: center;
-    border-top: 1px solid #eee;
-    padding-top: 10px;
   }
 }
 

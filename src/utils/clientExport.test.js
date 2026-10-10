@@ -11,6 +11,7 @@ import {
   buildClientDetails,
   generateMediaChecklist,
   getExtensionFromDataUrl,
+  downloadClientPdf,
 } from "./clientExport.js";
 import {
   getEventDefaults,
@@ -306,4 +307,30 @@ test("Media checklist is generated dynamically for the selected template", () =>
   assert.ok(checklist.includes("IMPORTANT NOTICE:"));
   assert.ok(checklist.includes("have NOT been sent"));
 });
+
+test("downloadClientPdf validates project ID and generates correct filename", async () => {
+  // Missing project ID
+  await assert.rejects(
+    async () => downloadClientPdf({ ...getEventDefaults("Wedding"), projectId: "" }),
+    /Project ID is required/,
+  );
+
+  // Invalid project ID (spaces, uppercase)
+  await assert.rejects(
+    async () =>
+      downloadClientPdf({
+        ...getEventDefaults("Wedding"),
+        projectId: "Invalid ID With Spaces",
+      }),
+    /lowercase letters, numbers, and hyphens/,
+  );
+
+  // Valid project ID resolves filename invitation-<project-id>.pdf
+  const filename = await downloadClientPdf({
+    ...getEventDefaults("Wedding"),
+    projectId: "nikhil-weds-anjali",
+  });
+  assert.equal(filename, "invitation-nikhil-weds-anjali.pdf");
+});
+
 

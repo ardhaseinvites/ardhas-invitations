@@ -1,3 +1,5 @@
+import { jsPDF } from "jspdf";
+import { toPng } from "html-to-image";
 import {
   getMediaSlots,
   validateProjectId,
@@ -372,6 +374,120 @@ export function downloadRenamedImages(config) {
   };
 }
 
+/**
+ * Direct client-side PDF download using jsPDF and html-to-image.
+ * Captures the invitation DOM including the Ardhas Order Sheet.
+ * Blocks if project ID is invalid.
+ * Filename: invitation-<project-id>.pdf
+ */
+export async function downloadClientPdf(config, element = null) {
+  const projectIdValidation = validateProjectId(config.projectId);
+  if (!projectIdValidation.valid) {
+    throw new Error(projectIdValidation.error);
+  }
+
+  const projectId = config.projectId.trim();
+  const filename = `invitation-${projectId}.pdf`;
+
+  // If running in browser environment with DOM access
+  if (typeof window !== "undefined" && typeof document !== "undefined") {
+    const target =
+      element ||
+      document.querySelector(".invitation:not(.invitation-compact)") ||
+      document.querySelector(".invitation");
+
+    if (!target) {
+      throw new Error("Invitation element could not be found for PDF capture.");
+    }
+
+    const orderSheet = target.querySelector(".ardhas-order-sheet");
+    let prevDisplay = "";
+    const toolbar = target.querySelector(".invite-toolbar");
+    let prevToolbarDisplay = "";
+
+    try {
+      // Unhide Ardhas Order Sheet during capture so it is included in the PDF
+      if (orderSheet) {
+        prevDisplay = orderSheet.style.display;
+        orderSheet.style.setProperty("display", "block", "important");
+      }
+
+      // Hide on-screen floating toolbar if present inside target
+      if (toolbar) {
+        prevToolbarDisplay = toolbar.style.display;
+        toolbar.style.display = "none";
+      }
+
+      const dataUrl = await toPng(target, {
+        quality: 0.95,
+        backgroundColor: "#ffffff",
+        filter: (node) => {
+          if (
+            node.classList &&
+            (node.classList.contains("invite-music") ||
+              node.classList.contains("invite-video-toggle"))
+          ) {
+            return false;
+          }
+          return true;
+        },
+      });
+
+      // Initialize jsPDF document (A4 format)
+      const pdf = new jsPDF({
+        orientation: "portrait",
+        unit: "mm",
+        format: "a4",
+      });
+
+      const pdfWidth = pdf.internal.pageSize.getWidth();
+      const pdfHeight = pdf.internal.pageSize.getHeight();
+
+      const img = new Image();
+      img.src = dataUrl;
+      await new Promise((resolve, reject) => {
+        img.onload = resolve;
+        img.onerror = reject;
+      });
+
+      const imgWidth = pdfWidth;
+      const imgHeight = (img.height * pdfWidth) / img.width;
+
+      let heightLeft = imgHeight;
+      let position = 0;
+
+      // Page 1
+      pdf.addImage(dataUrl, "PNG", 0, position, imgWidth, imgHeight, undefined, "FAST");
+      heightLeft -= pdfHeight;
+
+      // Multi-page pagination
+      while (heightLeft > 0) {
+        position = heightLeft - imgHeight;
+        pdf.addPage();
+        pdf.addImage(dataUrl, "PNG", 0, position, imgWidth, imgHeight, undefined, "FAST");
+        heightLeft -= pdfHeight;
+      }
+
+      pdf.save(filename);
+      return filename;
+    } catch (err) {
+      throw new Error(
+        `Direct PDF download failed: ${err.message}. Please use the "Print / Save as PDF" fallback button instead.`,
+      );
+    } finally {
+      // Always restore DOM state
+      if (orderSheet) {
+        orderSheet.style.display = prevDisplay;
+      }
+      if (toolbar) {
+        toolbar.style.display = prevToolbarDisplay;
+      }
+    }
+  }
+
+  return filename;
+}
+
 export default {
   downloadBlob,
   downloadDataUrl,
@@ -381,5 +497,6 @@ export default {
   generateMediaChecklist,
   downloadMediaChecklist,
   downloadRenamedImages,
+  downloadClientPdf,
 };
 

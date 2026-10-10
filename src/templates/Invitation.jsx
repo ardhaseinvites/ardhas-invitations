@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
-import { Music2, VolumeX, Printer } from "lucide-react";
+import { Music2, VolumeX, Printer, Download } from "lucide-react";
 import InvitationSections from "../sections/InvitationSections";
+import { downloadClientPdf } from "../utils/clientExport.js";
 import "../styles/invitation.css";
 import "../styles/event-invitations.css";
 import ArdhasOrderSheet from "../components/ArdhasOrderSheet";
@@ -75,6 +76,37 @@ function MusicButton({ copy }) {
   );
 }
 
+function PdfDownloadButton({ config }) {
+  const [busy, setBusy] = useState(false);
+  const handleDownload = async () => {
+    try {
+      setBusy(true);
+      await downloadClientPdf(config);
+    } catch (err) {
+      alert(err.message || "Failed to download PDF. Please use the Print fallback button.");
+    } finally {
+      setBusy(false);
+    }
+  };
+  return (
+    <>
+      <button
+        onClick={handleDownload}
+        disabled={busy}
+        title="Directly download invitation PDF with Ardhas Order Sheet"
+      >
+        <Download size={16} /> {busy ? "Downloading..." : "Download PDF"}
+      </button>
+      <button
+        onClick={() => window.print()}
+        title="Print or Save as PDF (in dialog choose 'Save as PDF' & tick 'Background graphics')"
+      >
+        <Printer size={16} /> Print
+      </button>
+    </>
+  );
+}
+
 export default function Invitation({ config, compact = false }) {
   const Template = templates[config.style || config.template] || MinimalLuxury;
   const channels = (
@@ -112,9 +144,7 @@ export default function Invitation({ config, compact = false }) {
             {config.sections?.music !== false && (
               <MusicButton copy={config.copy} />
             )}
-            <button onClick={() => window.print()}>
-              <Printer size={16} /> {config.copy.pdfLabel}
-            </button>
+            <PdfDownloadButton config={config} />
           </div>
           <InvitationSections key={config.eventType} config={config} />
           <ArdhasOrderSheet config={config} />

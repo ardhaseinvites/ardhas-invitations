@@ -27,11 +27,7 @@ import {
   validateProjectId,
   validateCustomFieldId,
 } from "../data/mediaSlots.js";
-import {
-  downloadClientJson,
-  downloadMediaChecklist,
-  downloadRenamedImages,
-} from "../utils/clientExport.js";
+import ClientHandoffPanel from "../components/ClientHandoffPanel";
 import Invitation from "../templates/Invitation";
 import "../styles/customizer.css";
 
@@ -641,8 +637,6 @@ export default function Customizer() {
   const tabButtons = useRef([]);
   const [showReset, setShowReset] = useState(false);
   const [uploadGeneration, setUploadGeneration] = useState(0);
-  const [exportError, setExportError] = useState("");
-  const [exportSuccess, setExportSuccess] = useState("");
   const initialSelection = useRef({
     event: params.get("event"),
     theme: params.get("theme"),
@@ -717,103 +711,7 @@ export default function Customizer() {
             </p>
           </div>
           <ControlGroup number="01" title="Project ID & Client Export">
-            <TextField
-              label="Project ID"
-              value={config.projectId}
-              onChange={(value) => {
-                setExportError("");
-                setExportSuccess("");
-                updateConfig({ projectId: value.toLowerCase().trim() });
-              }}
-              placeholder="e.g. nikhil-weds-anjali"
-            />
-            <p className="editor-hint">
-              Assigned by Ardhas to the client. (3 to 40 characters: lowercase letters, numbers, and hyphens only; no spaces).
-            </p>
-            {config.projectId ? (
-              validateProjectId(config.projectId).valid ? (
-                <p className="project-id-badge valid">
-                  <CheckCheck size={13} /> Valid Project ID: <strong>{config.projectId}</strong>
-                </p>
-              ) : (
-                <p className="project-id-badge invalid" role="alert">
-                  <AlertCircle size={13} /> {validateProjectId(config.projectId).error}
-                </p>
-              )
-            ) : (
-              <p className="project-id-badge empty">
-                <Sparkles size={13} /> Demo mode (no Project ID). Enter assigned ID to enable exports.
-              </p>
-            )}
-
-            <div className="customizer-export-stack">
-              <span className="editor-subhead">Client handoff files</span>
-              <button
-                type="button"
-                className="export-action-button primary"
-                onClick={() => {
-                  try {
-                    downloadClientJson(config);
-                    setExportSuccess(`Downloaded client-details-${config.projectId}.json`);
-                    setExportError("");
-                  } catch (err) {
-                    setExportError(err.message);
-                    setExportSuccess("");
-                  }
-                }}
-              >
-                <FileDown size={14} />
-                Download client details (JSON)
-              </button>
-
-              <button
-                type="button"
-                className="export-action-button"
-                onClick={() => {
-                  downloadMediaChecklist(config);
-                  setExportSuccess("Downloaded media checklist (.txt)");
-                  setExportError("");
-                }}
-              >
-                <FileText size={14} />
-                Download media checklist
-              </button>
-
-              <button
-                type="button"
-                className="export-action-button"
-                onClick={() => {
-                  try {
-                    const res = downloadRenamedImages(config);
-                    if (res.downloadedCount === 0) {
-                      setExportSuccess("No locally uploaded photos found in preview to download. Upload preview photos to download renamed files.");
-                    } else {
-                      setExportSuccess(`Downloaded ${res.downloadedCount} pre-named photo file(s).`);
-                    }
-                    setExportError("");
-                  } catch (err) {
-                    setExportError(err.message);
-                    setExportSuccess("");
-                  }
-                }}
-              >
-                <ImagePlus size={14} />
-                Download my images
-              </button>
-              <p className="editor-hint export-hint">
-                This JSON file is for sending to Ardhas only. Videos are not downloaded this way; send original video files separately to Ardhas.
-              </p>
-              {exportError && (
-                <p className="editor-error" role="alert">
-                  <AlertCircle size={13} /> {exportError}
-                </p>
-              )}
-              {exportSuccess && (
-                <p className="editor-success" role="status">
-                  <CheckCheck size={13} /> {exportSuccess}
-                </p>
-              )}
-            </div>
+            <ClientHandoffPanel config={config} updateConfig={updateConfig} />
           </ControlGroup>
           <ControlGroup number="02" title="Start with your occasion">
             <label className="editor-field">
