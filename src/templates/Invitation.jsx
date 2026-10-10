@@ -21,6 +21,7 @@ import VelureMinimal from "./VelureMinimal";
 import PolaroidStory from "./PolaroidStory";
 import EstateStory from "./EstateStory";
 import MinimalismPurple from "./MinimalismPurple";
+import WeddingUnifiedTemplate from "./WeddingUnifiedTemplate";
 
 const templates = {
   minimal: MinimalLuxury,
@@ -128,14 +129,45 @@ function PdfDownloadButton({ config }) {
 
 export default function Invitation({ config, compact = false }) {
   const currentKey = config.style || config.template;
+  const isWedding = config.eventType === "Wedding";
   const isDedicatedStationery =
-    ["deckle", "velure", "polaroid", "estate", "purple", "lavender"].includes(currentKey) ||
-    ["deckle", "velure", "polaroid", "estate", "purple", "lavender"].includes(config.layout);
+    isWedding ||
+    ["deckle", "velure", "polaroid", "estate", "purple", "lavender", "classic", "heritage", "celestial"].includes(currentKey) ||
+    ["deckle", "velure", "polaroid", "estate", "purple", "lavender", "classic", "heritage", "celestial"].includes(config.layout);
 
-  const Template =
+  let Template =
     templates[currentKey] ||
     (isDedicatedStationery ? templates[config.layout] : null) ||
     MinimalLuxury;
+
+  // In wedding designs, if any other layout is selected, ensure it follows
+  // the exact element placement in the page as like Memories Deckle and Velure Linen
+  if (
+    isWedding &&
+    (!templates[currentKey] ||
+      ["minimal", "romantic", "floral", "royal", "modern", "custom", "boho", "glassmorphic"].includes(currentKey))
+  ) {
+    Template = (props) => (
+      <WeddingUnifiedTemplate
+        {...props}
+        themeClass="velure-template"
+        sprigIcon={
+          currentKey === "royal"
+            ? "❖ ❖ ❖"
+            : currentKey === "floral"
+              ? "🌸 🌸 🌸"
+              : "𐀔 𐀔 𐀔"
+        }
+        dressCodeTitle={
+          currentKey === "royal"
+            ? "ROYAL FESTIVE ATTIRE"
+            : currentKey === "floral"
+              ? "PASTEL BOTANICAL ELEGANCE"
+              : "FORMAL ELEGANCE"
+        }
+      />
+    );
+  }
   const channels = (
     config.color.match(/[a-f\d]{2}/gi) || ["00", "00", "00"]
   ).map((value) => {

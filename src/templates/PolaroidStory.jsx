@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import {
   Church,
   Wine,
@@ -9,7 +9,13 @@ import {
   Globe,
   Check,
   Play,
+  Pause,
   X,
+  Car,
+  Shuffle,
+  Repeat,
+  SkipBack,
+  SkipForward,
 } from "lucide-react";
 import { parseYouTubeUrl } from "../utils/media.js";
 import "../styles/pinterest-templates.css";
@@ -59,6 +65,77 @@ function PolaroidQrSvg() {
 export default function PolaroidStory({ config, compact = false }) {
   const [rsvpChoice, setRsvpChoice] = useState("accept");
   const [playingVideo, setPlayingVideo] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [remaining, setRemaining] = useState({
+    days: 246,
+    hours: 11,
+    minutes: 53,
+    seconds: 6,
+  });
+
+  const audioContext = useRef(null);
+  const audioTimer = useRef(null);
+
+  // Countdown timer
+  useEffect(() => {
+    const updateCountdown = () => {
+      const target = new Date(
+        `${config.date || "2026-09-14"}T${config.time || "17:00"}:00+05:30`
+      ).getTime();
+      if (!Number.isFinite(target)) return;
+      const diff = Math.max(0, Math.floor((target - Date.now()) / 1000));
+      setRemaining({
+        days: Math.floor(diff / 86400),
+        hours: Math.floor((diff % 86400) / 3600),
+        minutes: Math.floor((diff % 3600) / 60),
+        seconds: diff % 60,
+      });
+    };
+    updateCountdown();
+    if (compact) return;
+    const interval = setInterval(updateCountdown, 1000);
+    return () => clearInterval(interval);
+  }, [config.date, config.time, compact]);
+
+  const togglePlaySong = () => {
+    if (isPlaying) {
+      clearInterval(audioTimer.current);
+      audioContext.current?.close();
+      audioContext.current = null;
+      setIsPlaying(false);
+      return;
+    }
+    const Audio = window.AudioContext || window.webkitAudioContext;
+    if (!Audio) return;
+    const ctx = new Audio();
+    audioContext.current = ctx;
+    const chords = [261.63, 329.63, 392.0, 440.0, 392.0, 329.63];
+    let step = 0;
+    const playNote = () => {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = "sine";
+      osc.frequency.value = chords[step++ % chords.length];
+      gain.gain.setValueAtTime(0, ctx.currentTime);
+      gain.gain.linearRampToValueAtTime(0.06, ctx.currentTime + 0.1);
+      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 1.2);
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start();
+      osc.stop(ctx.currentTime + 1.3);
+    };
+    ctx.resume();
+    playNote();
+    audioTimer.current = setInterval(playNote, 700);
+    setIsPlaying(true);
+  };
+
+  useEffect(() => {
+    return () => {
+      clearInterval(audioTimer.current);
+      audioContext.current?.close();
+    };
+  }, []);
 
   const heroPhoto =
     config.heroImage ||
@@ -147,6 +224,89 @@ export default function PolaroidStory({ config, compact = false }) {
               reception to follow
             </p>
           </div>
+        </div>
+      </section>
+
+      {/* Countdown & Romantic Music Card */}
+      <section className="velure-music-card" style={{ margin: "20px 20px 0", background: "#fcf9f2" }}>
+        <p className="velure-music-header">COUNTDOWN TO OUR FOREVER</p>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            gap: "14px",
+            margin: "12px 0 16px",
+            fontFamily: "Cormorant Garamond, Georgia, serif",
+          }}
+        >
+          <div style={{ textAlign: "center", minWidth: "40px" }}>
+            <span style={{ fontSize: "24px", fontWeight: 600, display: "block", lineHeight: 1 }}>
+              {remaining.days}
+            </span>
+            <span style={{ fontSize: "9px", letterSpacing: "1px", textTransform: "uppercase", opacity: 0.7 }}>
+              Days
+            </span>
+          </div>
+          <span style={{ opacity: 0.4, fontSize: "18px" }}>:</span>
+          <div style={{ textAlign: "center", minWidth: "40px" }}>
+            <span style={{ fontSize: "24px", fontWeight: 600, display: "block", lineHeight: 1 }}>
+              {remaining.hours}
+            </span>
+            <span style={{ fontSize: "9px", letterSpacing: "1px", textTransform: "uppercase", opacity: 0.7 }}>
+              Hours
+            </span>
+          </div>
+          <span style={{ opacity: 0.4, fontSize: "18px" }}>:</span>
+          <div style={{ textAlign: "center", minWidth: "40px" }}>
+            <span style={{ fontSize: "24px", fontWeight: 600, display: "block", lineHeight: 1 }}>
+              {remaining.minutes}
+            </span>
+            <span style={{ fontSize: "9px", letterSpacing: "1px", textTransform: "uppercase", opacity: 0.7 }}>
+              Mins
+            </span>
+          </div>
+          <span style={{ opacity: 0.4, fontSize: "18px" }}>:</span>
+          <div style={{ textAlign: "center", minWidth: "40px" }}>
+            <span style={{ fontSize: "24px", fontWeight: 600, display: "block", lineHeight: 1 }}>
+              {remaining.seconds}
+            </span>
+            <span style={{ fontSize: "9px", letterSpacing: "1px", textTransform: "uppercase", opacity: 0.7 }}>
+              Secs
+            </span>
+          </div>
+        </div>
+
+        <p className="velure-music-track">Love Song Melody</p>
+
+        <div className="velure-music-scrubber" onClick={togglePlaySong}>
+          <div
+            className="velure-music-fill"
+            style={{ width: isPlaying ? "72%" : "20%", background: "#7C886E" }}
+          />
+        </div>
+
+        <div className="velure-music-controls">
+          <button type="button" className="velure-music-btn" aria-label="Shuffle">
+            <Shuffle size={14} />
+          </button>
+          <button type="button" className="velure-music-btn" aria-label="Previous">
+            <SkipBack size={15} />
+          </button>
+          <button
+            type="button"
+            className="velure-music-btn play-circle"
+            onClick={togglePlaySong}
+            aria-label={isPlaying ? "Pause music" : "Play music"}
+            style={{ background: "#7C886E", color: "#fff" }}
+          >
+            {isPlaying ? <Pause size={17} /> : <Play size={17} fill="currentColor" />}
+          </button>
+          <button type="button" className="velure-music-btn" aria-label="Next">
+            <SkipForward size={15} />
+          </button>
+          <button type="button" className="velure-music-btn" aria-label="Repeat">
+            <Repeat size={14} />
+          </button>
         </div>
       </section>
 
@@ -311,6 +471,40 @@ export default function PolaroidStory({ config, compact = false }) {
             </div>
           </section>
 
+          {/* Dress Code Swatches */}
+          <section className="velure-dresscode-card" style={{ borderTop: "1px solid #E6E0D4" }}>
+            <h4
+              style={{
+                fontSize: "12px",
+                letterSpacing: "3px",
+                textTransform: "uppercase",
+                fontWeight: 600,
+                marginBottom: "4px",
+              }}
+            >
+              DRESS CODE
+            </h4>
+            <p
+              style={{
+                fontSize: "11px",
+                letterSpacing: "1px",
+                textTransform: "uppercase",
+                color: "#7C886E",
+                fontWeight: 600,
+              }}
+            >
+              FORMAL ATTIRE
+            </p>
+
+            <div className="velure-palette-dots">
+              <span className="velure-palette-circle" style={{ backgroundColor: "#F7F3EE" }} title="Ivory" />
+              <span className="velure-palette-circle" style={{ backgroundColor: "#D9CDBE" }} title="Warm Sand" />
+              <span className="velure-palette-circle" style={{ backgroundColor: "#7C886E" }} title="Sage Green" />
+              <span className="velure-palette-circle" style={{ backgroundColor: "#47453F" }} title="Charcoal" />
+              <span className="velure-palette-circle" style={{ backgroundColor: "#1C1B19" }} title="Classic Black" />
+            </div>
+          </section>
+
           {/* 5. Kindly RSVP with QR Code */}
           <section style={{ padding: "40px 24px 34px", borderTop: "1px solid #E6E0D4", background: "#F5F1E8" }}>
             <h3 style={{ fontFamily: "Italianno", fontSize: "44px", color: "#2B2723", lineHeight: 1, marginBottom: "4px" }}>
@@ -357,6 +551,43 @@ export default function PolaroidStory({ config, compact = false }) {
             <p style={{ fontSize: "11px", color: "#4B463E", marginTop: "2px" }}>
               OLIVIAANDETHAN.COM
             </p>
+          </section>
+
+          {/* Recommendations Grid */}
+          <section style={{ padding: "30px 20px", borderTop: "1px solid #E6E0D4", textAlign: "center" }}>
+            <h4
+              style={{
+                fontSize: "12px",
+                letterSpacing: "3px",
+                textTransform: "uppercase",
+                fontWeight: 600,
+                color: "#2B2723",
+                marginBottom: "16px",
+              }}
+            >
+              RECOMMENDATIONS
+            </h4>
+
+            <div className="velure-recs-grid">
+              <div className="velure-rec-item">
+                <Car size={24} className="velure-rec-icon" />
+                <p className="velure-rec-text">
+                  Valet parking is available. Please allow extra time for arrival.
+                </p>
+              </div>
+              <div className="velure-rec-item">
+                <span style={{ fontSize: "20px", marginTop: "2px" }}>👠</span>
+                <p className="velure-rec-text">
+                  Grass-friendly footwear recommended for the outdoor lawn ceremony.
+                </p>
+              </div>
+              <div className="velure-rec-item">
+                <Camera size={24} className="velure-rec-icon" />
+                <p className="velure-rec-text">
+                  Unplugged ceremony: please keep phones away until the reception!
+                </p>
+              </div>
+            </div>
           </section>
 
           {/* 6. Closing Courtyard Photo */}
