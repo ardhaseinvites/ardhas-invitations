@@ -1,0 +1,746 @@
+/* ==========================================================================
+   Minimalism Purple (ChungDoi-Inspired Soft Lavender & Envelope Invitation)
+   ========================================================================== */
+
+.mp-template {
+  --mp-purple: #7869a0;
+  --mp-purple-dark: #574a78;
+  --mp-purple-light: #9a8cc0;
+  --mp-purple-soft: #efeaf6;
+  --mp-sage: #787a6c;
+  --mp-sand: #9e9d8c;
+  --mp-ink: #2b2520;
+  --mp-bg: #ffffff;
+  
+  max-width: 480px;
+  margin: 0 auto;
+  background: var(--mp-bg);
+  color: var(--mp-purple);
+  font-family: "EB Garamond", "Cormorant Garamond", Georgia, serif;
+  box-shadow: 0 10px 40px rgba(120, 105, 160, 0.15);
+  border-radius: 16px;
+  overflow: hidden;
+  position: relative;
+  text-align: center;
+}
+
+/* --------------------------------------------------------------------------
+   1. Interactive Envelope & Wax Seal Opening Screen
+   -------------------------------------------------------------------------- */
+.mp-envelope-overlay {
+  position: relative;
+  width: 100%;
+  min-height: 600px;
+  background: linear-gradient(135deg, #9a8cc0 0%, #7869a0 50%, #574a78 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* Ambient falling petal animation */
+@keyframes mpAmbientFall {
+  0% {
+    transform: translateY(-20px) rotate(0deg) scale(0.8);
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.7;
+  }
+  85% {
+    opacity: 0.7;
+  }
+  100% {
+    transform: translateY(620px) rotate(360deg) scale(1);
+    opacity: 0;
+  }
+}
+
+.mp-petal {
+  position: absolute;
+  top: -30px;
+  pointer-events: none;
+  animation: mpAmbientFall 14s linear infinite;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.mp-envelope-card {
+  position: relative;
+  width: 100%;
+  max-width: 380px;
+  background: rgba(255, 253, 255, 0.98);
+  border-radius: 14px;
+  padding: 60px 24px 34px;
+  box-shadow: 0 25px 60px -12px rgba(0, 0, 0, 0.45), 0 0 40px rgba(120, 105, 160, 0.25);
+  border: 1px solid rgba(120, 105, 160, 0.2);
+  text-align: center;
+  z-index: 10;
+}
+
+/* Wax Seal with Pulsing Glow */
+@keyframes mpSealPulse {
+  0%, 100% {
+    transform: translate(-50%, -50%) scale(1);
+    box-shadow: 0 4px 20px rgba(120, 105, 160, 0.5), inset 0 2px 4px rgba(255, 255, 255, 0.3);
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.06);
+    box-shadow: 0 6px 26px rgba(120, 105, 160, 0.75), inset 0 2px 5px rgba(255, 255, 255, 0.5);
+  }
+}
+
+.mp-wax-seal {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #8a7ab2, #5a4b82);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  cursor: pointer;
+  z-index: 20;
+  animation: mpSealPulse 2.4s ease-in-out infinite;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.mp-envelope-names {
+  font-family: "EB Garamond", "Cormorant Garamond", serif;
+  font-size: 32px;
+  line-height: 1.15;
+  color: var(--mp-purple);
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.mp-envelope-names span {
+  display: block;
+}
+
+.mp-envelope-names .mp-amp {
+  font-family: "Baskerville", Georgia, serif;
+  font-size: 20px;
+  line-height: 1;
+  opacity: 0.85;
+  margin: 2px 0;
+}
+
+.mp-divider-glyph {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin: 10px 0 14px;
+}
+
+.mp-divider-glyph::before,
+.mp-divider-glyph::after {
+  content: "";
+  width: 44px;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--mp-purple));
+}
+
+.mp-divider-glyph::after {
+  background: linear-gradient(to left, transparent, var(--mp-purple));
+}
+
+.mp-divider-glyph span {
+  font-size: 15px;
+  color: var(--mp-purple);
+  opacity: 0.7;
+}
+
+.mp-envelope-date {
+  font-family: "Lora", "EB Garamond", serif;
+  font-size: 16px;
+  color: rgba(120, 105, 160, 0.85);
+  margin-bottom: 12px;
+}
+
+.mp-envelope-sub {
+  font-size: 15px;
+  color: rgba(120, 105, 160, 0.75);
+  margin-bottom: 22px;
+  font-weight: 400;
+}
+
+/* Shimmering "Open" Button */
+@keyframes mpShine {
+  0% { transform: translateX(-150%); }
+  100% { transform: translateX(250%); }
+}
+
+.mp-open-btn {
+  position: relative;
+  background-color: var(--mp-purple);
+  color: #ffffff;
+  padding: 10px 36px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(120, 105, 160, 0.4);
+  overflow: hidden;
+  transition: transform 0.2s ease, background 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mp-open-btn:hover {
+  transform: scale(1.04);
+  background-color: var(--mp-purple-dark);
+}
+
+.mp-open-btn::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 35px;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.45), transparent);
+  animation: mpShine 2.8s ease-in-out infinite;
+}
+
+/* --------------------------------------------------------------------------
+   2. Main Opened Invitation Page: Header & Envelope-Tucked Photo
+   -------------------------------------------------------------------------- */
+.mp-main-card {
+  position: relative;
+  background: #ffffff;
+  padding-bottom: 40px;
+}
+
+/* Subtle textured paper overlay */
+.mp-paper-texture {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(#7869a0 0.5px, transparent 0.5px);
+  background-size: 18px 18px;
+  opacity: 0.08;
+  pointer-events: none;
+}
+
+.mp-header-section {
+  position: relative;
+  padding: 44px 24px 30px;
+  text-align: center;
+}
+
+.mp-save-the-date {
+  font-family: "Playfair Display", "Times New Roman", serif;
+  font-size: 14px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--mp-sage);
+  font-weight: 600;
+  margin-bottom: 24px;
+}
+
+/* Floating Envelope with Tucked Tilted Photo */
+@keyframes mpFloatSlow {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-7px); }
+}
+
+.mp-envelope-pocket-wrap {
+  position: relative;
+  width: 250px;
+  height: 270px;
+  margin: 0 auto 30px;
+  animation: mpFloatSlow 6s ease-in-out infinite;
+}
+
+/* Envelope Back */
+.mp-envelope-back {
+  position: absolute;
+  inset: 20px 0 0 0;
+  background: #eadef4;
+  border-radius: 8px 8px 12px 12px;
+  border: 1px solid #c9bade;
+  box-shadow: 0 12px 30px rgba(120, 105, 160, 0.18);
+}
+
+/* Tilted Photo Card */
+.mp-tucked-photo {
+  position: absolute;
+  top: 0;
+  left: 20px;
+  width: 200px;
+  height: 250px;
+  background: #ffffff;
+  border: 6px solid #ffffff;
+  border-radius: 4px;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
+  transform: rotate(-10deg);
+  overflow: hidden;
+  z-index: 2;
+  transition: transform 0.3s ease;
+}
+
+.mp-tucked-photo:hover {
+  transform: rotate(-6deg) scale(1.02);
+}
+
+.mp-tucked-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Watercolor Botanical Spray Accent */
+.mp-botanical-accent {
+  position: absolute;
+  bottom: 10px;
+  right: -10px;
+  width: 100px;
+  pointer-events: none;
+  z-index: 5;
+  filter: drop-shadow(0 4px 10px rgba(120, 105, 160, 0.2));
+}
+
+/* Envelope Front Flap Overlay */
+.mp-envelope-front {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 130px;
+  background: linear-gradient(to top, #d8caea, #eddff8);
+  clip-path: polygon(0 40%, 50% 0, 100% 40%, 100% 100%, 0 100%);
+  border-radius: 0 0 12px 12px;
+  z-index: 4;
+  border: 1px solid #c5b5db;
+  opacity: 0.95;
+}
+
+/* Hero Names with Giant Calligraphy Ampersand */
+.mp-hero-names-wrap {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 10px 0 28px;
+}
+
+.mp-giant-amp {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: "Italianno", "The Nautigal", cursive;
+  font-size: 130px;
+  line-height: 0.8;
+  color: rgba(120, 105, 160, 0.14);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.mp-hero-name {
+  font-family: "EB Garamond", "Cormorant Garamond", serif;
+  font-size: clamp(34px, 9vw, 48px);
+  text-transform: uppercase;
+  color: var(--mp-purple);
+  line-height: 1.1;
+  position: relative;
+  z-index: 2;
+  letter-spacing: 1px;
+}
+
+/* --------------------------------------------------------------------------
+   3. Purple Stationery Info Cards (Ceremony, Reception, & Schedule)
+   -------------------------------------------------------------------------- */
+.mp-purple-card {
+  position: relative;
+  background-color: var(--mp-purple);
+  color: #ffffff;
+  border-radius: 14px;
+  padding: 32px 20px;
+  margin: 0 20px 28px;
+  box-shadow: 0 10px 30px rgba(120, 105, 160, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  text-align: center;
+}
+
+.mp-card-title {
+  font-family: "Times New Roman", Georgia, serif;
+  font-size: 18px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  font-weight: 700;
+  margin-bottom: 18px;
+  color: #ffffff;
+}
+
+/* Parents Section Grid */
+.mp-parents-grid {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.mp-parent-col {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.mp-parent-role {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.7);
+  letter-spacing: 1px;
+}
+
+.mp-parent-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.mp-parents-vsep {
+  width: 1px;
+  height: 44px;
+  background-color: rgba(255, 255, 255, 0.4);
+}
+
+.mp-announcement-quote {
+  font-size: 13px;
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.95);
+  max-width: 320px;
+  margin: 0 auto 20px;
+  line-height: 1.5;
+}
+
+.mp-event-subcard {
+  border-top: 1px solid rgba(255, 255, 255, 0.25);
+  padding-top: 18px;
+  margin-top: 18px;
+}
+
+.mp-event-subcard:first-of-type {
+  border-top: none;
+  padding-top: 0;
+  margin-top: 0;
+}
+
+.mp-event-venue-name {
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: 2px;
+}
+
+.mp-event-address {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.75);
+  margin-bottom: 12px;
+}
+
+.mp-date-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin: 8px 0;
+}
+
+.mp-big-day {
+  font-size: 46px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.mp-date-sep {
+  width: 1px;
+  height: 38px;
+  background-color: rgba(255, 255, 255, 0.45);
+}
+
+.mp-date-month-year {
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.mp-date-month {
+  font-size: 14px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.mp-date-year {
+  font-size: 15px;
+  font-weight: 400;
+}
+
+/* --------------------------------------------------------------------------
+   4. Mini Month Calendar Widget Box
+   -------------------------------------------------------------------------- */
+.mp-calendar-box {
+  background: #ffffff;
+  color: var(--mp-purple);
+  border-radius: 12px;
+  padding: 16px 14px;
+  max-width: 280px;
+  margin: 20px auto 14px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.1);
+}
+
+.mp-calendar-header {
+  font-family: "Italianno", cursive;
+  font-size: 26px;
+  color: var(--mp-purple);
+  border-bottom: 1px solid rgba(120, 105, 160, 0.2);
+  padding-bottom: 6px;
+  margin-bottom: 10px;
+}
+
+.mp-calendar-days-row {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  font-size: 11px;
+  font-weight: 600;
+  opacity: 0.65;
+  margin-bottom: 6px;
+}
+
+.mp-calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+}
+
+.mp-calendar-cell {
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+}
+
+.mp-calendar-active-heart {
+  position: relative;
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mp-calendar-heart-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  fill: var(--mp-purple);
+}
+
+.mp-calendar-active-num {
+  position: relative;
+  z-index: 2;
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.mp-add-cal-link {
+  color: #ffffff;
+  font-size: 13px;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  cursor: pointer;
+  margin-top: 6px;
+  display: inline-block;
+  opacity: 0.95;
+  transition: opacity 0.2s ease;
+}
+
+.mp-add-cal-link:hover {
+  opacity: 1;
+}
+
+/* --------------------------------------------------------------------------
+   5. 3D Card Carousel Photo Gallery
+   -------------------------------------------------------------------------- */
+.mp-gallery-section {
+  padding: 24px 20px;
+  position: relative;
+}
+
+.mp-gallery-card-frame {
+  position: relative;
+  width: 240px;
+  height: 320px;
+  margin: 16px auto;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 16px 36px rgba(120, 105, 160, 0.25);
+  border: 4px solid #ffffff;
+  background: #f7f4fa;
+}
+
+.mp-gallery-card-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.mp-gallery-nav-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 10px;
+}
+
+.mp-gallery-arrow-btn {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--mp-purple-soft);
+  color: var(--mp-purple);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.mp-gallery-arrow-btn:hover {
+  background: var(--mp-purple);
+  color: #ffffff;
+  transform: scale(1.08);
+}
+
+.mp-gallery-counter {
+  font-size: 12px;
+  color: var(--mp-sand);
+  font-weight: 600;
+}
+
+/* --------------------------------------------------------------------------
+   6. Dress Code Palette Swatches
+   -------------------------------------------------------------------------- */
+.mp-dresscode-section {
+  padding: 24px 20px;
+  text-align: center;
+}
+
+.mp-swatches-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 14px;
+}
+
+.mp-swatch-circle {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  border: 2px solid #ffffff;
+  transition: transform 0.2s ease;
+}
+
+.mp-swatch-circle:hover {
+  transform: scale(1.15);
+}
+
+/* --------------------------------------------------------------------------
+   7. Vertical Day Schedule Timeline
+   -------------------------------------------------------------------------- */
+.mp-schedule-list {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  max-width: 320px;
+  margin: 18px auto 0;
+  text-align: left;
+}
+
+.mp-schedule-line {
+  position: absolute;
+  top: 10px;
+  bottom: 10px;
+  left: 65px;
+  width: 1px;
+  background-color: rgba(255, 255, 255, 0.35);
+}
+
+.mp-schedule-row {
+  display: grid;
+  grid-template-columns: 55px 22px 1fr;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 0;
+}
+
+.mp-schedule-time {
+  font-size: 13px;
+  font-weight: 600;
+  text-align: right;
+  color: #ffffff;
+}
+
+.mp-schedule-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #ffffff;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.25);
+  margin: 0 auto;
+  z-index: 2;
+}
+
+.mp-schedule-title {
+  font-size: 13px;
+  color: #ffffff;
+}
+
+/* --------------------------------------------------------------------------
+   8. RSVP Attendance Button
+   -------------------------------------------------------------------------- */
+.mp-rsvp-section {
+  margin: 10px 0 24px;
+  text-align: center;
+}
+
+.mp-rsvp-confirm-btn {
+  background-color: var(--mp-purple);
+  color: #ffffff;
+  padding: 10px 28px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(120, 105, 160, 0.35);
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.mp-rsvp-confirm-btn:hover {
+  transform: scale(1.04);
+  background-color: var(--mp-purple-dark);
+}

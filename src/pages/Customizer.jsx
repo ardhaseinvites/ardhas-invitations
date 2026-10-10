@@ -54,8 +54,10 @@ const layouts = [
   { value: "floating", label: "Floating (Layered Card)" },
   { value: "polaroid", label: "Polaroid (Story Film Stack)" },
   { value: "estate", label: "Estate (Architectural Sketch)" },
+  { value: "purple", label: "Lavender Envelope (ChungDoi Wax Seal & Tucked Photo)" },
 ];
 const styles = [
+  { value: "purple", label: "Minimalism Purple (ChungDoi Soft Lavender & Wax Seal)" },
   { value: "deckle", label: "Deckle Torn-Paper Romance (Lucia & Juan)" },
   { value: "velure", label: "Velure Olive Linen Luxury (Alejandra & Mateo)" },
   { value: "polaroid", label: "Polaroid Story Stack (Olivia & Ethan)" },

@@ -272,7 +272,7 @@ const events = {
     designs: [
       ["The Evening Edit", "royal", "#d6ba7d"],
       ["Champagne Hours", "minimal", "#987949"],
-      ["Under the Lights", "modern", "#77639a"],
+      ["Under the Lights", "purple", "#7869a0"],
       ["Grand Ballroom", "heritage", "#8c2e42"],
       ["Midnight Gala", "celestial", "#293c5c"],
     ],
@@ -527,7 +527,9 @@ export const templates = eventTypes.flatMap((eventType) =>
             ? "polaroid"
             : style === "estate"
               ? "estate"
-              : ["editorial", "arch", "split", "framed", "floating"][index % 5],
+              : style === "purple"
+                ? "purple"
+                : ["editorial", "arch", "split", "framed", "floating"][index % 5],
     font:
       style === "modern" || style === "glassmorphic"
         ? "Modern"
@@ -550,7 +552,9 @@ export const templates = eventTypes.flatMap((eventType) =>
             ? "POLAROID"
             : style === "estate"
               ? "ESTATE"
-              : ["SIGNATURE", "TIMELESS", "EDITORIAL", "HERITAGE", "CELESTIAL"][index % 5],
+              : style === "purple"
+                ? "LAVENDER"
+                : ["SIGNATURE", "TIMELESS", "EDITORIAL", "HERITAGE", "CELESTIAL"][index % 5],
   })),
 );
 

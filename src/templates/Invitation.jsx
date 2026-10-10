@@ -20,6 +20,7 @@ import DeckleRomance from "./DeckleRomance";
 import VelureMinimal from "./VelureMinimal";
 import PolaroidStory from "./PolaroidStory";
 import EstateStory from "./EstateStory";
+import MinimalismPurple from "./MinimalismPurple";
 
 const templates = {
   minimal: MinimalLuxury,
@@ -37,6 +38,8 @@ const templates = {
   velure: VelureMinimal,
   polaroid: PolaroidStory,
   estate: EstateStory,
+  purple: MinimalismPurple,
+  lavender: MinimalismPurple,
 };
 
 function MusicButton({ copy }) {
@@ -125,13 +128,13 @@ function PdfDownloadButton({ config }) {
 
 export default function Invitation({ config, compact = false }) {
   const currentKey = config.style || config.template;
-  const isPinterestTemplate =
-    ["deckle", "velure", "polaroid", "estate"].includes(currentKey) ||
-    ["deckle", "velure", "polaroid", "estate"].includes(config.layout);
+  const isDedicatedStationery =
+    ["deckle", "velure", "polaroid", "estate", "purple", "lavender"].includes(currentKey) ||
+    ["deckle", "velure", "polaroid", "estate", "purple", "lavender"].includes(config.layout);
 
   const Template =
     templates[currentKey] ||
-    (isPinterestTemplate ? templates[config.layout] : null) ||
+    (isDedicatedStationery ? templates[config.layout] : null) ||
     MinimalLuxury;
   const channels = (
     config.color.match(/[a-f\d]{2}/gi) || ["00", "00", "00"]
@@ -170,7 +173,7 @@ export default function Invitation({ config, compact = false }) {
             )}
             <PdfDownloadButton config={config} />
           </div>
-          {!isPinterestTemplate && (
+          {!isDedicatedStationery && (
             <InvitationSections key={config.eventType} config={config} />
           )}
           <ArdhasOrderSheet config={config} />
