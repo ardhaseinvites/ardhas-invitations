@@ -1273,6 +1273,107 @@
   gap: 12px;
   width: 100%;
 }
+
+/* Client Handoff Menu Button */
+.client-handoff-menu-header {
+  margin-top: 4px;
+}
+.client-handoff-menu-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 11px 14px;
+  background: #fbf8f0;
+  border: 1px solid #d4c8b2;
+  border-radius: 5px;
+  color: #423623;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.18s ease;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+}
+.client-handoff-menu-btn:hover {
+  background: #f5eedf;
+  border-color: #baa887;
+  color: #272014;
+}
+.client-handoff-menu-btn.active {
+  background: #423623;
+  color: #fff8ea;
+  border-color: #2c2417;
+  box-shadow: 0 2px 8px rgba(66, 54, 35, 0.2);
+}
+.client-handoff-menu-btn-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  font-size: 11px;
+}
+.client-handoff-menu-btn-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.client-handoff-menu-badge {
+  font-size: 10px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.07);
+  color: inherit;
+  font-weight: 500;
+  text-transform: lowercase;
+}
+.client-handoff-menu-btn.active .client-handoff-menu-badge {
+  background: rgba(255, 255, 255, 0.2);
+}
+.client-handoff-menu-chevron {
+  transition: transform 0.2s ease;
+}
+.client-handoff-menu-chevron.open {
+  transform: rotate(180deg);
+}
+
+.client-handoff-hide-options-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 100%;
+  padding: 8px 12px;
+  background: transparent;
+  border: 1px dashed #d5cab5;
+  border-radius: 4px;
+  color: #7a6a50;
+  font-size: 11px;
+  font-weight: 500;
+  cursor: pointer;
+  margin-top: 6px;
+  transition: all 0.15s ease;
+}
+.client-handoff-hide-options-btn:hover {
+  background: #f7f1e4;
+  color: #3f3422;
+  border-color: #ab9b80;
+}
+
+@keyframes slideDownHandoff {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.animate-slide-down {
+  animation: slideDownHandoff 0.2s ease-out;
+}
+
 .client-handoff-project-id-section {
   display: flex;
   flex-direction: column;

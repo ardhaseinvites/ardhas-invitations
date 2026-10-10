@@ -2,12 +2,15 @@ import { useState } from "react";
 import {
   AlertCircle,
   CheckCheck,
+  ChevronDown,
+  ChevronUp,
   Download,
   FileDown,
   FileText,
   ImagePlus,
   Lightbulb,
   Loader2,
+  Menu,
   Printer,
   Sparkles,
 } from "lucide-react";
@@ -30,7 +33,9 @@ export default function ClientHandoffPanel({
   showProjectIdInput = true,
   title = "Client handoff files",
   className = "",
+  defaultOpen = false,
 }) {
+  const [isMenuOpen, setIsMenuOpen] = useState(defaultOpen);
   const [exportError, setExportError] = useState("");
   const [exportSuccess, setExportSuccess] = useState("");
   const [isPdfBusy, setIsPdfBusy] = useState(false);
@@ -153,105 +158,141 @@ export default function ClientHandoffPanel({
         </div>
       )}
 
-      <div className="customizer-export-stack">
-        {title && <span className="editor-subhead">{title}</span>}
-
-        {/* Primary Recommended Action: Print / Save as PDF */}
+      {/* Menu Button Toggle to Hide / Show Options */}
+      <div className="client-handoff-menu-header">
         <button
           type="button"
-          className="export-action-button primary"
-          onClick={handlePrint}
-          title="Open browser print dialog to save as PDF with vector fonts and proper page breaks"
+          className={`client-handoff-menu-btn ${isMenuOpen ? "active" : ""}`}
+          onClick={() => setIsMenuOpen((prev) => !prev)}
+          aria-expanded={isMenuOpen}
+          aria-controls="client-handoff-options-stack"
         >
-          <Printer size={14} />
-          <span>Print / Save as PDF</span>
+          <div className="client-handoff-menu-btn-left">
+            <Menu size={15} />
+            <span className="client-handoff-menu-btn-title">
+              {title || "Client handoff files"}
+            </span>
+          </div>
+          <div className="client-handoff-menu-btn-right">
+            <span className="client-handoff-menu-badge">5 options</span>
+            <ChevronDown
+              size={15}
+              className={`client-handoff-menu-chevron ${isMenuOpen ? "open" : ""}`}
+            />
+          </div>
         </button>
-
-        {/* High-fidelity print tip */}
-        <div className="pdf-print-tip">
-          <Lightbulb size={13} className="pdf-print-tip-icon" />
-          <span>
-            <strong>Recommended for final PDF:</strong> In your browser print dialog, select{" "}
-            <strong>"Save as PDF"</strong> as Destination and tick{" "}
-            <strong>"Background graphics"</strong> for sharp vector quality and clean page breaks.
-          </span>
-        </div>
-
-        {/* Secondary Direct Action: Quick Preview PDF */}
-        <button
-          type="button"
-          className="export-action-button"
-          onClick={handleDownloadPdf}
-          disabled={isPdfBusy}
-          title="Download quick client-side preview PDF with Ardhas Order Sheet"
-        >
-          {isPdfBusy ? (
-            <Loader2 size={14} className="animate-spin" />
-          ) : (
-            <Download size={14} />
-          )}
-          <span>{isPdfBusy ? "Generating preview PDF..." : "Quick preview PDF"}</span>
-        </button>
-
-        {/* JSON Export */}
-        <button
-          type="button"
-          className="export-action-button"
-          onClick={handleDownloadJson}
-          title="Download machine-readable client details JSON for Ardhas"
-        >
-          <FileDown size={14} />
-          <span>Download client details (JSON)</span>
-        </button>
-
-        {/* Media Checklist */}
-        <button
-          type="button"
-          className="export-action-button"
-          onClick={handleDownloadChecklist}
-          title="Download text checklist of required media slots"
-        >
-          <FileText size={14} />
-          <span>Download media checklist</span>
-        </button>
-
-        {/* Download Images */}
-        <button
-          type="button"
-          className="export-action-button"
-          onClick={handleDownloadImages}
-          title="Download locally uploaded photos renamed to match slots"
-        >
-          <ImagePlus size={14} />
-          <span>Download my images</span>
-        </button>
-
-        {/* Disclaimers & Notes */}
-        <div className="client-handoff-notes">
-          <p className="editor-hint export-hint">
-            <strong>Official PDF note:</strong> The "Quick preview PDF" is generated directly in your browser for fast review. The final, high-resolution publication PDF is prepared by Ardhas using your client details JSON.
-          </p>
-          <p className="editor-hint export-hint">
-            <strong>Source of truth:</strong> The exported JSON file is the source of truth for Ardhas. Videos are not downloaded this way; please send original video files separately to Ardhas.
-          </p>
-          <p className="editor-hint export-hint">
-            <strong>Local session only:</strong> Photos and videos selected in the browser preview are stored in your browser session only and have{" "}
-            <strong>NOT</strong> been sent to Ardhas.
-          </p>
-        </div>
-
-        {/* Feedback Messages */}
-        {exportError && (
-          <p className="editor-error" role="alert">
-            <AlertCircle size={13} /> {exportError}
-          </p>
-        )}
-        {exportSuccess && (
-          <p className="editor-success" role="status">
-            <CheckCheck size={13} /> {exportSuccess}
-          </p>
-        )}
       </div>
+
+      {/* Options Stack: Hidden by default, shown upon clicking the menu button */}
+      {isMenuOpen && (
+        <div id="client-handoff-options-stack" className="customizer-export-stack animate-slide-down">
+          {/* Primary Recommended Action: Print / Save as PDF */}
+          <button
+            type="button"
+            className="export-action-button primary"
+            onClick={handlePrint}
+            title="Open browser print dialog to save as PDF with vector fonts and proper page breaks"
+          >
+            <Printer size={14} />
+            <span>Print / Save as PDF</span>
+          </button>
+
+          {/* High-fidelity print tip */}
+          <div className="pdf-print-tip">
+            <Lightbulb size={13} className="pdf-print-tip-icon" />
+            <span>
+              <strong>Recommended for final PDF:</strong> In your browser print dialog, select{" "}
+              <strong>"Save as PDF"</strong> as Destination and tick{" "}
+              <strong>"Background graphics"</strong> for sharp vector quality and clean page breaks.
+            </span>
+          </div>
+
+          {/* Secondary Direct Action: Quick Preview PDF */}
+          <button
+            type="button"
+            className="export-action-button"
+            onClick={handleDownloadPdf}
+            disabled={isPdfBusy}
+            title="Download quick client-side preview PDF with Ardhas Order Sheet"
+          >
+            {isPdfBusy ? (
+              <Loader2 size={14} className="animate-spin" />
+            ) : (
+              <Download size={14} />
+            )}
+            <span>{isPdfBusy ? "Generating preview PDF..." : "Quick preview PDF"}</span>
+          </button>
+
+          {/* JSON Export */}
+          <button
+            type="button"
+            className="export-action-button"
+            onClick={handleDownloadJson}
+            title="Download machine-readable client details JSON for Ardhas"
+          >
+            <FileDown size={14} />
+            <span>Download client details (JSON)</span>
+          </button>
+
+          {/* Media Checklist */}
+          <button
+            type="button"
+            className="export-action-button"
+            onClick={handleDownloadChecklist}
+            title="Download text checklist of required media slots"
+          >
+            <FileText size={14} />
+            <span>Download media checklist</span>
+          </button>
+
+          {/* Download Images */}
+          <button
+            type="button"
+            className="export-action-button"
+            onClick={handleDownloadImages}
+            title="Download locally uploaded photos renamed to match slots"
+          >
+            <ImagePlus size={14} />
+            <span>Download my images</span>
+          </button>
+
+          {/* Disclaimers & Notes */}
+          <div className="client-handoff-notes">
+            <p className="editor-hint export-hint">
+              <strong>Official PDF note:</strong> The "Quick preview PDF" is generated directly in your browser for fast review. The final, high-resolution publication PDF is prepared by Ardhas using your client details JSON.
+            </p>
+            <p className="editor-hint export-hint">
+              <strong>Source of truth:</strong> The exported JSON file is the source of truth for Ardhas. Videos are not downloaded this way; please send original video files separately to Ardhas.
+            </p>
+            <p className="editor-hint export-hint">
+              <strong>Local session only:</strong> Photos and videos selected in the browser preview are stored in your browser session only and have{" "}
+              <strong>NOT</strong> been sent to Ardhas.
+            </p>
+          </div>
+
+          {/* Collapse button */}
+          <button
+            type="button"
+            className="client-handoff-hide-options-btn"
+            onClick={() => setIsMenuOpen(false)}
+          >
+            <ChevronUp size={13} />
+            <span>Hide options</span>
+          </button>
+        </div>
+      )}
+
+      {/* Feedback Messages */}
+      {exportError && (
+        <p className="editor-error" role="alert">
+          <AlertCircle size={13} /> {exportError}
+        </p>
+      )}
+      {exportSuccess && (
+        <p className="editor-success" role="status">
+          <CheckCheck size={13} /> {exportSuccess}
+        </p>
+      )}
     </div>
   );
 }
