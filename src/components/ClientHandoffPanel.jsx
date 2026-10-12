@@ -116,7 +116,7 @@ export default function ClientHandoffPanel({
                 type="text"
                 value={config?.projectId || ""}
                 onChange={(e) => handleProjectIdChange(e.target.value)}
-                placeholder="e.g. nikhil-weds-anjali"
+                placeholder="e.g. aswin-weds-anisree"
                 aria-label="Project ID"
               />
             </label>

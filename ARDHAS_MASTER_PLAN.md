@@ -464,7 +464,7 @@ This uses Node.js's built-in test runner (no Jest, Vitest, or similar).
 
 **Proposed future functionality:**
 - Custom domain (`ardhas.in` or similar)
-- Per-invitation unique public URLs (e.g., `/invite/nikhil-weds-anjali`)
+- Per-invitation unique public URLs (e.g., `/invite/aswin-weds-anisree`)
 - Static pre-rendering or SSR for accurate WhatsApp/social previews
 - Automated media upload service
 - Client-facing data entry form that exports a JSON
@@ -859,7 +859,7 @@ The client JSON export must use a versioned schema to allow future changes witho
 ```json
 {
   "schema": "ardhas-client/1.0",
-  "projectId": "nikhil-weds-anjali",
+  "projectId": "aswin-weds-anisree",
   "generatedAt": "2026-10-10T12:00:00+05:30",
   "template": "wedding-1",
   "eventType": "Wedding",
@@ -877,7 +877,7 @@ The client JSON export must use a versioned schema to allow future changes witho
 ```json
 {
   "schema": "ardhas-client/1.0",
-  "projectId": "nikhil-weds-anjali",
+  "projectId": "aswin-weds-anisree",
   "generatedAt": "2026-10-15T09:30:00+05:30",
   "template": "wedding-1",
   "eventType": "Wedding",
@@ -1053,7 +1053,7 @@ The client JSON export must use a versioned schema to allow future changes witho
   ],
 
   "publication": {
-    "slug": "nikhil-weds-anjali",
+    "slug": "aswin-weds-anisree",
     "url": null,
     "publishedAt": null,
     "qrCodeFile": null,
@@ -1112,8 +1112,8 @@ WEDDING_VIDEO.mp4
 Or with a project prefix to avoid confusion when handling multiple clients:
 
 ```
-nikhil-weds-anjali_HERO_IMAGE.jpg
-nikhil-weds-anjali_GALLERY_IMAGE_01.jpg
+aswin-weds-anisree_HERO_IMAGE.jpg
+aswin-weds-anisree_GALLERY_IMAGE_01.jpg
 ```
 
 The generation script should accept files in either naming convention, using the client JSON's `media` section to match identifiers to filenames.
@@ -1122,7 +1122,7 @@ The generation script should accept files in either naming convention, using the
 
 ```
 ARDHAS MEDIA CHECKLIST
-Project: nikhil-weds-anjali
+Project: aswin-weds-anisree
 Template: Ivory Vows (wedding-1)
 Generated: 2026-10-15
 
@@ -1154,7 +1154,7 @@ Generated: 2026-10-15
 How to send your files:
 - Name each file as shown above (e.g., HERO_IMAGE.jpg).
 - Send all files to Ardhas via WhatsApp or Google Drive.
-- Mention the project name: nikhil-weds-anjali.
+- Mention the project name: aswin-weds-anisree.
 
 Original files are preferred. Ardhas will optimize them for web delivery.
 ```
@@ -1305,7 +1305,7 @@ D:\ardhas-invitations\
 │   ├── styles\                       # CSS stylesheets (exists)
 │   └── templates\                    # Invitation template components (exists)
 ├── clients\                          # [TO CREATE] Per-client project folders
-│   └── nikhil-weds-anjali\           # Example project folder
+│   └── aswin-weds-anisree\           # Example project folder
 │       ├── client-details.json       # Full client data in the Ardhas schema
 │       ├── media-checklist.txt       # Printed checklist of required media
 │       ├── media\                    # Original client files (received, not web-optimized)
@@ -1383,7 +1383,7 @@ spreadsheet/
 - Use a descriptive, URL-safe slug: `{firstname}-weds-{firstname}` for weddings, or `{family}-housewarming` for housewarmings.
 - Use lowercase letters, hyphens only (no spaces, underscores, or special characters).
 - Keep it stable — do not rename a project folder after creating it, as the slug may be part of the published URL.
-- Examples: `nikhil-weds-anjali`, `meera-baby-shower-2026`, `nair-family-housewarming`
+- Examples: `aswin-weds-anisree`, `meera-baby-shower-2026`, `nair-family-housewarming`
 
 ---
 
@@ -1395,7 +1395,7 @@ Maintain a spreadsheet at `spreadsheet/client-tracker.xlsx` as an internal opera
 
 | Column | Description |
 |---|---|
-| Project ID | The slug identifier (e.g., `nikhil-weds-anjali`) |
+| Project ID | The slug identifier (e.g., `aswin-weds-anisree`) |
 | Event Type | Wedding, Housewarming, etc. |
 | Client Name | Name of the primary contact |
 | Event Date | The date of the event |
@@ -1428,7 +1428,7 @@ The generation script is a Node.js script that the founder runs locally to produ
 **Conceptual command:**
 
 ```powershell
-node scripts/generate-invitation.js --project nikhil-weds-anjali
+node scripts/generate-invitation.js --project aswin-weds-anisree
 ```
 
 ### 22.2 Proposed workflow steps
@@ -1506,7 +1506,7 @@ The script must:
 Example output:
 ```
 Ardhas Invitation Generator
-Project: nikhil-weds-anjali
+Project: aswin-weds-anisree
 Template: wedding-1 (Ivory Vows)
 
 ✓ JSON loaded and schema validated
@@ -1515,13 +1515,13 @@ Template: wedding-1 (Ivory Vows)
 ⚠ Optional slot GALLERY_IMAGE_05 not found — skipped
 ✓ Optimized media: 5 of 5 required files found
 ✓ Build started…
-✓ Build complete: clients/nikhil-weds-anjali/generated/dist/
+✓ Build complete: clients/aswin-weds-anisree/generated/dist/
 
 Next steps:
-  1. Preview locally: npx serve clients/nikhil-weds-anjali/generated/dist
+  1. Preview locally: npx serve clients/aswin-weds-anisree/generated/dist
   2. Deploy to hosting service
   3. Verify the published URL
-  4. Generate QR code: node scripts/generate-qr.js --project nikhil-weds-anjali --url https://ardhas.in/invite/nikhil-weds-anjali
+  4. Generate QR code: node scripts/generate-qr.js --project aswin-weds-anisree --url https://ardhas.in/invite/aswin-weds-anisree
 ```
 
 ---
@@ -1543,7 +1543,7 @@ The existing application has one `/preview` route that shows whichever template 
 
 Each client gets their own complete static build, deployed to a separate path or folder on the hosting service.
 
-Example: `https://ardhas.in/invite/nikhil-weds-anjali/`
+Example: `https://ardhas.in/invite/aswin-weds-anisree/`
 
 The contents of `clients/{projectId}/generated/dist/` are deployed to the hosting service under this path. No shared application server is needed.
 
@@ -1677,7 +1677,7 @@ A custom domain such as `ardhas.in` is the intended destination. As of this writ
 Once the domain is configured, invitation URLs would be:
 
 ```
-https://ardhas.in/invite/nikhil-weds-anjali/
+https://ardhas.in/invite/aswin-weds-anisree/
 ```
 
 This structure requires either:
@@ -1724,8 +1724,8 @@ During the generation script, after the Vite build produces `index.html`, post-p
 <title>Nikhil & Anjali · Wedding Invitation</title>
 <meta property="og:title" content="Nikhil & Anjali · Wedding Invitation" />
 <meta property="og:description" content="Joyfully invite you to celebrate our wedding on 14 December 2026, The Leela Ashtamudi, Kollam." />
-<meta property="og:image" content="https://ardhas.in/invite/nikhil-weds-anjali/hero.jpg" />
-<meta property="og:url" content="https://ardhas.in/invite/nikhil-weds-anjali/" />
+<meta property="og:image" content="https://ardhas.in/invite/aswin-weds-anisree/hero.jpg" />
+<meta property="og:url" content="https://ardhas.in/invite/aswin-weds-anisree/" />
 <meta property="og:type" content="website" />
 <meta name="twitter:card" content="summary_large_image" />
 ```
@@ -1745,7 +1745,7 @@ A QR code is generated after the final public URL is confirmed.
 A local Node.js script using a library such as `qrcode` (npm package) generates a PNG image containing the URL.
 
 ```
-node scripts/generate-qr.js --project nikhil-weds-anjali --url https://ardhas.in/invite/nikhil-weds-anjali
+node scripts/generate-qr.js --project aswin-weds-anisree --url https://ardhas.in/invite/aswin-weds-anisree
 ```
 
 The QR code is saved at `clients/{projectId}/qr-code.png`.
@@ -2157,7 +2157,7 @@ The project is ready for the first real paying client when:
 | **Base64 data URL** | A way to encode binary file data (like an image) as a text string so it can be embedded directly in HTML or JavaScript. Used when images are uploaded in the browser. Large and not suitable for storing in JSON exports. |
 | **dist/** | The output directory produced by the Vite build. Contains compiled, minified, and optimized HTML, CSS, and JavaScript ready for deployment. |
 | **SPA routing fallback** | A mechanism that ensures client-side routes (e.g., `/customizer`) are served correctly when the user navigates directly to the URL, rather than returning a 404. The `public/404.html` file implements this for GitHub Pages. |
-| **Slug** | A URL-safe string derived from a name or title. For example, "Nikhil & Anjali Wedding" becomes `nikhil-weds-anjali`. |
+| **Slug** | A URL-safe string derived from a name or title. For example, "Nikhil & Anjali Wedding" becomes `aswin-weds-anisree`. |
 | **WhatsApp** | A popular messaging application. Many Indian clients will share their invitation via WhatsApp. |
 | **WebP** | A modern image format developed by Google that provides significantly smaller file sizes than JPG or PNG at similar quality. |
 | **RSVP** | "Répondez s'il vous plaît" — a request for guests to confirm their attendance. |

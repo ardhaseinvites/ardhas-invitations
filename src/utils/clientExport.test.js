@@ -25,7 +25,7 @@ import {
 
 test("Project ID validation rules", () => {
   // Valid IDs: 3 to 40 characters, lowercase letters, numbers, hyphens only
-  assert.equal(validateProjectId("nikhil-weds-anjali").valid, true);
+  assert.equal(validateProjectId("aswin-weds-anisree").valid, true);
   assert.equal(validateProjectId("abc").valid, true);
   assert.equal(validateProjectId("wedding-2027-client-01").valid, true);
   assert.equal(validateProjectId("a".repeat(40)).valid, true);
@@ -34,7 +34,7 @@ test("Project ID validation rules", () => {
   assert.equal(validateProjectId("").valid, false);
   assert.equal(validateProjectId("ab").valid, false); // < 3
   assert.equal(validateProjectId("a".repeat(41)).valid, false); // > 40
-  assert.equal(validateProjectId("Nikhil-Weds-Anjali").valid, false); // Uppercase
+  assert.equal(validateProjectId("aswin-weds-anisree").valid, false); // Uppercase
   assert.equal(validateProjectId("nikhil weds anjali").valid, false); // Spaces
   assert.equal(validateProjectId("nikhil_weds_anjali").valid, false); // Underscores
   assert.equal(validateProjectId("nikhil@wedding").valid, false); // Special chars
@@ -89,7 +89,7 @@ test("Reducer handles updating wedding fields, family repeater, multiple events,
   state = invitationReducer(state, {
     type: "update",
     patch: {
-      projectId: "nikhil-weds-anjali",
+      projectId: "aswin-weds-anisree",
       groomFullName: "Nikhil Suresh Menon",
       brideFullName: "Anjali Rajan Pillai",
       groomFatherName: "Suresh Menon",
@@ -129,7 +129,7 @@ test("Reducer handles updating wedding fields, family repeater, multiple events,
   });
 
   const draft = state.drafts.Wedding;
-  assert.equal(draft.projectId, "nikhil-weds-anjali");
+  assert.equal(draft.projectId, "aswin-weds-anisree");
   assert.equal(draft.groomFullName, "Nikhil Suresh Menon");
   assert.equal(draft.brideFullName, "Anjali Rajan Pillai");
   assert.equal(draft.additionalFamily.length, 1);
@@ -164,12 +164,12 @@ test("Media slots are strictly unique across all 36 templates and match slot nam
 
 test("Expected filename generation", () => {
   assert.equal(
-    getExpectedMediaFilename("nikhil-weds-anjali", "HERO_IMAGE", "jpg"),
-    "nikhil-weds-anjali_HERO_IMAGE.jpg",
+    getExpectedMediaFilename("aswin-weds-anisree", "HERO_IMAGE", "jpg"),
+    "aswin-weds-anisree_HERO_IMAGE.jpg",
   );
   assert.equal(
-    getExpectedMediaFilename("nikhil-weds-anjali", "WEDDING_VIDEO", "mp4"),
-    "nikhil-weds-anjali_WEDDING_VIDEO.mp4",
+    getExpectedMediaFilename("aswin-weds-anisree", "WEDDING_VIDEO", "mp4"),
+    "aswin-weds-anisree_WEDDING_VIDEO.mp4",
   );
 });
 
@@ -228,7 +228,7 @@ test("buildClientDetails throws error when project ID is missing or invalid", ()
 test("buildClientDetails produces clean JSON without Base64 blobs, preserves remote URLs, and honors contact rules", () => {
   const config = {
     ...getEventDefaults("Wedding"),
-    projectId: "nikhil-weds-anjali",
+    projectId: "aswin-weds-anisree",
     groomFullName: "Nikhil Suresh Menon",
     brideFullName: "Anjali Rajan Pillai",
     heroImage: "data:image/jpeg;base64,VmVyeUxvcmdlQmFzZTY0U3RyaW5nVGhhdE11c3ROb3RCZUluSlNPTg==",
@@ -253,7 +253,7 @@ test("buildClientDetails produces clean JSON without Base64 blobs, preserves rem
   // Schema & metadata
   assert.equal(details.schema, "ardhas-client/1.0");
   assert.equal(details.schemaVersion, "1.0");
-  assert.equal(details.projectId, "nikhil-weds-anjali");
+  assert.equal(details.projectId, "aswin-weds-anisree");
   assert.ok(details.exportedAt);
   assert.equal(details.eventType, "Wedding");
 
@@ -279,10 +279,10 @@ test("buildClientDetails produces clean JSON without Base64 blobs, preserves rem
   assert.equal(details.media.HERO_IMAGE.status, "provided_locally");
   assert.equal(details.media.HERO_IMAGE.url, null);
   assert.equal(details.media.HERO_IMAGE.originalFileRequiredSeparately, true);
-  assert.equal(details.media.HERO_IMAGE.suggestedFilename, "nikhil-weds-anjali_HERO_IMAGE.jpg");
+  assert.equal(details.media.HERO_IMAGE.suggestedFilename, "aswin-weds-anisree_HERO_IMAGE.jpg");
 
   assert.equal(details.media.GALLERY_IMAGE_01.status, "provided_locally");
-  assert.equal(details.media.GALLERY_IMAGE_01.suggestedFilename, "nikhil-weds-anjali_GALLERY_IMAGE_01.png");
+  assert.equal(details.media.GALLERY_IMAGE_01.suggestedFilename, "aswin-weds-anisree_GALLERY_IMAGE_01.png");
 
   // Contacts rule: phone only exported if explicitly filled
   assert.equal(details.content.contacts[0].phone, "+91 9847000001");
@@ -328,9 +328,9 @@ test("downloadClientPdf validates project ID and generates correct filename", as
   // Valid project ID resolves filename invitation-<project-id>.pdf
   const filename = await downloadClientPdf({
     ...getEventDefaults("Wedding"),
-    projectId: "nikhil-weds-anjali",
+    projectId: "aswin-weds-anisree",
   });
-  assert.equal(filename, "invitation-nikhil-weds-anjali.pdf");
+  assert.equal(filename, "invitation-aswin-weds-anisree.pdf");
 });
 
 
