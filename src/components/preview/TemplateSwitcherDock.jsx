@@ -4,7 +4,7 @@ import { useInvitation } from "../../context/InvitationContext";
 import { getEventTemplates } from "../../data/content";
 
 export default function TemplateSwitcherDock() {
-  const { config, applyTemplate } = useInvitation();
+  const { config, applyTemplate, selectEvent } = useInvitation();
   const siblingTemplates = getEventTemplates(config.eventType);
 
   if (!siblingTemplates || siblingTemplates.length <= 1) return null;
@@ -13,7 +13,18 @@ export default function TemplateSwitcherDock() {
     <nav className="preview-template-dock" aria-label="Switch invitation design">
       <div className="dock-label">
         <Sparkles size={13} color="#c4a365" />
-        <span>{config.eventType} Designs:</span>
+        <select
+          value={config.eventType}
+          onChange={(e) => selectEvent(e.target.value)}
+          className="dock-event-select"
+          aria-label="Select celebration occasion"
+        >
+          {eventTypes.map((evt) => (
+            <option key={evt} value={evt}>
+              {evt}
+            </option>
+          ))}
+        </select>
       </div>
 
       <div className="dock-pills">

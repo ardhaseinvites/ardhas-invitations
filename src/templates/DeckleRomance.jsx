@@ -211,14 +211,18 @@ export default function DeckleRomance({ config, compact = false }) {
           <p className="deckle-event-address">
             {config.address || "Ronda, Málaga"}
           </p>
-          <a
-            href={mapLink}
-            target="_blank"
-            rel="noreferrer"
-            className="deckle-pill-btn"
-          >
-            VIEW DETAILS
-          </a>
+          {!compact ? (
+            <a
+              href={mapLink}
+              target="_blank"
+              rel="noreferrer"
+              className="deckle-pill-btn"
+            >
+              VIEW DETAILS
+            </a>
+          ) : (
+            <span className="deckle-pill-btn">VIEW DETAILS</span>
+          )}
         </div>
 
         <div className="deckle-divider-line" />
@@ -231,14 +235,18 @@ export default function DeckleRomance({ config, compact = false }) {
           <p className="deckle-event-time">— 18:30 —</p>
           <p className="deckle-event-venue">FINCA LA CONCEPCIÓN</p>
           <p className="deckle-event-address">Marbella, Málaga</p>
-          <a
-            href={mapLink}
-            target="_blank"
-            rel="noreferrer"
-            className="deckle-pill-btn"
-          >
-            VIEW DETAILS
-          </a>
+          {!compact ? (
+            <a
+              href={mapLink}
+              target="_blank"
+              rel="noreferrer"
+              className="deckle-pill-btn"
+            >
+              VIEW DETAILS
+            </a>
+          ) : (
+            <span className="deckle-pill-btn">VIEW DETAILS</span>
+          )}
         </div>
       </section>
 

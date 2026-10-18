@@ -1,0 +1,2987 @@
+/* ==========================================================================
+   New Luxury Digital Templates:
+   1. L'Édition Noire (Editorial / Haute-Couture Magazine)
+   2. Pichwai Vrindavan (Royal Indian Nathdwara Velvet & Lotus)
+   3. Nocturne Celestial (3D Diorama & Sky Lanterns)
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. L'ÉDITION NOIRE (Haute-Couture Fashion Magazine)
+   -------------------------------------------------------------------------- */
+.edition-noire-card {
+  --en-bg: #f8f6f0;
+  --en-ink: #1c1d1f;
+  --en-brass: #c2a265;
+  --en-linen: #8e7d63;
+  --en-border: rgba(194, 162, 101, 0.25);
+
+  background: var(--en-bg);
+  color: var(--en-ink);
+  font-family: "Cormorant Garamond", Georgia, serif;
+  box-shadow: 0 16px 50px rgba(28, 29, 31, 0.14);
+}
+
+.edition-masthead {
+  padding: 40px 24px 20px;
+  text-align: center;
+}
+
+.edition-issue-bar {
+  display: flex;
+  justify-content: space-between;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 8px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--en-linen);
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--en-border);
+  margin-bottom: 18px;
+}
+
+.edition-title {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: clamp(26px, 6.5vw, 36px);
+  font-weight: 800;
+  letter-spacing: 6px;
+  text-transform: uppercase;
+  color: var(--en-ink);
+  margin: 0 0 14px;
+}
+
+.edition-rule-double {
+  height: 3px;
+  border-top: 1px solid var(--en-ink);
+  border-bottom: 1px solid var(--en-ink);
+  margin-bottom: 24px;
+}
+
+.edition-hero-frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  max-height: 540px;
+  overflow: hidden;
+  border-radius: 4px;
+  background: #111;
+}
+
+.edition-hero-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  opacity: 0.92;
+}
+
+.edition-hero-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 30px 20px;
+  background: linear-gradient(
+    to top,
+    rgba(28, 29, 31, 0.88) 0%,
+    rgba(28, 29, 31, 0.3) 50%,
+    transparent 100%
+  );
+  color: #ffffff;
+  text-align: center;
+}
+
+.edition-names-block {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.edition-name-lead,
+.edition-name-follow {
+  font-family: "Italianno", cursive;
+  font-size: clamp(48px, 11vw, 68px);
+  line-height: 1;
+  color: #fff;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+}
+
+.edition-amp {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 26px;
+  color: var(--en-brass);
+}
+
+.edition-sub-dateline {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 9.5px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: #e2dcd0;
+}
+
+.edition-byline {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 18px;
+  font-size: 9px;
+  letter-spacing: 2px;
+  color: var(--en-linen);
+  text-transform: uppercase;
+}
+
+.edition-section-kicker {
+  display: block;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 8.5px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--en-brass);
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.edition-prologue-section {
+  padding: 40px 28px;
+  text-align: center;
+  border-top: 1px solid var(--en-border);
+}
+
+.edition-pull-quote {
+  font-size: 18px;
+  line-height: 1.6;
+  font-style: italic;
+  color: #38342f;
+  margin: 0 auto;
+  max-width: 520px;
+}
+
+.edition-foil-pinline {
+  width: 48px;
+  height: 1px;
+  background: var(--en-brass);
+  margin: 24px auto 0;
+}
+
+.edition-acts-section,
+.edition-venue-section,
+.edition-gallery-section,
+.edition-dress-section {
+  padding: 40px 24px;
+  border-top: 1px solid var(--en-border);
+  text-align: center;
+}
+
+.edition-section-title {
+  font-size: 24px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin: 0 0 24px;
+  color: var(--en-ink);
+}
+
+.edition-acts-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 18px;
+  max-width: 540px;
+  margin: 0 auto;
+}
+
+.edition-act-card {
+  padding: 20px 24px;
+  background: #ffffff;
+  border: 1px solid var(--en-border);
+  border-radius: 6px;
+  text-align: left;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.03);
+}
+
+.edition-act-time {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  color: var(--en-brass);
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.edition-act-title {
+  font-size: 16px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin: 0 0 6px;
+  color: var(--en-ink);
+}
+
+.edition-act-desc {
+  font-size: 12px;
+  color: #60594f;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.edition-venue-address {
+  font-size: 14px;
+  color: var(--en-linen);
+  margin-bottom: 20px;
+}
+
+.edition-map-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 24px;
+  border: 1px solid var(--en-ink);
+  background: var(--en-ink);
+  color: #fff !important;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 9.5px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  border-radius: 999px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.edition-map-btn:hover {
+  background: var(--en-brass);
+  border-color: var(--en-brass);
+}
+
+.edition-gallery-asym {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.edition-photo-plate {
+  position: relative;
+  background: #fff;
+  padding: 8px 8px 30px;
+  border: 1px solid var(--en-border);
+  border-radius: 4px;
+}
+
+.edition-photo-plate img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  display: block;
+}
+
+.edition-photo-caption {
+  position: absolute;
+  bottom: 8px;
+  left: 0;
+  right: 0;
+  font-size: 9px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--en-linen);
+}
+
+.edition-palette-pills {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-top: 16px;
+}
+
+.edition-palette-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.edition-color-circle {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+}
+
+.edition-color-label {
+  font-size: 10px;
+  color: var(--en-linen);
+}
+
+.edition-rsvp-section {
+  padding: 40px 24px 50px;
+  background: #f2ece0;
+}
+
+.edition-rsvp-ticket {
+  max-width: 460px;
+  margin: 0 auto;
+  background: #ffffff;
+  border: 1px dashed var(--en-brass);
+  border-radius: 12px;
+  padding: 30px 24px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+.edition-ticket-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 8.5px;
+  letter-spacing: 2.5px;
+  color: var(--en-brass);
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.edition-ticket-title {
+  font-size: 20px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin: 0 0 20px;
+}
+
+.edition-toggle-row {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.edition-toggle-btn {
+  flex: 1;
+  padding: 10px 8px;
+  border: 1px solid #d4ccbd;
+  background: #faf8f5;
+  color: #333;
+  font-size: 9.5px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.edition-toggle-btn.active {
+  background: var(--en-ink);
+  color: #fff;
+  border-color: var(--en-ink);
+}
+
+.edition-counter-group {
+  margin-bottom: 16px;
+  text-align: left;
+}
+
+.edition-counter-group label,
+.edition-input-group label {
+  display: block;
+  font-size: 9px;
+  letter-spacing: 1.5px;
+  color: var(--en-linen);
+  margin-bottom: 6px;
+  font-weight: 600;
+}
+
+.edition-counter-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid #d4ccbd;
+  border-radius: 6px;
+  padding: 4px 14px;
+  background: #faf8f5;
+}
+
+.edition-counter-controls button {
+  background: transparent;
+  border: 0;
+  font-size: 18px;
+  cursor: pointer;
+  color: var(--en-ink);
+  padding: 4px 10px;
+}
+
+.edition-counter-controls span {
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.edition-input-group input {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid #d4ccbd;
+  border-radius: 6px;
+  background: #faf8f5;
+  font-size: 12px;
+  box-sizing: border-box;
+}
+
+.edition-submit-btn {
+  width: 100%;
+  margin-top: 20px;
+  padding: 12px;
+  background: var(--en-brass);
+  color: #fff;
+  border: 0;
+  border-radius: 999px;
+  font-size: 10.5px;
+  letter-spacing: 2px;
+  font-weight: 600;
+  text-transform: uppercase;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: background 0.2s ease;
+}
+
+.edition-submit-btn:hover {
+  background: #ad8f55;
+}
+
+.edition-footer {
+  padding: 30px 20px;
+  text-align: center;
+  border-top: 1px solid var(--en-border);
+}
+
+.edition-signoff {
+  font-size: 9px;
+  letter-spacing: 3px;
+  color: var(--en-linen);
+  margin: 0 0 6px;
+}
+
+.edition-signoff-names {
+  font-family: "Italianno", cursive;
+  font-size: 38px;
+  margin: 0 0 10px;
+  color: var(--en-ink);
+}
+
+.edition-colophon {
+  font-size: 8px;
+  letter-spacing: 2px;
+  color: #a49784;
+}
+
+/* --------------------------------------------------------------------------
+   2. PICHWAI VRINDAVAN (Royal Indian Nathdwara Velvet & Lotus)
+   -------------------------------------------------------------------------- */
+.pichwai-template-card {
+  --pw-indigo: #12192c;
+  --pw-teal: #0c3b43;
+  --pw-gold: #e5c158;
+  --pw-crimson: #7a1c2e;
+  --pw-cream: #fbf7ee;
+
+  background: var(--pw-cream);
+  color: var(--pw-indigo);
+  font-family: "Cinzel", "Cormorant Garamond", Georgia, serif;
+  box-shadow: 0 16px 50px rgba(18, 25, 44, 0.16);
+}
+
+.pichwai-header {
+  padding: 44px 24px 24px;
+  text-align: center;
+  background: radial-gradient(circle at center, #1b253f 0%, #101627 100%);
+  color: var(--pw-gold);
+}
+
+.pichwai-om {
+  display: block;
+  font-size: 14px;
+  letter-spacing: 3px;
+  color: var(--pw-gold);
+  margin-bottom: 12px;
+}
+
+.pichwai-surya-medallion {
+  width: 52px;
+  height: 52px;
+  margin: 0 auto 12px;
+  border-radius: 50%;
+  border: 1px solid var(--pw-gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 20px rgba(229, 193, 88, 0.35);
+}
+
+.pichwai-sun-icon {
+  color: var(--pw-gold);
+}
+
+.pichwai-invocation-sub {
+  font-size: 8.5px;
+  letter-spacing: 2.5px;
+  color: #d1c19b;
+  margin-bottom: 18px;
+}
+
+.pichwai-names-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  margin-bottom: 12px;
+}
+
+.pichwai-name-top,
+.pichwai-name-bottom {
+  font-family: "Italianno", cursive;
+  font-size: clamp(48px, 11vw, 66px);
+  color: #fff;
+  line-height: 1.05;
+  text-shadow: 0 2px 14px rgba(229, 193, 88, 0.5);
+}
+
+.pichwai-sangam {
+  font-size: 13px;
+  letter-spacing: 3px;
+  color: var(--pw-gold);
+}
+
+.pichwai-event-date {
+  font-size: 12px;
+  letter-spacing: 2px;
+  color: #e5d8b8;
+  margin-bottom: 24px;
+}
+
+.pichwai-arch-frame {
+  position: relative;
+  width: 86%;
+  max-width: 340px;
+  margin: 0 auto;
+  border-radius: 170px 170px 12px 12px;
+  padding: 8px;
+  background: linear-gradient(135deg, #e5c158 0%, #aa8529 100%);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+.pichwai-arch-border {
+  border-radius: 162px 162px 8px 8px;
+  overflow: hidden;
+  background: #000;
+}
+
+.pichwai-arch-image {
+  width: 100%;
+  height: 380px;
+  object-fit: cover;
+  display: block;
+}
+
+.pichwai-lotus-corner {
+  position: absolute;
+  font-size: 16px;
+}
+.pichwai-lotus-corner.top-left { top: -8px; left: -8px; }
+.pichwai-lotus-corner.top-right { top: -8px; right: -8px; }
+.pichwai-lotus-corner.bottom-left { bottom: -8px; left: -8px; }
+.pichwai-lotus-corner.bottom-right { bottom: -8px; right: -8px; }
+
+.pichwai-verse-section {
+  padding: 40px 24px;
+  background: #fbf7ee;
+  text-align: center;
+}
+
+.pichwai-shloka-box {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 24px;
+  border: 1px solid rgba(229, 193, 88, 0.45);
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 6px 20px rgba(229, 193, 88, 0.08);
+}
+
+.pichwai-sanskrit {
+  font-size: 14px;
+  line-height: 1.8;
+  color: var(--pw-crimson);
+  font-weight: 600;
+  margin: 0 0 14px;
+}
+
+.pichwai-shloka-trans {
+  font-size: 13.5px;
+  line-height: 1.6;
+  font-style: italic;
+  color: #4b3e34;
+  margin: 0;
+}
+
+.pichwai-schedule-section,
+.pichwai-venue-section,
+.pichwai-dress-section,
+.pichwai-blessings-section {
+  padding: 38px 24px;
+  text-align: center;
+  border-top: 1px solid rgba(229, 193, 88, 0.25);
+}
+
+.pichwai-section-badge {
+  display: inline-block;
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: var(--pw-crimson);
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.pichwai-section-title {
+  font-size: 22px;
+  letter-spacing: 2px;
+  color: var(--pw-indigo);
+  margin: 0 0 24px;
+}
+
+.pichwai-events-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+.pichwai-event-item {
+  display: flex;
+  gap: 16px;
+  padding: 18px 20px;
+  background: #ffffff;
+  border-radius: 8px;
+  border-left: 4px solid var(--pw-gold);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+  text-align: left;
+}
+
+.pichwai-time-pillar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--pw-crimson);
+  min-width: 72px;
+}
+
+.pichwai-event-body h3 {
+  font-size: 15px;
+  margin: 0 0 4px;
+  color: var(--pw-indigo);
+}
+
+.pichwai-event-body p {
+  font-size: 12px;
+  color: #554e44;
+  line-height: 1.4;
+  margin: 0;
+}
+
+.pichwai-venue-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 24px;
+  background: var(--pw-crimson);
+  color: #fff !important;
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.pichwai-venue-btn:hover {
+  background: #962237;
+}
+
+.pichwai-palette-row {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-top: 16px;
+}
+
+.pichwai-swatch-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.pichwai-swatch-circle {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.pichwai-swatch-name {
+  font-size: 10px;
+  color: #635749;
+}
+
+.pichwai-blessing-form {
+  display: flex;
+  gap: 8px;
+  max-width: 500px;
+  margin: 0 auto 20px;
+}
+
+.pichwai-blessing-form input {
+  flex: 1;
+  padding: 10px 14px;
+  border: 1px solid rgba(229, 193, 88, 0.5);
+  border-radius: 6px;
+  background: #fff;
+  font-size: 12px;
+}
+
+.pichwai-blessing-form button {
+  padding: 10px 20px;
+  background: var(--pw-gold);
+  color: #3b2c05;
+  border: 0;
+  border-radius: 6px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.pichwai-blessings-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.pichwai-blessing-card {
+  padding: 14px 18px;
+  background: #ffffff;
+  border-radius: 6px;
+  border: 1px solid rgba(229, 193, 88, 0.3);
+  text-align: left;
+}
+
+.pichwai-blessing-card p {
+  font-size: 13px;
+  font-style: italic;
+  margin: 0 0 4px;
+  color: #3d352c;
+}
+
+.pichwai-blessing-card small {
+  font-size: 10px;
+  color: var(--pw-crimson);
+  font-weight: 600;
+}
+
+.pichwai-rsvp-section {
+  padding: 40px 24px;
+  background: radial-gradient(circle at center, #1b253f 0%, #101627 100%);
+  color: #fff;
+}
+
+.pichwai-rsvp-card {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 30px 24px;
+  border: 1px solid var(--pw-gold);
+  border-radius: 12px;
+  background: rgba(18, 25, 44, 0.7);
+}
+
+.pichwai-rsvp-title {
+  color: var(--pw-gold);
+  font-size: 18px;
+  letter-spacing: 2px;
+  margin: 0 0 6px;
+}
+
+.pichwai-rsvp-sub {
+  font-size: 12px;
+  color: #d1c5a9;
+  margin: 0 0 20px;
+}
+
+.pichwai-btn-toggle {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.pichwai-btn-toggle button {
+  flex: 1;
+  padding: 10px 6px;
+  border: 1px solid rgba(229, 193, 88, 0.4);
+  background: rgba(255, 255, 255, 0.05);
+  color: #e5d8b8;
+  font-size: 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.pichwai-btn-toggle button.selected {
+  background: var(--pw-gold);
+  color: #2b1f06;
+  font-weight: 700;
+}
+
+.pichwai-counter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  font-size: 12px;
+  color: #e5d8b8;
+}
+
+.pichwai-counter-btns {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.pichwai-counter-btns button {
+  background: rgba(229, 193, 88, 0.2);
+  border: 1px solid var(--pw-gold);
+  color: #fff;
+  border-radius: 4px;
+  width: 28px;
+  height: 28px;
+  cursor: pointer;
+}
+
+.pichwai-rsvp-send {
+  width: 100%;
+  padding: 12px;
+  background: var(--pw-gold);
+  color: #2b1f06;
+  font-weight: 700;
+  border: 0;
+  border-radius: 999px;
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.pichwai-footer {
+  padding: 30px 20px;
+  text-align: center;
+  border-top: 1px solid rgba(229, 193, 88, 0.2);
+}
+
+.pichwai-namaste {
+  font-size: 12px;
+  letter-spacing: 3px;
+  color: var(--pw-crimson);
+  font-weight: 700;
+  margin: 0 0 6px;
+}
+
+.pichwai-family-signoff {
+  font-size: 13px;
+  color: #635749;
+  margin: 0 0 10px;
+}
+
+.pichwai-trademark {
+  font-size: 8px;
+  letter-spacing: 2px;
+  color: #9c8e7d;
+}
+
+/* --------------------------------------------------------------------------
+   3. NOCTURNE CELESTIAL (3D Diorama & Sky Lanterns)
+   -------------------------------------------------------------------------- */
+.nocturne-card {
+  --nc-slate: #0b1021;
+  --nc-indigo: #161f38;
+  --nc-rosegold: #e0a996;
+  --nc-pearl: #f4f0ea;
+
+  background: radial-gradient(circle at 50% 10%, #161f38 0%, #080c18 100%);
+  color: var(--nc-pearl);
+  font-family: "Tenor Sans", "Cinzel", "Cormorant Garamond", Georgia, serif;
+  box-shadow: 0 18px 60px rgba(8, 12, 24, 0.5);
+}
+
+.nocturne-header {
+  padding: 44px 24px 24px;
+  text-align: center;
+}
+
+.nocturne-constellation-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border: 1px solid rgba(224, 169, 150, 0.3);
+  border-radius: 999px;
+  background: rgba(224, 169, 150, 0.08);
+  font-size: 8.5px;
+  letter-spacing: 2px;
+  color: var(--nc-rosegold);
+  margin-bottom: 20px;
+}
+
+.nocturne-title {
+  font-size: 10px;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: #a4adc2;
+  margin: 0 0 14px;
+}
+
+.nocturne-names-cluster {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: 12px;
+}
+
+.nocturne-name-primary,
+.nocturne-name-secondary {
+  font-family: "Italianno", cursive;
+  font-size: clamp(52px, 12vw, 70px);
+  color: #ffffff;
+  line-height: 1;
+  text-shadow: 0 0 20px rgba(224, 169, 150, 0.6);
+}
+
+.nocturne-celestial-glyph {
+  font-size: 14px;
+  letter-spacing: 6px;
+  color: var(--nc-rosegold);
+}
+
+.nocturne-dateline {
+  font-size: 10px;
+  letter-spacing: 3px;
+  color: #adb9d4;
+  margin-bottom: 28px;
+}
+
+.nocturne-diorama-frame {
+  position: relative;
+  width: 88%;
+  max-width: 340px;
+  margin: 0 auto;
+  border-radius: 170px 170px 12px 12px;
+  padding: 6px;
+  background: linear-gradient(135deg, rgba(224, 169, 150, 0.8) 0%, rgba(22, 31, 56, 0.8) 100%);
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.6);
+}
+
+.nocturne-photo-cutout {
+  border-radius: 164px 164px 8px 8px;
+  overflow: hidden;
+  background: #000;
+}
+
+.nocturne-hero-img {
+  width: 100%;
+  height: 380px;
+  object-fit: cover;
+  display: block;
+}
+
+.nocturne-kicker {
+  display: block;
+  font-size: 8.5px;
+  letter-spacing: 3px;
+  color: var(--nc-rosegold);
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.nocturne-prologue,
+.nocturne-constellation-section,
+.nocturne-venue-section,
+.nocturne-dress-section,
+.nocturne-lanterns-section {
+  padding: 40px 24px;
+  text-align: center;
+  border-top: 1px solid rgba(224, 169, 150, 0.15);
+}
+
+.nocturne-quote {
+  font-size: 16px;
+  line-height: 1.6;
+  font-style: italic;
+  color: #e2e7f3;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.nocturne-section-heading {
+  font-size: 22px;
+  letter-spacing: 2px;
+  color: #ffffff;
+  margin: 0 0 24px;
+}
+
+.nocturne-stops-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+.nocturne-stop-node {
+  display: flex;
+  gap: 16px;
+  padding: 18px 20px;
+  background: rgba(22, 31, 56, 0.6);
+  border: 1px solid rgba(224, 169, 150, 0.2);
+  border-radius: 8px;
+  text-align: left;
+}
+
+.nocturne-star-marker {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  min-width: 60px;
+}
+
+.nocturne-node-time {
+  font-size: 10px;
+  color: var(--nc-rosegold);
+  font-weight: 600;
+}
+
+.nocturne-node-content h3 {
+  font-size: 14px;
+  letter-spacing: 1px;
+  margin: 0 0 4px;
+  color: #ffffff;
+}
+
+.nocturne-node-content p {
+  font-size: 12px;
+  color: #a4b0cc;
+  line-height: 1.4;
+  margin: 0;
+}
+
+.nocturne-venue-coords {
+  font-size: 13px;
+  color: #9eaac6;
+  margin-bottom: 20px;
+}
+
+.nocturne-map-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 24px;
+  background: rgba(224, 169, 150, 0.15);
+  border: 1px solid var(--nc-rosegold);
+  color: var(--nc-rosegold) !important;
+  font-size: 9.5px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  border-radius: 999px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.nocturne-map-link:hover {
+  background: var(--nc-rosegold);
+  color: #0b1021 !important;
+}
+
+.nocturne-palette-circles {
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  flex-wrap: wrap;
+  margin-top: 16px;
+}
+
+.nocturne-palette-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.nocturne-swatch-dot {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 0 0 10px rgba(224, 169, 150, 0.3);
+}
+
+.nocturne-swatch-txt {
+  font-size: 9.5px;
+  color: #a4b0cc;
+}
+
+.nocturne-lanterns-section {
+  background: rgba(11, 16, 33, 0.5);
+}
+
+.nocturne-lantern-form {
+  display: flex;
+  gap: 8px;
+  max-width: 500px;
+  margin: 20px auto 24px;
+}
+
+.nocturne-lantern-form input {
+  flex: 1;
+  padding: 10px 14px;
+  background: rgba(22, 31, 56, 0.8);
+  border: 1px solid rgba(224, 169, 150, 0.4);
+  border-radius: 6px;
+  color: #fff;
+  font-size: 12px;
+}
+
+.nocturne-lantern-form button {
+  padding: 10px 18px;
+  background: var(--nc-rosegold);
+  color: #0b1021;
+  border: 0;
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: 11px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.nocturne-lantern-sky {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.nocturne-lantern-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  background: rgba(22, 31, 56, 0.6);
+  border: 1px solid rgba(224, 169, 150, 0.2);
+  border-radius: 8px;
+  text-align: left;
+  animation: lantern-float 4s ease-in-out infinite alternate;
+}
+
+@keyframes lantern-float {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-4px); }
+}
+
+.lantern-glow {
+  font-size: 20px;
+  filter: drop-shadow(0 0 8px #ff9a3c);
+}
+
+.nocturne-lantern-item p {
+  font-size: 12.5px;
+  font-style: italic;
+  margin: 0;
+  color: #f0e6d6;
+}
+
+.nocturne-rsvp-section {
+  padding: 40px 24px 50px;
+}
+
+.nocturne-rsvp-card {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 30px 24px;
+  background: rgba(22, 31, 56, 0.7);
+  border: 1px solid rgba(224, 169, 150, 0.35);
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  text-align: center;
+}
+
+.nocturne-rsvp-head {
+  font-size: 18px;
+  letter-spacing: 1.5px;
+  color: #ffffff;
+  margin: 0 0 4px;
+}
+
+.nocturne-rsvp-sub {
+  font-size: 11px;
+  color: #9eaac6;
+  margin: 0 0 20px;
+}
+
+.nocturne-decision-row {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.nocturne-decision-row button {
+  flex: 1;
+  padding: 10px 6px;
+  border: 1px solid rgba(224, 169, 150, 0.3);
+  background: rgba(11, 16, 33, 0.6);
+  color: #adb9d4;
+  font-size: 9.5px;
+  letter-spacing: 1px;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.nocturne-decision-row button.active {
+  background: var(--nc-rosegold);
+  color: #0b1021;
+  font-weight: 700;
+}
+
+.nocturne-counter-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  font-size: 11px;
+  color: #a4b0cc;
+}
+
+.nocturne-counter-btns {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.nocturne-counter-btns button {
+  width: 28px;
+  height: 28px;
+  background: rgba(224, 169, 150, 0.15);
+  border: 1px solid var(--nc-rosegold);
+  color: #fff;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.nocturne-rsvp-submit {
+  width: 100%;
+  padding: 12px;
+  background: var(--nc-rosegold);
+  color: #0b1021;
+  font-weight: 700;
+  border: 0;
+  border-radius: 999px;
+  font-size: 11px;
+  letter-spacing: 2px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.nocturne-footer {
+  padding: 30px 20px;
+  text-align: center;
+  border-top: 1px solid rgba(224, 169, 150, 0.15);
+}
+
+.nocturne-signoff {
+  font-size: 9px;
+  letter-spacing: 3px;
+  color: #8c97b2;
+  margin: 0 0 6px;
+}
+
+.nocturne-signoff-names {
+  font-family: "Italianno", cursive;
+  font-size: 38px;
+  color: #ffffff;
+  margin: 0 0 8px;
+}
+
+.nocturne-brand-tag {
+  font-size: 8px;
+  letter-spacing: 2px;
+  color: #636d85;
+}
+
+
+/* ==========================================================================
+   4. CHOCOLAT & IVOIRE (Ivory Parchment & Espresso Luxury)
+   ========================================================================== */
+.chocolat-ivoire-card {
+  --ci-bg: #fdfbf7;
+  --ci-ink: #2d1e18;
+  --ci-warm: #8c6747;
+  --ci-border: #e8ded2;
+  --ci-espresso: #201511;
+
+  background: var(--ci-bg);
+  color: var(--ci-ink);
+  font-family: "Cormorant Garamond", Georgia, serif;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 16px 50px rgba(45, 30, 24, 0.1);
+  padding: 0;
+}
+
+.chocolat-header {
+  padding: 44px 24px 20px;
+  text-align: center;
+}
+
+.chocolat-script-names {
+  font-family: "Italianno", "Cormorant Garamond", cursive, serif;
+  font-size: clamp(38px, 9vw, 54px);
+  font-weight: 400;
+  color: var(--ci-ink);
+  margin: 0;
+  line-height: 1.1;
+}
+
+.chocolat-divider-motif {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin: 12px 0 10px;
+  color: var(--ci-warm);
+}
+
+.chocolat-divider-motif .motif-line {
+  display: inline-block;
+  width: 40px;
+  height: 1px;
+  background: var(--ci-border);
+}
+
+.chocolat-divider-motif .motif-heart {
+  font-size: 10px;
+}
+
+.chocolat-divider-motif .motif-diamond {
+  font-size: 9px;
+}
+
+.chocolat-sub-label {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 9px;
+  letter-spacing: 4px;
+  color: var(--ci-warm);
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.chocolat-photo-frame {
+  margin: 10px 24px 24px;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid var(--ci-border);
+  box-shadow: 0 8px 24px rgba(45, 30, 24, 0.08);
+}
+
+.chocolat-hero-image {
+  width: 100%;
+  aspect-ratio: 4/5;
+  object-fit: cover;
+  display: block;
+}
+
+.chocolat-yt-wrap iframe {
+  width: 100%;
+  aspect-ratio: 16/9;
+  border: none;
+}
+
+.chocolat-date-section {
+  text-align: center;
+  padding: 10px 24px;
+}
+
+.chocolat-kicker {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 9px;
+  letter-spacing: 3px;
+  color: var(--ci-warm);
+  margin: 0 0 12px;
+}
+
+.chocolat-date-box {
+  display: inline-flex;
+  flex-direction: column;
+  padding: 12px 28px;
+  border-left: 1px solid var(--ci-ink);
+  border-right: 1px solid var(--ci-ink);
+}
+
+.chocolat-date-box .box-label {
+  font-size: 11px;
+  color: var(--ci-warm);
+  font-style: italic;
+}
+
+.chocolat-date-box .box-day {
+  font-size: clamp(24px, 5vw, 30px);
+  font-weight: 600;
+  color: var(--ci-ink);
+  margin: 4px 0;
+}
+
+.chocolat-date-box .box-time {
+  font-size: 13px;
+  color: var(--ci-ink);
+  font-weight: 500;
+}
+
+.chocolat-flourish-wrap {
+  margin: 16px auto;
+  max-width: 240px;
+}
+
+.chocolat-flourish-svg {
+  width: 100%;
+  height: auto;
+}
+
+.chocolat-letter-section {
+  padding: 24px;
+  text-align: center;
+}
+
+.chocolat-letter-title {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  color: var(--ci-ink);
+  margin: 0 0 14px;
+}
+
+.chocolat-letter-text {
+  font-size: 14px;
+  line-height: 1.8;
+  color: #4a3528;
+  max-width: 380px;
+  margin: 0 auto 16px;
+}
+
+.chocolat-letter-signoff {
+  font-size: 12px;
+  color: var(--ci-warm);
+}
+
+.chocolat-letter-signoff .script-sign {
+  display: block;
+  font-family: "Italianno", "Cormorant Garamond", cursive, serif;
+  font-size: 28px;
+  color: var(--ci-ink);
+  margin-top: 4px;
+}
+
+.chocolat-mini-heart {
+  color: #8c6747;
+  font-size: 10px;
+  display: block;
+  margin-top: 8px;
+}
+
+/* Calendar Strip */
+.chocolat-calendar-section {
+  padding: 18px 24px;
+  text-align: center;
+  border-top: 1px solid var(--ci-border);
+  border-bottom: 1px solid var(--ci-border);
+}
+
+.chocolat-cal-title {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 10px;
+  letter-spacing: 3px;
+  color: var(--ci-warm);
+  margin: 0 0 12px;
+}
+
+.chocolat-cal-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 6px;
+  align-items: center;
+  max-width: 320px;
+  margin: 0 auto;
+}
+
+.cal-day-name {
+  font-size: 8px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: var(--ci-warm);
+  letter-spacing: 1px;
+}
+
+.cal-day-num {
+  font-size: 12px;
+  color: var(--ci-ink);
+}
+
+.cal-heart-day {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cal-heart-day .heart-shape {
+  color: #4a3528;
+  font-size: 24px;
+}
+
+.cal-heart-day .heart-num {
+  position: absolute;
+  color: #ffffff;
+  font-size: 10px;
+  font-weight: 700;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Serpentine Curvy Itinerary */
+.chocolat-itinerary-section {
+  padding: 30px 20px;
+}
+
+.chocolat-serpentine-wrap {
+  position: relative;
+  max-width: 280px;
+  margin: 0 auto;
+  height: 480px;
+}
+
+.chocolat-serpentine-svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.chocolat-stop {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+}
+
+.chocolat-stop.stop-1 {
+  top: 58px;
+  left: 78px;
+  text-align: left;
+}
+
+.chocolat-stop.stop-2 {
+  top: 138px;
+  right: 78px;
+  text-align: right;
+}
+
+.chocolat-stop.stop-3 {
+  top: 218px;
+  left: 78px;
+  text-align: left;
+}
+
+.chocolat-stop.stop-4 {
+  top: 298px;
+  right: 78px;
+  text-align: right;
+}
+
+.chocolat-stop.stop-5 {
+  top: 398px;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+}
+
+.stop-time {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 15px;
+  font-style: italic;
+  color: var(--ci-warm);
+}
+
+.stop-title {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 8px;
+  letter-spacing: 2px;
+  color: var(--ci-ink);
+  font-weight: 600;
+}
+
+/* Estate Section */
+.chocolat-venue-section {
+  padding: 30px 24px;
+  text-align: center;
+}
+
+.chocolat-section-title {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 14px;
+  letter-spacing: 3px;
+  font-weight: 600;
+  color: var(--ci-ink);
+  margin: 0 0 6px;
+  text-transform: uppercase;
+}
+
+.chocolat-dot-motif {
+  color: var(--ci-warm);
+  font-size: 9px;
+  display: block;
+  margin-bottom: 12px;
+}
+
+.chocolat-estate-name {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--ci-ink);
+  margin: 0 0 6px;
+}
+
+.chocolat-estate-address {
+  font-size: 12px;
+  color: var(--ci-warm);
+  margin: 0 0 20px;
+}
+
+.chocolat-estate-sketch {
+  max-width: 220px;
+  margin: 0 auto 20px;
+}
+
+.estate-sketch-svg {
+  width: 100%;
+  height: auto;
+}
+
+.chocolat-map-btn {
+  display: inline-block;
+  padding: 10px 28px;
+  border: 1px solid var(--ci-ink);
+  color: var(--ci-ink);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 9px;
+  letter-spacing: 2px;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: all 0.2s;
+}
+
+.chocolat-map-btn:hover {
+  background: var(--ci-ink);
+  color: #ffffff;
+}
+
+/* Dress Code Ribbons */
+.chocolat-dress-section {
+  padding: 30px 24px;
+  text-align: center;
+}
+
+.chocolat-dress-sub {
+  font-size: 13px;
+  color: #4a3528;
+  max-width: 320px;
+  margin: 0 auto 24px;
+  line-height: 1.6;
+}
+
+.chocolat-ribbons-container {
+  position: relative;
+  max-width: 320px;
+  margin: 0 auto;
+}
+
+.ribbon-string-line {
+  position: absolute;
+  top: 12px;
+  left: 10px;
+  right: 10px;
+  height: 1px;
+  background: #cbb49f;
+  z-index: 1;
+}
+
+.ribbons-row {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 2;
+}
+
+.ribbon-node {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.ribbon-svg {
+  width: 32px;
+  height: 40px;
+  filter: drop-shadow(0 2px 4px rgba(45, 30, 24, 0.15));
+}
+
+/* Wishes */
+.chocolat-wishes-section {
+  padding: 30px 24px;
+  text-align: center;
+}
+
+.chocolat-wish-card {
+  max-width: 340px;
+  margin: 0 auto 16px;
+  padding: 14px 18px;
+  border-left: 2px solid var(--ci-warm);
+  text-align: left;
+  background: rgba(232, 222, 210, 0.2);
+}
+
+.chocolat-wish-card h4 {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 9px;
+  letter-spacing: 2px;
+  color: var(--ci-ink);
+  margin: 0 0 6px;
+}
+
+.chocolat-wish-card p {
+  font-size: 13px;
+  line-height: 1.6;
+  color: #4a3528;
+  margin: 0;
+}
+
+/* Contacts */
+.chocolat-care-section {
+  padding: 30px 24px;
+  text-align: center;
+}
+
+.chocolat-care-intro {
+  font-size: 13px;
+  color: var(--ci-warm);
+  margin: 0 auto 18px;
+  max-width: 320px;
+}
+
+.chocolat-contact-card {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 20px;
+  border: 1px solid var(--ci-border);
+  border-radius: 20px;
+  margin-bottom: 12px;
+  color: var(--ci-ink);
+  text-align: left;
+}
+
+.chocolat-contact-card div {
+  display: flex;
+  flex-direction: column;
+}
+
+.contact-num {
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.contact-mail {
+  font-size: 10px;
+  color: var(--ci-warm);
+}
+
+.chocolat-planner-label {
+  font-size: 11px;
+  color: var(--ci-warm);
+  margin: 14px 0 8px;
+}
+
+/* Espresso RSVP Card */
+.chocolat-rsvp-section {
+  margin: 30px 14px 0;
+}
+
+.chocolat-espresso-ticket {
+  background: var(--ci-espresso);
+  color: #fdfbf7;
+  border-radius: 12px;
+  padding: 36px 24px 0;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.espresso-brand {
+  font-family: "Italianno", "Cormorant Garamond", cursive, serif;
+  font-size: 24px;
+  color: #cbb49f;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.espresso-title {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 15px;
+  letter-spacing: 2px;
+  color: #fdfbf7;
+  margin: 0 0 10px;
+}
+
+.espresso-divider {
+  color: #8c6747;
+  font-size: 10px;
+  margin-bottom: 20px;
+}
+
+.espresso-form {
+  max-width: 300px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.espresso-input-group {
+  margin-bottom: 18px;
+}
+
+.espresso-input-group label,
+.espresso-stepper-group label,
+.espresso-radio-group label {
+  display: block;
+  font-size: 11px;
+  color: #cbb49f;
+  margin-bottom: 8px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.espresso-input-group input {
+  width: 100%;
+  padding: 10px 14px;
+  background: transparent;
+  border: 1px solid rgba(203, 180, 159, 0.4);
+  color: #ffffff;
+  border-radius: 4px;
+  font-size: 13px;
+}
+
+.espresso-stepper {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid rgba(203, 180, 159, 0.4);
+  border-radius: 4px;
+}
+
+.espresso-stepper button {
+  width: 36px;
+  height: 36px;
+  background: transparent;
+  border: none;
+  color: #ffffff;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.espresso-stepper .stepper-val {
+  width: 36px;
+  text-align: center;
+  color: #ffffff;
+  font-size: 14px;
+}
+
+.espresso-radio-options {
+  display: flex;
+  gap: 20px;
+}
+
+.radio-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #ffffff;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.espresso-send-btn {
+  width: 100%;
+  margin-top: 24px;
+  padding: 12px;
+  background: #fdfbf7;
+  color: #2d1e18;
+  border: none;
+  border-radius: 4px;
+  font-size: 11px;
+  letter-spacing: 2px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.espresso-send-btn:hover {
+  background: #e8ded2;
+}
+
+.espresso-wave-footer {
+  margin-top: 30px;
+  height: 24px;
+}
+
+.espresso-wave-footer svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.chocolat-closing-footer {
+  padding: 30px 24px 44px;
+  text-align: center;
+}
+
+.closing-heart {
+  color: #8c6747;
+  font-size: 12px;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.closing-callout {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 16px;
+  letter-spacing: 2px;
+  color: var(--ci-ink);
+  margin: 0 0 20px;
+  font-style: italic;
+}
+
+.closing-photo-wrap {
+  border-radius: 6px;
+  overflow: hidden;
+  max-width: 320px;
+  margin: 0 auto;
+}
+
+.closing-photo {
+  width: 100%;
+  aspect-ratio: 4/5;
+  object-fit: cover;
+  display: block;
+}
+
+
+/* ==========================================================================
+   5. ATELIER TRIPTYCH (Modern European Taplink Wedding Layout)
+   ========================================================================== */
+.atelier-triptych-card {
+  --at-bg: #f9f8f6;
+  --at-ink: #2b2724;
+  --at-stone: #8c8275;
+  --at-sage: #738370;
+  --at-card-bg: #ffffff;
+
+  background: var(--at-bg);
+  color: var(--at-ink);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 16px 50px rgba(43, 39, 36, 0.08);
+}
+
+.atelier-header {
+  padding: 36px 20px 20px;
+  text-align: center;
+}
+
+.atelier-script-kicker {
+  font-family: "Italianno", "Cormorant Garamond", cursive, serif;
+  font-size: 38px;
+  font-weight: 400;
+  color: var(--at-stone);
+  margin: 0 0 16px;
+}
+
+/* 3-Photo Triptych Date Strip */
+.atelier-triptych-strip {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+  margin: 0 auto 24px;
+  max-width: 380px;
+}
+
+.triptych-pane {
+  position: relative;
+  aspect-ratio: 9/16;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.triptych-pane img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.triptych-num {
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(28px, 6vw, 36px);
+  font-weight: 600;
+  color: #ffffff;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
+}
+
+.atelier-couple-names {
+  font-family: "Italianno", cursive;
+  font-size: clamp(34px, 8vw, 48px);
+  color: var(--at-ink);
+  margin: 0 0 4px;
+  font-weight: 400;
+}
+
+.atelier-sub-married {
+  font-size: 8px;
+  letter-spacing: 3px;
+  color: var(--at-stone);
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.atelier-letter-block {
+  background: var(--at-card-bg);
+  margin: 16px;
+  padding: 24px 20px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.03);
+}
+
+.atelier-block-heading {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 18px;
+  color: var(--at-ink);
+  margin: 0 0 12px;
+}
+
+.atelier-letter-body {
+  font-size: 13px;
+  line-height: 1.7;
+  color: #554e48;
+  margin: 0 0 20px;
+}
+
+/* Mini Calendar */
+.atelier-mini-calendar {
+  padding-top: 14px;
+  border-top: 1px solid #ede8e3;
+}
+
+.mini-cal-month {
+  font-size: 11px;
+  color: var(--at-stone);
+  margin: 0 0 10px;
+  font-style: italic;
+  font-family: "Cormorant Garamond", serif;
+}
+
+.mini-cal-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+  max-width: 260px;
+  margin: 0 auto;
+}
+
+.mini-cal-th {
+  font-size: 8px;
+  color: var(--at-stone);
+}
+
+.mini-cal-td {
+  font-size: 11px;
+  color: #6d635a;
+}
+
+.mini-cal-heart-cell {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cal-ring-heart {
+  color: var(--at-sage);
+  font-size: 22px;
+}
+
+.cal-num-bold {
+  position: absolute;
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--at-sage);
+}
+
+/* Event Cards */
+.atelier-event-card,
+.atelier-dress-card,
+.atelier-details-card,
+.atelier-rsvp-card {
+  background: var(--at-card-bg);
+  margin: 14px 16px;
+  padding: 24px 20px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.03);
+}
+
+.atelier-lineart-icon {
+  margin-bottom: 12px;
+}
+
+.atelier-lineart-icon svg {
+  width: 44px;
+  height: 44px;
+  display: inline-block;
+}
+
+.atelier-card-title {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--at-ink);
+  margin: 0 0 8px;
+}
+
+.atelier-card-datetime {
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--at-ink);
+  margin-bottom: 8px;
+}
+
+.atelier-card-datetime .bar {
+  color: var(--at-stone);
+}
+
+.atelier-card-address,
+.atelier-card-venue {
+  font-size: 12px;
+  color: #6d635a;
+  margin: 0 0 14px;
+}
+
+.atelier-sage-pill {
+  display: inline-block;
+  padding: 8px 22px;
+  background: var(--at-sage);
+  color: #ffffff;
+  border-radius: 20px;
+  font-size: 9px;
+  letter-spacing: 1.5px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+
+.atelier-sage-pill:hover {
+  background: #5b6958;
+}
+
+.atelier-dress-text,
+.atelier-details-text {
+  font-size: 13px;
+  line-height: 1.6;
+  color: #554e48;
+  max-width: 320px;
+  margin: 0 auto 18px;
+}
+
+.atelier-swatch-row {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+
+.atelier-swatch-dot {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* RSVP Form */
+.atelier-rsvp-deadline {
+  font-size: 11px;
+  color: var(--at-stone);
+  margin: 0 0 20px;
+}
+
+.atelier-rsvp-form {
+  text-align: left;
+  max-width: 320px;
+  margin: 0 auto;
+}
+
+.atelier-field {
+  margin-bottom: 16px;
+}
+
+.atelier-field label {
+  display: block;
+  font-size: 11px;
+  font-weight: 600;
+  color: #6d635a;
+  margin-bottom: 6px;
+}
+
+.atelier-field input[type="text"],
+.atelier-field input[type="tel"] {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid #ddd5cc;
+  border-radius: 6px;
+  font-size: 13px;
+  background: #faf8f5;
+}
+
+.atelier-radio-group {
+  display: flex;
+  gap: 10px;
+}
+
+.atelier-choice-btn {
+  flex: 1;
+  padding: 10px 12px;
+  border: 1px solid #ddd5cc;
+  background: #ffffff;
+  border-radius: 6px;
+  font-size: 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.atelier-choice-btn.selected {
+  background: var(--at-sage);
+  color: #ffffff;
+  border-color: var(--at-sage);
+}
+
+.atelier-drinks-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.drink-check-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: #443e39;
+  cursor: pointer;
+}
+
+.atelier-submit-btn {
+  width: 100%;
+  padding: 12px;
+  background: #2b2724;
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  font-size: 10px;
+  letter-spacing: 2px;
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.atelier-confirm-text {
+  font-size: 11px;
+  color: var(--at-sage);
+  margin-top: 10px;
+  text-align: center;
+}
+
+.atelier-closing-sign {
+  margin-top: 30px;
+  text-align: center;
+}
+
+.closing-wait {
+  font-size: 12px;
+  color: var(--at-stone);
+  margin-bottom: 4px;
+}
+
+.closing-script-names {
+  font-family: "Italianno", cursive;
+  font-size: 32px;
+  color: var(--at-ink);
+  margin: 0;
+}
+
+
+/* ==========================================================================
+   6. CHÂTEAU DE ROSE (Blush Silk & Floating Rose Petals)
+   ========================================================================== */
+.chateau-rose-card {
+  --cr-bg: #fcf8f5;
+  --cr-ink: #302621;
+  --cr-rose: #d4a390;
+  --cr-border: #e8d7cf;
+  --cr-gold: #cba286;
+
+  background: var(--cr-bg);
+  color: var(--cr-ink);
+  font-family: "Cormorant Garamond", Georgia, serif;
+  border: 1px solid var(--cr-border);
+  border-radius: 16px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 16px 50px rgba(212, 163, 144, 0.15);
+}
+
+.chateau-header {
+  position: relative;
+  padding: 40px 24px 20px;
+  text-align: center;
+}
+
+.chateau-watercolor-spray {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 140px;
+  pointer-events: none;
+}
+
+.rose-bouquet-svg {
+  width: 100%;
+  height: auto;
+}
+
+.chateau-kicker {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 9px;
+  letter-spacing: 3px;
+  color: var(--cr-rose);
+  margin: 0 0 10px;
+}
+
+.chateau-couple-title {
+  font-size: clamp(32px, 8vw, 44px);
+  font-weight: 500;
+  color: var(--cr-ink);
+  margin: 0 0 6px;
+}
+
+.chateau-date-label {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 10px;
+  letter-spacing: 3px;
+  color: var(--cr-gold);
+  margin: 0 0 8px;
+}
+
+.chateau-gold-heart {
+  color: var(--cr-gold);
+  font-size: 10px;
+  display: block;
+  margin-bottom: 14px;
+}
+
+.chateau-intro-quote {
+  font-size: 14px;
+  line-height: 1.8;
+  font-style: italic;
+  color: #5c4d45;
+  max-width: 360px;
+  margin: 0 auto;
+}
+
+/* Framed Date Box */
+.chateau-date-box-section {
+  padding: 20px 24px;
+  text-align: center;
+}
+
+.chateau-rounded-date-box {
+  border: 1px solid var(--cr-border);
+  border-radius: 12px;
+  padding: 16px 20px;
+  display: inline-flex;
+  flex-direction: column;
+  background: #ffffff;
+  box-shadow: 0 4px 16px rgba(212, 163, 144, 0.08);
+  margin-bottom: 18px;
+}
+
+.box-day-name {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 8px;
+  letter-spacing: 2px;
+  color: var(--cr-gold);
+}
+
+.box-day-num-wrap {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 10px;
+  margin: 4px 0;
+}
+
+.box-month,
+.box-year {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: #6f5f56;
+}
+
+.box-big-num {
+  font-size: 38px;
+  font-weight: 600;
+  color: var(--cr-ink);
+}
+
+.box-at-time {
+  font-size: 11px;
+  color: var(--cr-rose);
+}
+
+.chateau-calendar-wrap {
+  max-width: 260px;
+  margin: 0 auto;
+}
+
+.cal-title {
+  font-size: 11px;
+  color: var(--cr-gold);
+  font-style: italic;
+  margin: 0 0 8px;
+}
+
+.chateau-cal-table {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+}
+
+.cal-th {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 8px;
+  color: var(--cr-rose);
+}
+
+.cal-td {
+  font-size: 11px;
+  color: #6f5f56;
+}
+
+.cal-circled-td {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.circle-ring {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border: 1px solid var(--cr-gold);
+  border-radius: 50%;
+}
+
+.circle-num {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--cr-gold);
+}
+
+/* Venue Section */
+.chateau-venue-section {
+  padding: 24px;
+  text-align: center;
+}
+
+.chateau-sec-kicker {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 8px;
+  letter-spacing: 3px;
+  color: var(--cr-rose);
+  display: block;
+  margin-bottom: 8px;
+}
+
+.chateau-venue-title {
+  font-size: 20px;
+  color: var(--cr-ink);
+  margin: 0 0 4px;
+}
+
+.chateau-venue-sub {
+  font-size: 12px;
+  color: #6f5f56;
+  margin: 0 0 14px;
+}
+
+.chateau-pill-map-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 20px;
+  border: 1px solid var(--cr-border);
+  background: #ffffff;
+  color: var(--cr-ink);
+  border-radius: 20px;
+  font-size: 9px;
+  letter-spacing: 1.5px;
+  text-decoration: none;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  transition: all 0.2s;
+}
+
+.chateau-pill-map-btn:hover {
+  border-color: var(--cr-gold);
+  background: #fdfbf7;
+}
+
+/* Frosted Countdown */
+.chateau-countdown-section {
+  padding: 20px 24px 0;
+  text-align: center;
+  position: relative;
+}
+
+.chateau-countdown-row {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 10px;
+  position: relative;
+  z-index: 2;
+}
+
+.chateau-frosted-circle {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(232, 215, 207, 0.8);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(212, 163, 144, 0.15);
+}
+
+.count-num {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--cr-ink);
+  line-height: 1;
+}
+
+.count-unit {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 7px;
+  letter-spacing: 1px;
+  color: var(--cr-rose);
+  margin-top: 2px;
+}
+
+.chateau-roses-footer-art {
+  max-width: 260px;
+  margin: 0 auto;
+}
+
+.roses-banner-svg {
+  width: 100%;
+  height: auto;
+}
+
+/* Program Cards */
+.chateau-program-section {
+  padding: 30px 24px;
+  text-align: center;
+}
+
+.chateau-hosted-by {
+  font-size: 12px;
+  color: #6f5f56;
+  margin-bottom: 24px;
+}
+
+.chateau-hosted-by span {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 8px;
+  letter-spacing: 2px;
+  color: var(--cr-rose);
+  display: block;
+}
+
+.chateau-timeline-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 320px;
+  margin: 12px auto 0;
+}
+
+.chateau-time-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 18px;
+  background: #ffffff;
+  border: 1px solid var(--cr-border);
+  border-radius: 12px;
+  text-align: left;
+}
+
+.time-icon {
+  font-size: 20px;
+}
+
+.time-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.event-time {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 10px;
+  color: var(--cr-gold);
+  font-weight: 600;
+}
+
+.event-name {
+  font-size: 15px;
+  color: var(--cr-ink);
+  margin: 2px 0 0;
+}
+
+.event-sub {
+  font-size: 11px;
+  color: #8c7a72;
+  margin: 0;
+}
+
+/* Dress Code */
+.chateau-dress-section {
+  padding: 24px;
+  text-align: center;
+}
+
+.chateau-dress-title {
+  font-size: 17px;
+  color: var(--cr-ink);
+  margin: 0 0 6px;
+}
+
+.chateau-dress-desc {
+  font-size: 13px;
+  color: #6f5f56;
+  max-width: 300px;
+  margin: 0 auto 16px;
+}
+
+.chateau-swatches-row {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+
+.chateau-swatch {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+/* Wishlist Accordion */
+.chateau-wishlist-section {
+  padding: 20px 24px;
+  text-align: center;
+}
+
+.chateau-wishlist-accordion-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 24px;
+  background: #ffffff;
+  border: 1px solid var(--cr-border);
+  border-radius: 20px;
+  color: var(--cr-ink);
+  font-size: 11px;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.chateau-wishlist-content {
+  margin-top: 14px;
+  background: #ffffff;
+  padding: 16px;
+  border-radius: 12px;
+  border: 1px solid var(--cr-border);
+  max-width: 320px;
+  margin: 14px auto 0;
+  text-align: left;
+}
+
+.wish-item {
+  margin-bottom: 12px;
+}
+
+.wish-item:last-child {
+  margin-bottom: 0;
+}
+
+.wish-item h4 {
+  font-size: 13px;
+  color: var(--cr-ink);
+  margin: 0 0 2px;
+}
+
+.wish-item p {
+  font-size: 11px;
+  color: #7b6d65;
+  margin: 0;
+}
+
+/* Contacts */
+.chateau-contacts-section {
+  padding: 20px 24px;
+  text-align: center;
+}
+
+.chateau-planner-card {
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 20px;
+  background: #ffffff;
+  border: 1px solid var(--cr-border);
+  border-radius: 12px;
+  text-align: left;
+}
+
+.planner-details h4 {
+  font-size: 13px;
+  margin: 0 0 2px;
+  color: var(--cr-ink);
+}
+
+.planner-details p {
+  font-size: 11px;
+  color: var(--cr-gold);
+  margin: 0;
+}
+
+.planner-phone-icon {
+  color: var(--cr-gold);
+}
+
+/* Quotes */
+.chateau-wishes-section {
+  padding: 24px;
+  text-align: center;
+}
+
+.chateau-quote-card {
+  background: #ffffff;
+  border: 1px solid var(--cr-border);
+  border-radius: 12px;
+  padding: 14px 18px;
+  margin: 0 auto 10px;
+  max-width: 320px;
+  text-align: left;
+}
+
+.chateau-quote-card p {
+  font-size: 12px;
+  font-style: italic;
+  color: var(--cr-ink);
+  margin: 0 0 4px;
+}
+
+.chateau-quote-card small {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 8px;
+  letter-spacing: 1.5px;
+  color: var(--cr-rose);
+}
+
+/* RSVP */
+.chateau-rsvp-section {
+  padding: 30px 24px 44px;
+  text-align: center;
+}
+
+.crafted-tag {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 8px;
+  letter-spacing: 2px;
+  color: var(--cr-rose);
+  display: block;
+  margin-bottom: 14px;
+}
+
+.chateau-rsvp-box {
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+.chateau-input {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid var(--cr-border);
+  border-radius: 6px;
+  font-size: 13px;
+  background: #ffffff;
+  margin-bottom: 12px;
+}
+
+.chateau-count-select {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  font-size: 12px;
+  color: #6f5f56;
+}
+
+.chateau-stepper {
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--cr-border);
+  border-radius: 4px;
+  background: #ffffff;
+}
+
+.chateau-stepper button {
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.chateau-stepper span {
+  width: 28px;
+  text-align: center;
+  font-weight: 600;
+}
+
+.chateau-dark-rsvp-btn {
+  width: 100%;
+  padding: 12px;
+  background: #2e241f;
+  color: #ffffff;
+  border: none;
+  border-radius: 24px;
+  font-size: 10px;
+  letter-spacing: 2px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(46, 36, 31, 0.2);
+  transition: all 0.2s;
+}
+
+.chateau-dark-rsvp-btn:hover {
+  background: #1a1411;
+}
+
+.chateau-rsvp-confirm {
+  font-size: 11px;
+  color: #5b6958;
+  margin-top: 10px;
+}
+
+.chateau-brand-footer {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 8px;
+  letter-spacing: 3px;
+  color: #a89a93;
+  margin-top: 30px;
+}

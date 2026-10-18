@@ -360,7 +360,7 @@ export default function Home() {
               <a className="button light" href="#templates">
                 Explore templates <ArrowUpRight size={17} />
               </a>
-              <Link className="button glass" to="/preview">
+              <Link className="button glass" to="/demo">
                 <Play size={14} fill="currentColor" /> Experience live demo
               </Link>
             </div>

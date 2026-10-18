@@ -25,12 +25,8 @@ import {
 } from "lucide-react";
 import { useInvitation } from "../context/InvitationContext";
 import { eventTypes, getEventTemplates } from "../data/content";
-import {
-  validateProjectId,
-  validateCustomFieldId,
-} from "../data/mediaSlots.js";
+import { validateCustomFieldId } from "../data/mediaSlots.js";
 import { parseYouTubeUrl, getMediaThumbnail } from "../utils/media.js";
-import ClientHandoffPanel from "../components/ClientHandoffPanel";
 import Invitation from "../templates/Invitation";
 import "../styles/customizer.css";
 
@@ -803,6 +799,9 @@ export default function Customizer() {
             <CheckCheck size={15} />
             Changes saved in this session
           </span>
+          <Link className="customizer-preview-link" to="/demo" style={{ marginRight: "6px" }}>
+            Demo studio <ArrowUpRight size={16} />
+          </Link>
           <Link className="customizer-preview-link" to="/preview">
             Open invitation <ArrowUpRight size={16} />
           </Link>
@@ -821,10 +820,7 @@ export default function Customizer() {
               yours.
             </p>
           </div>
-          <ControlGroup number="01" title="Project ID & Client Export">
-            <ClientHandoffPanel config={config} updateConfig={updateConfig} />
-          </ControlGroup>
-          <ControlGroup number="02" title="Start with your occasion">
+          <ControlGroup number="01" title="Start with your occasion">
             <label className="editor-field">
               Event type
               <div className="customizer-select">

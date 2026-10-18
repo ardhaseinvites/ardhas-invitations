@@ -1160,7 +1160,11 @@
     position: absolute;
     left: 0;
     top: 0;
-    width: 100%;
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
     overflow: visible;
     color: #222;
     background: white;
@@ -1979,5 +1983,23 @@
   height: 100%;
   border: 0;
 }
+
+/* Desktop View: Invitation width scaled to 70% of desktop viewport */
+@media (min-width: 768px) {
+  .invitation:not(.invitation-compact) {
+    width: 70%;
+    max-width: 70vw;
+    margin: 32px auto 80px;
+    border-radius: 18px;
+    box-shadow: 0 16px 50px rgba(44, 37, 32, 0.12);
+  }
+
+  .preview-main {
+    min-height: calc(100vh - 60px);
+    padding: 24px 0 80px;
+    background: #faf8f5;
+  }
+}
+
 
 

@@ -1348,3 +1348,67 @@
   border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
+/* Desktop View: Expand Pinterest templates to fill 70%-width invitation */
+@media (min-width: 768px) {
+  .pinterest-mobile-card {
+    max-width: 100%;
+    width: 100%;
+    border-radius: 18px;
+  }
+
+  .velure-arch-photo {
+    max-width: 460px;
+  }
+
+  .velure-arch-photo img {
+    height: 440px;
+  }
+
+  .velure-quote-text {
+    max-width: 560px;
+    font-size: 17px;
+  }
+
+  .estate-sketch-frame {
+    max-width: 480px;
+  }
+
+  .estate-sketch-frame img {
+    height: 280px;
+  }
+
+  .polaroid-stack {
+    max-width: 480px;
+  }
+
+  .deckle-quote p {
+    max-width: 540px;
+  }
+}
+
+
+
+.dock-event-select {
+  background: rgba(196, 163, 101, 0.12);
+  color: #e5c88b;
+  border: 1px solid rgba(196, 163, 101, 0.4);
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 8px;
+  cursor: pointer;
+  outline: none;
+  font-family: inherit;
+  transition: all 0.2s ease;
+}
+
+.dock-event-select:hover {
+  background: rgba(196, 163, 101, 0.2);
+  border-color: #e5c88b;
+}
+
+.dock-event-select option {
+  background: #1c1917;
+  color: #f5f5f4;
+  padding: 4px;
+}

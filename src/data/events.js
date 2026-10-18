@@ -36,10 +36,10 @@ const events = {
     dress: "Festive elegance · Soft, joyful colors",
     designs: [
       ["Memories Deckle", "deckle", "#8d7045"],
-      ["Temple Promise", "classic", "#923c35"],
-      ["Velure Linen", "velure", "#706f54"],
-      ["Royal Darbar", "heritage", "#a38243"],
-      ["Starry Infinity", "celestial", "#38527a"],
+      ["Chocolat & Ivoire", "chocolate", "#2d1e18"],
+      ["Atelier Triptych", "triptych", "#738370"],
+      ["Château de Rose", "chateau", "#cba286"],
+      ["Pichwai Vrindavan", "pichwai", "#0c3b43"],
     ],
     memories: ["The first hello", "A thousand memories", "Our forever begins"],
     schedule: [
@@ -179,7 +179,7 @@ const events = {
     address: "The Raviz Ashtamudi, Thevally, Kollam, Kerala",
     dress: "Elegant evening wear",
     designs: [
-      ["Silver Stories", "minimal", "#797b81"],
+      ["Chocolat & Ivoire", "chocolate", "#2d1e18"],
       ["A Golden Journey", "royal", "#d0b37c"],
       ["Still in Bloom", "floral", "#8b6373"],
       ["Heritage Garland", "heritage", "#943c4a"],
@@ -244,7 +244,7 @@ const events = {
     dress: "Details to follow",
     designs: [
       ["Mark the Moment", "modern", "#436568"],
-      ["A Date to Keep", "minimal", "#99774f"],
+      ["Atelier Triptych", "triptych", "#738370"],
       ["Postcard from Forever", "polaroid", "#a66372"],
       ["Regal Announcement", "heritage", "#8d3444"],
       ["Constellation Calendar", "celestial", "#324a6e"],
@@ -270,11 +270,11 @@ const events = {
     address: "Le Méridien Kochi, Maradu, Kochi, Kerala",
     dress: "Evening elegance · Jewel tones",
     designs: [
-      ["The Evening Edit", "royal", "#d6ba7d"],
+      ["L'Édition Noire", "edition", "#1c1d1f"],
       ["Champagne Hours", "minimal", "#987949"],
       ["Under the Lights", "purple", "#7869a0"],
       ["Grand Ballroom", "heritage", "#8c2e42"],
-      ["Midnight Gala", "celestial", "#293c5c"],
+      ["Nocturne Celestial", "nocturne", "#293c5c"],
     ],
     memories: ["A day of promises", "An evening of joy", "Memories after dark"],
     schedule: [
@@ -529,17 +529,41 @@ export const templates = eventTypes.flatMap((eventType) =>
               ? "estate"
               : style === "purple"
                 ? "purple"
-                : ["editorial", "arch", "split", "framed", "floating"][index % 5],
+                : style === "edition"
+                  ? "edition"
+                  : style === "pichwai"
+                    ? "pichwai"
+                    : style === "nocturne"
+                      ? "nocturne"
+                      : style === "chocolate"
+                        ? "chocolate"
+                        : style === "triptych"
+                          ? "triptych"
+                          : style === "chateau"
+                            ? "chateau"
+                            : ["editorial", "arch", "split", "framed", "floating"][index % 5],
     font:
-      style === "modern" || style === "glassmorphic"
-        ? "Modern"
-        : style === "royal" || style === "heritage"
+      style === "edition"
+        ? "Serif"
+        : style === "pichwai"
           ? "Royal"
-          : style === "boho" || style === "velure"
-            ? "Minimal"
-            : style === "deckle" || style === "polaroid" || style === "estate"
-              ? "Handwritten"
-              : "Serif",
+          : style === "nocturne"
+            ? "Modern"
+            : style === "chocolate"
+              ? "Serif"
+              : style === "triptych"
+                ? "Modern"
+                : style === "chateau"
+                  ? "Serif"
+                  : style === "modern" || style === "glassmorphic"
+                    ? "Modern"
+                    : style === "royal" || style === "heritage"
+                      ? "Royal"
+                      : style === "boho" || style === "velure"
+                        ? "Minimal"
+                        : style === "deckle" || style === "polaroid" || style === "estate"
+                          ? "Handwritten"
+                          : "Serif",
     background: "Plain",
     description: `${["A signature", "An intimate", "An expressive", "A regal", "A celestial"][index % 5]} ${eventType.toLowerCase()} invitation, made personal.`,
     category: eventType,
@@ -554,7 +578,19 @@ export const templates = eventTypes.flatMap((eventType) =>
               ? "ESTATE"
               : style === "purple"
                 ? "LAVENDER"
-                : ["SIGNATURE", "TIMELESS", "EDITORIAL", "HERITAGE", "CELESTIAL"][index % 5],
+                : style === "edition"
+                  ? "EDITORIAL"
+                  : style === "pichwai"
+                    ? "HERITAGE"
+                    : style === "nocturne"
+                      ? "CELESTIAL"
+                      : style === "chocolate"
+                        ? "PARCHMENT"
+                        : style === "triptych"
+                          ? "TRIPTYCH"
+                          : style === "chateau"
+                            ? "CHÂTEAU"
+                            : ["SIGNATURE", "TIMELESS", "EDITORIAL", "HERITAGE", "CELESTIAL"][index % 5],
   })),
 );
 

@@ -5,6 +5,7 @@ import { Helmet } from "react-helmet";
 import Home from "./pages/Home";
 const Customizer = lazy(() => import("./pages/Customizer"));
 const Preview = lazy(() => import("./pages/Preview"));
+const Demo = lazy(() => import("./pages/Demo"));
 const Housewarming = lazy(() => import("./pages/Housewarming"));
 export default function App() {
   const location = useLocation();
@@ -60,6 +61,7 @@ export default function App() {
               <Route path="/" element={<Home />} />
               <Route path="/customizer" element={<Customizer />} />
               <Route path="/preview" element={<Preview />} />
+              <Route path="/demo" element={<Demo />} />
               <Route path="/housewarming" element={<Housewarming />} />
               <Route
                 path="*"

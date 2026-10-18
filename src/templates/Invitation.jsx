@@ -22,6 +22,14 @@ import PolaroidStory from "./PolaroidStory";
 import EstateStory from "./EstateStory";
 import MinimalismPurple from "./MinimalismPurple";
 import WeddingUnifiedTemplate from "./WeddingUnifiedTemplate";
+import EditionNoire from "./EditionNoire";
+import PichwaiVrindavan from "./PichwaiVrindavan";
+import NocturneCelestial from "./NocturneCelestial";
+import ChocolatIvoire from "./ChocolatIvoire";
+import AtelierTriptych from "./AtelierTriptych";
+import ChateauRose from "./ChateauRose";
+import FamilyAndCustomDetails from "../components/invitation/FamilyAndCustomDetails";
+import "../styles/new-templates.css";
 
 const templates = {
   minimal: MinimalLuxury,
@@ -41,6 +49,12 @@ const templates = {
   estate: EstateStory,
   purple: MinimalismPurple,
   lavender: MinimalismPurple,
+  edition: EditionNoire,
+  pichwai: PichwaiVrindavan,
+  nocturne: NocturneCelestial,
+  chocolate: ChocolatIvoire,
+  triptych: AtelierTriptych,
+  chateau: ChateauRose,
 };
 
 function MusicButton({ copy }) {
@@ -127,13 +141,17 @@ function PdfDownloadButton({ config }) {
   );
 }
 
-export default function Invitation({ config, compact = false }) {
+export default function Invitation({
+  config,
+  compact = false,
+  showToolbar = true,
+}) {
   const currentKey = config.style || config.template;
   const isWedding = config.eventType === "Wedding";
   const isDedicatedStationery =
     isWedding ||
-    ["deckle", "velure", "polaroid", "estate", "purple", "lavender", "classic", "heritage", "celestial"].includes(currentKey) ||
-    ["deckle", "velure", "polaroid", "estate", "purple", "lavender", "classic", "heritage", "celestial"].includes(config.layout);
+    ["deckle", "velure", "polaroid", "estate", "purple", "lavender", "classic", "heritage", "celestial", "edition", "pichwai", "nocturne", "chocolate", "triptych", "chateau"].includes(currentKey) ||
+    ["deckle", "velure", "polaroid", "estate", "purple", "lavender", "classic", "heritage", "celestial", "edition", "pichwai", "nocturne", "chocolate", "triptych", "chateau"].includes(config.layout);
 
   let Template =
     templates[currentKey] ||
@@ -199,12 +217,15 @@ export default function Invitation({ config, compact = false }) {
       <Template config={config} compact={compact} />
       {!compact && (
         <>
-          <div className="invite-toolbar">
-            {config.sections?.music !== false && (
-              <MusicButton copy={config.copy} />
-            )}
-            <PdfDownloadButton config={config} />
-          </div>
+          <FamilyAndCustomDetails config={config} compact={compact} />
+          {showToolbar && (
+            <div className="invite-toolbar">
+              {config.sections?.music !== false && (
+                <MusicButton copy={config.copy} />
+              )}
+              <PdfDownloadButton config={config} />
+            </div>
+          )}
           {!isDedicatedStationery && (
             <InvitationSections key={config.eventType} config={config} />
           )}

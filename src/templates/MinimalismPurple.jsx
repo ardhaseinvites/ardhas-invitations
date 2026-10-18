@@ -218,14 +218,18 @@ export default function MinimalismPurple({ config, compact = false }) {
                   <div className="mp-parent-col">
                     <span className="mp-parent-role">Groom's Family</span>
                     <span className="mp-parent-name">
-                      {config.groomFatherName || `${groomName}'s Parents`}
+                      {config.groomFatherName && config.groomMotherName
+                        ? `${config.groomFatherName} & ${config.groomMotherName}`
+                        : config.groomFatherName || config.groomMotherName || `${groomName}'s Parents`}
                     </span>
                   </div>
                   <div className="mp-parents-vsep" aria-hidden="true" />
                   <div className="mp-parent-col">
                     <span className="mp-parent-role">Bride's Family</span>
                     <span className="mp-parent-name">
-                      {config.brideFatherName || `${brideName}'s Parents`}
+                      {config.brideFatherName && config.brideMotherName
+                        ? `${config.brideFatherName} & ${config.brideMotherName}`
+                        : config.brideFatherName || config.brideMotherName || `${brideName}'s Parents`}
                     </span>
                   </div>
                 </div>
